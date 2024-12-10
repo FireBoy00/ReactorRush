@@ -191,6 +191,8 @@ namespace ReactorRushGame
                         else
                         {
                             minigames[selected - 1].Run();
+                            Thread.Sleep(1000);
+                            DisplayMinigameMenu(selected);
                         }
                         menuChosen = true;
                         break;

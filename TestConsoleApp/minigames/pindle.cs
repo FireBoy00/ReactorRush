@@ -76,9 +76,8 @@ namespace Minigames
             table.HideHeaders();
             table.Collapse();
             table.Centered();
-            table.Border(TableBorder.None);
+            table.Border(TableBorder.Rounded);
 
-            // Define the columns
             for (int i = 0; i < NumberLength; i++)
             {
                 table.AddColumn(new TableColumn(""));
@@ -90,27 +89,27 @@ namespace Minigames
                 for (int j = 0; j < NumberLength; j++)
                 {
                     string cellContent = " ";
-                    Style cellStyle = new Style().Background(Color.Grey15);
+                    Style cellStyle = new Style();
 
                     if (i < _attempts)
                     {
-                        cellContent = _guesses[i][j].ToString();
+                        cellContent = $"[bold]{_guesses[i][j]}[/]";
                         if (_guesses[i][j] == _targetNumber[j])
                         {
-                            cellStyle = new Style().Background(Color.DarkGreen);
+                            cellStyle = new Style().Foreground(Color.DarkGreen);
                         }
                         else if (_targetNumber.Contains(_guesses[i][j]))
                         {
-                            cellStyle = new Style().Background(Color.DarkGoldenrod);
+                            cellStyle = new Style().Foreground(Color.DarkGoldenrod);
                         }
                         else
                         {
-                            cellStyle = new Style().Background(Color.DarkRed);
+                            cellStyle = new Style().Foreground(Color.DarkRed);
                         }
                     }
                     else if (i == _attempts && j < _currentGuess.Length)
                     {
-                        cellContent = _currentGuess[j].ToString();
+                        cellContent = $"[bold]{_currentGuess[j]}[/]";
                     }
 
                     row.Add(new Markup(cellContent, cellStyle));
@@ -135,7 +134,6 @@ namespace Minigames
             {
                 _guesses[_attempts] = _currentGuess;
                 _attempts++;
-                Console.WriteLine($"Attempt {_attempts}: {_currentGuess} | {_targetNumber}");
                 if (_currentGuess == _targetNumber)
                 {
                     _currentGuess = string.Empty;
