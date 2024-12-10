@@ -1,9 +1,9 @@
 using System;
 using Spectre.Console;
 
-namespace ReactorRushGame
+namespace Minigames
 {
-    public class MinigameCableFix
+    public class CableFix : IMinigame
     {
         private int width;
         private int height;
@@ -19,8 +19,8 @@ namespace ReactorRushGame
         public void Run()
         {
             Console.CursorVisible = false; // Hide the cursor
-            width = Console.WindowWidth / 4; // Make the table smaller
-            height = Console.WindowHeight / 4; // Make the table smaller
+            width = Console.WindowWidth / 4;
+            height = Console.WindowHeight / 4;
             visited = new bool[height, width];
             var random = new Random();
 
@@ -68,14 +68,6 @@ namespace ReactorRushGame
         private void DisplayTimer()
         {
             TimeSpan elapsedTime = DateTime.Now - startTime;
-            // var panel = new Panel(new Markup($"{elapsedTime:mm\\:ss}").Centered())
-            // .Border(BoxBorder.Rounded)
-            // .BorderColor(Color.DarkOrange3)
-            // .Padding(1, 2)
-            // .Collapse();
-
-            // var centeredPanel = new Padder(panel, new Padding((Console.WindowWidth - (panel.Width ?? 0)) / 2, 0));
-            // AnsiConsole.Write(centeredPanel);
             AnsiConsole.Write(new Padder(new FigletText($"{elapsedTime:mm\\:ss}").Centered().Color(Color.DarkOrange3)).PadTop(7));
         }
 
