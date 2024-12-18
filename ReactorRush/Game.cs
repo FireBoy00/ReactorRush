@@ -39,11 +39,11 @@ namespace ReactorRush
             {
                 if (selected == i + 1)
                 {
-                    menu.AddRow(new Panel(new Markup($"[bold aqua]{i + 1}. {options[i]}[/]")).Expand().PadLeft(2).PadRight(1));
+                    menu.AddRow(new Panel(new Markup($"[bold aqua]{i + 1}. {options[i]}[/]")).Expand().PadLeft(2).PadRight(1).Border(BoxBorder.Double));
                 }
                 else
                 {
-                    menu.AddRow(new Panel(new Markup($"[bold orange3]{i + 1}. [/][yellow]{options[i]}[/]")).Expand().PadRight(2));
+                    menu.AddRow(new Panel(new Markup($"[bold orange3]{i + 1}. [/][yellow]{options[i]}[/]")).Expand().PadRight(2).Border(BoxBorder.Square));
                 }
             }
 
@@ -120,7 +120,7 @@ namespace ReactorRush
         private void Quit() {
             Console.Clear();
             Console.WriteLine("Thanks for playing!");
-            Thread.Sleep(1000); // pause for 2 seconds before closing the console
+            Thread.Sleep(1000); // pause for 1 seconds before closing the console
             Environment.Exit(1); // close the game
         }
 
