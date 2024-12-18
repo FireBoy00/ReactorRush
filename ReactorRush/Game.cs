@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using Spectre.Console;
 using System.IO;
+using Spectre.Console.Rendering;
 using System.Collections.Generic;
 using Minigames;
 
@@ -33,20 +34,17 @@ namespace ReactorRushGame
             menu.Border(TableBorder.None);
 
             menu.AddColumn(new TableColumn("Menu").LeftAligned());
-            if (selected == 1) {
-                menu.AddRow(new Panel(new Markup("[bold aqua]1. Start Game[/]")).Expand().PadLeft(2).PadRight(1));
-            }else {
-                menu.AddRow(new Panel(new Markup("[bold orange3]1. [/][yellow]Start Game[/]")).Expand().PadRight(2));
-            }
-            if (selected == 2) {
-                menu.AddRow(new Panel(new Markup("[bold aqua]2. Settings[/]")).Expand().PadLeft(2));
-            }else {
-                menu.AddRow(new Panel(new Markup("[bold orange3]2. [/][yellow]Settings[/]")).Expand());
-            }
-            if (selected == 3) {
-                menu.AddRow(new Panel(new Markup("[bold aqua]3. Quit[/]")).Expand().PadLeft(2));
-            }else {
-                menu.AddRow(new Panel(new Markup("[bold orange3]3. [/][yellow]Quit[/]")).Expand());
+            string[] options = ["Start Game", "Minigames", "Settings", "Quit"];
+            for (int i = 0; i < options.Length; i++)
+            {
+                if (selected == i + 1)
+                {
+                    menu.AddRow(new Panel(new Markup($"[bold aqua]{i + 1}. {options[i]}[/]")).Expand().PadLeft(2).PadRight(1));
+                }
+                else
+                {
+                    menu.AddRow(new Panel(new Markup($"[bold orange3]{i + 1}. [/][yellow]{options[i]}[/]")).Expand().PadRight(2));
+                }
             }
 
             AnsiConsole.Write(menu);
@@ -57,13 +55,13 @@ namespace ReactorRushGame
                 switch (key.Key) {
                     case ConsoleKey.UpArrow:
                         if (selected == 1)
-                            selected = 3; // If it would go past 1, reset it to 3
+                            selected = options.Length; // If it would go past 1, reset it to 3
                         else
                             selected--;
                         DisplayMenu(selected);
                         break;
                     case ConsoleKey.DownArrow:
-                        if (selected == 3)
+                        if (selected == options.Length)
                             selected = 1; // If it would go past 3, reset it to 1
                         else
                             selected++;
@@ -76,9 +74,12 @@ namespace ReactorRushGame
                                 StartGame();
                                 break;
                             case 2:
-                                Settings();
+                                DisplayMinigameMenu();
                                 break;
                             case 3:
+                                Settings();
+                                break;
+                            case 4:
                                 Quit();
                                 break;
                             default:
@@ -95,7 +96,7 @@ namespace ReactorRushGame
         private void StartGame()
         {
             Console.Clear();
-            DisplayMinigameMenu();
+            DisplayLevelSelectionMenu();
             Console.WriteLine("Press any key to exit...");
             Console.ReadKey();
             Quit();
@@ -196,6 +197,128 @@ namespace ReactorRushGame
                         }
                         menuChosen = true;
                         break;
+                }
+            }
+            #endregion
+        }
+
+        private void DisplayLevelSelectionMenu(int selected = 1) 
+        {
+            Console.CursorVisible = false; // Hide the cursor
+            Console.SetCursorPosition(0, 0);
+            AnsiConsole.Write(new Padder(new FigletText("Select Level").Centered().Color(Color.DarkOrange3)).PadTop(7));
+
+            #region LevelSelectionMenu
+            var menu = new Grid();
+            menu.Centered();
+            // menu.HideHeaders();
+            // menu.Border(TableBorder.None);
+
+            string[] levels = ["Power Room", "Colling System", "Ion Rods", "Reactor Core"];
+            // int columns = (levels.Length / 4) > 0 ? (levels.Length / 4) : 1;
+            int columns = 3;
+            int rows = 4;
+
+            for (int i = 0; i < columns; i++)
+            {
+                menu.AddColumn(new GridColumn().Centered());
+            }
+            for (int i = 0; i < rows; i++)
+            {
+                var row = new List<IRenderable>();
+                for (int j = 0; j < columns; j++)
+                {
+                    int index = i * columns + j;
+                    if (index < levels.Length)
+                    {
+                        if (selected == index + 1)
+                        {
+                            row.Add(new Panel(new Markup($"[bold aqua]{levels[index]}[/]")).Expand());
+                        }
+                        else
+                        {
+                            row.Add(new Panel(new Markup($"[yellow]{levels[index]}[/]")).Expand());
+                        }
+                    }
+                    else
+                    {
+                        row.Add(new Panel(new Markup($"[red]Coming soon[/]")).Expand()); // Placeholder for future levels
+                    }
+                }
+                menu.AddRow(row.ToArray());
+            }
+
+            // Add the "Back" button row
+            var backRow = new List<IRenderable>();
+            for (int i = 0; i < columns; i++)
+            {
+                if (i == columns / 2)
+                {
+                    if (selected == levels.Length + 1)
+                    {
+                        backRow.Add(new Panel(new Markup($"[bold aquamarine3]Back[/]")).Expand());
+                    }
+                    else
+                    {
+                        backRow.Add(new Panel(new Markup($"[orange3]Back[/]")).Expand());
+                    }
+                }
+                else
+                {
+                    backRow.Add(new Panel(new Markup("")).Expand().Border(BoxBorder.None)); // Left and right empty columns
+                }
+            }
+            menu.AddRow(backRow.ToArray());
+
+            var paddedMenu = new Panel(Align.Center(menu)).Expand().Border(BoxBorder.None);
+            AnsiConsole.Write(paddedMenu);
+            Console.SetCursorPosition(Console.WindowWidth / 2, Console.GetCursorPosition().Top + 4);
+
+            while (true) {
+                var key = Console.ReadKey();
+                switch (key.Key) {
+                    case ConsoleKey.LeftArrow:
+                        if (selected == 1)
+                            selected = levels.Length + 1; // If it would go past 1, reset it to the last option
+                        else
+                            selected--; // Move left
+                        DisplayLevelSelectionMenu(selected);
+                        break;
+                    case ConsoleKey.UpArrow:
+                        if (selected > columns)
+                            selected-= columns; // If it has a row above, move up
+                        DisplayLevelSelectionMenu(selected);
+                        break;
+                    case ConsoleKey.RightArrow:
+                        if (selected == levels.Length + 1)
+                            selected = 1; // If it would go past the last option, reset it to 1
+                        else
+                            selected++; // Move right
+                        DisplayLevelSelectionMenu(selected);
+                        break;
+                    case ConsoleKey.DownArrow:
+                        if (selected >= levels.Length + 1 - columns)
+                            selected = levels.Length + 1; // If it would go past the last option, reset it to the "Back" button
+                        else
+                            selected+= columns; // If it has a row below, move down
+                        DisplayLevelSelectionMenu(selected);
+                        break;
+                    case ConsoleKey.Enter:
+                        Console.Clear();
+                        if (selected == levels.Length + 1)
+                        {
+                            Run(); // Go back to the main menu
+                        }
+                        else
+                        {
+                            // Start the selected level
+                            Console.WriteLine($"You selected {levels[selected - 1]} level.");
+                        }
+                        return;
+                    case ConsoleKey.Escape: 
+                    case ConsoleKey.Backspace:
+                        Run(); // Go back to the main menu
+                        return;
                 }
             }
             #endregion

@@ -3,6 +3,9 @@ using Spectre.Console;
 
 namespace Minigames
 {
+    //? Replace the colors with brighter ones
+    //? Replace the "You Win!" message with a more generic one, for tasks
+
     public class Pindle : IMinigame
     {
         private const int NumberLength = 5;
