@@ -13,7 +13,7 @@ namespace ReactorRush
     public class Game
     {
         public bool menuChosen = false;
-        private List<IMinigame> minigames = MinigameList.Minigames;
+        private readonly List<IMinigame> minigames = MinigameList.Minigames;
 
         public void Run()
         {
