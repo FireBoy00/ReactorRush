@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using Spectre.Console;
 
-namespace ReactorRushGame
+namespace ReactorRush
 {
     class Program
     {

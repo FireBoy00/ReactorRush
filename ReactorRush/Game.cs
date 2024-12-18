@@ -8,7 +8,7 @@ using Spectre.Console.Rendering;
 using System.Collections.Generic;
 using Minigames;
 
-namespace ReactorRushGame
+namespace ReactorRush
 {
     public class Game
     {
