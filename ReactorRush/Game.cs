@@ -97,9 +97,6 @@ namespace ReactorRush
         {
             Console.Clear();
             DisplayLevelSelectionMenu();
-            Console.WriteLine("Press any key to exit...");
-            Console.ReadKey();
-            Quit();
         }
 
         private void Settings()
@@ -312,7 +309,7 @@ namespace ReactorRush
                         else
                         {
                             // Start the selected level
-                            Console.WriteLine($"You selected {levels[selected - 1]} level.");
+                            StartLevel(selected);
                         }
                         return;
                     case ConsoleKey.Escape: 
@@ -322,6 +319,17 @@ namespace ReactorRush
                 }
             }
             #endregion
+        }
+    
+        private void StartLevel(int level) {
+            Console.Clear();
+            var author = "Narrator";
+            var welcomeMsg = "Welcome to the Power Room. Your task is to fix the power cables and restore power to the reactor. Good luck!Welcome to the Power Room. Your task is to fix the power cables and restore power to the reactor. Good luck!Welcome to the Power Room. Your task is to fix...Welcome to the Power Room. Your task is to fix the power cables and restore power to the reactor. Good luck!Welcome to the Power Room. Your task is to fix the power cables and restore power to the reactor. Good luck!Welcome to the Power Room. Your task is to fix...";
+            Utility.PrintStory(author, welcomeMsg);
+            Utility.PrintStory("FireBoy", "Test concluded!");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+            Run();
         }
     }
 }
