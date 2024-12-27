@@ -5,9 +5,9 @@ namespace Rooms
         int StartLevel();
     }
 
-    public static class MinigameList
+    public static class RoomsList
     {
-        public static List<IRooms> Minigames { get; } = new List<IRooms>
+        public static List<IRooms> Rooms { get; } = new List<IRooms>
         {
             new VisitorCenter() // 0
             // Add other rooms here
