@@ -106,12 +106,8 @@ namespace ReactorRush
             Console.WriteLine("Settings:");
             Console.WriteLine("1. Difficulty Level");
             Console.WriteLine("2. Sound On/Off");
-            Thread.Sleep(3000);
-
-            Console.Clear();
-            Console.WriteLine("Press any key to exit...");
-            Console.ReadKey();
-            Quit();
+            Thread.Sleep(2000);
+            Run();
         }
     
         private void Quit() {
@@ -139,22 +135,22 @@ namespace ReactorRush
                 var minigameName = minigames[i].GetType().Name;
                 if (selected == i + 1)
                 {
-                    menu.AddRow(new Panel(new Markup($"[bold aqua]{i + 1}. {minigameName}[/]")).Expand().PadLeft(2).PadRight(1));
+                    menu.AddRow(new Panel(new Markup($"[bold aqua]{i + 1}. {minigameName}[/]")).Expand().PadLeft(2).PadRight(1).Border(BoxBorder.Double));
                 }
                 else
                 {
-                    menu.AddRow(new Panel(new Markup($"[bold orange3]{i + 1}. [/][yellow]{minigameName}[/]")).Expand().PadRight(2));
+                    menu.AddRow(new Panel(new Markup($"[bold orange3]{i + 1}. [/][yellow]{minigameName}[/]")).Expand().PadRight(2).Border(BoxBorder.Square));
                 }
             }
 
             // Add the "Back" button
             if (selected == minigames.Count + 1)
             {
-                menu.AddRow(new Panel(new Markup($"[bold aqua]{minigames.Count + 1}. Back[/]")).Expand().PadLeft(2).PadRight(1));
+                menu.AddRow(new Panel(new Markup($"[bold aqua]{minigames.Count + 1}. Back[/]")).Expand().PadLeft(2).PadRight(1).Border(BoxBorder.Double));
             }
             else
             {
-                menu.AddRow(new Panel(new Markup($"[bold orange3]{minigames.Count + 1}. [/][yellow]Back[/]")).Expand().PadRight(2));
+                menu.AddRow(new Panel(new Markup($"[bold orange3]{minigames.Count + 1}. [/][yellow]Back[/]")).Expand().PadRight(2).Border(BoxBorder.Square));
             }
 
             AnsiConsole.Write(menu);
@@ -194,6 +190,10 @@ namespace ReactorRush
                         }
                         menuChosen = true;
                         break;
+                    case ConsoleKey.Backspace:
+                    case ConsoleKey.Escape:
+                        Run();
+                        break;
                 }
             }
             #endregion
@@ -230,11 +230,11 @@ namespace ReactorRush
                     {
                         if (selected == index + 1)
                         {
-                            row.Add(new Panel(new Markup($"[bold aqua]{levels[index]}[/]")).Expand());
+                            row.Add(new Panel(new Markup($"[bold aqua]{levels[index]}[/]")).Expand().Border(BoxBorder.Double));
                         }
                         else
                         {
-                            row.Add(new Panel(new Markup($"[yellow]{levels[index]}[/]")).Expand());
+                            row.Add(new Panel(new Markup($"[yellow]{levels[index]}[/]")).Expand().Border(BoxBorder.Square));
                         }
                     }
                     else
@@ -253,11 +253,11 @@ namespace ReactorRush
                 {
                     if (selected == levels.Length + 1)
                     {
-                        backRow.Add(new Panel(new Markup($"[bold aquamarine3]Back[/]")).Expand());
+                        backRow.Add(new Panel(new Markup($"[bold aquamarine3]Back[/]")).Expand().Border(BoxBorder.Double));
                     }
                     else
                     {
-                        backRow.Add(new Panel(new Markup($"[orange3]Back[/]")).Expand());
+                        backRow.Add(new Panel(new Markup($"[orange3]Back[/]")).Expand().Border(BoxBorder.Square));
                     }
                 }
                 else
@@ -327,7 +327,8 @@ namespace ReactorRush
             var welcomeMsg = "Welcome to the Power Room. Your task is to fix the power cables and restore power to the reactor. Good luck!Welcome to the Power Room. Your task is to fix the power cables and restore power to the reactor. Good luck!Welcome to the Power Room. Your task is to fix...Welcome to the Power Room. Your task is to fix the power cables and restore power to the reactor. Good luck!Welcome to the Power Room. Your task is to fix the power cables and restore power to the reactor. Good luck!Welcome to the Power Room. Your task is to fix...";
             Utility.PrintStory(author, welcomeMsg);
             Utility.PrintStory("FireBoy", "Test concluded!");
-            Console.WriteLine("Press any key to continue...");
+            Utility.Prompt("What's your name?", ["Adrian", "Mathias", "Albert", "Eny", "A"]);
+            Console.WriteLine("[DEBUG] Press any key to return to menue...");
             Console.ReadKey();
             Run();
         }

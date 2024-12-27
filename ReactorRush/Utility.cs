@@ -6,7 +6,7 @@ namespace ReactorRush
 {
     public static class Utility
     {
-        public static void PrintStory(string author, string text, int typingSpeed = 25)
+        public static void PrintStory(string author, string text, bool prompt = false, int typingSpeed = 25)
         {
             Console.Clear();
             var panel = new Panel(string.Empty)
@@ -40,16 +40,18 @@ namespace ReactorRush
             panel.Width = maxWidth;
             panel.Height = height;
 
+            var topPadding = (Console.WindowHeight - (panel.Height ?? 0)) / 2;
+            topPadding = !prompt ? topPadding : Console.WindowHeight * 20 / 100;
+            Console.SetCursorPosition(0, topPadding);
             var centeredPanel = new Padder(panel)
-                .PadLeft((Console.WindowWidth - (panel.Width ?? 0)) / 2)
-                .PadTop((Console.WindowHeight - (panel.Height ?? 0)) / 2);
+                .PadLeft((Console.WindowWidth - (panel.Width ?? 0)) / 2);
 
             AnsiConsole.Write(centeredPanel);
 
             // Typing effect
             var currentText = string.Empty;
-            var instructionText = "Press SPACE to skip the story...";
-            var instruction = new Panel("[grey]Press [yellow]SPACE[/] to skip the story...[/]")
+            var instructionText = "Press SPACE to skip the animation...";
+            var instruction = new Panel("[grey]Press [yellow]SPACE[/] to skip the animation...[/]")
             {
                 Border = BoxBorder.Rounded,
                 Padding = new Padding(1, 0)
@@ -78,11 +80,9 @@ namespace ReactorRush
                     Height = panel.Height
                 };
 
+                Console.SetCursorPosition(0, topPadding);
                 centeredPanel = new Padder(panel)
-                    .PadLeft((Console.WindowWidth - (panel.Width ?? 0)) / 2)
-                    .PadTop((Console.WindowHeight - (panel.Height ?? 0)) / 2);
-
-                Console.SetCursorPosition(0, 0);
+                    .PadLeft((Console.WindowWidth - (panel.Width ?? 0)) / 2);
                 AnsiConsole.Write(centeredPanel);
 
                 Console.SetCursorPosition(0, Console.WindowHeight - 5);
@@ -101,13 +101,14 @@ namespace ReactorRush
                 Height = panel.Height
             };
 
-            centeredPanel = new Padder(panel)
-                .PadLeft((Console.WindowWidth - (panel.Width ?? 0)) / 2)
-                .PadTop((Console.WindowHeight - (panel.Height ?? 0)) / 2);
-
             Console.Clear();
+            Console.SetCursorPosition(0, topPadding);
+            centeredPanel = new Padder(panel)
+                .PadLeft((Console.WindowWidth - (panel.Width ?? 0)) / 2);
+
             AnsiConsole.Write(centeredPanel);
 
+            if (prompt) return;
             // Instruct the user to press ENTER to continue
             instructionText = "Press ENTER to continue...";
             instruction = new Panel("[grey]Press [yellow]ENTER[/] to continue...[/]")
@@ -136,5 +137,63 @@ namespace ReactorRush
                 }
             }
         }
+    
+        public static void Prompt (string question, string[] options, string author = "Instructor") {
+            Console.Clear();
+            PrintStory(author, question, true);
+            var table = new Table
+            {
+                Border = TableBorder.None,
+                ShowHeaders = false
+            }.Centered();
+
+            table.AddColumn(new TableColumn("").Centered());
+
+            foreach (var option in options)
+            {
+                var opt = new Panel(new Markup($"[yellow]{option}[/]"));
+                table.AddRow(opt);
+            }
+
+            var minimTableWidth = Console.WindowWidth * 75 / 100;
+            table.Width = table.Width > minimTableWidth ? table.Width : minimTableWidth;
+
+            // var tableHeight = table.Rows.Count;
+            // var topPadding = Console.WindowHeight * 20 / 100;
+            // Console.SetCursorPosition(0, topPadding);
+
+            AnsiConsole.Write(table);
+
+            var selectionMade = false;
+            var selectedOption = 1;
+            while (!selectionMade) {
+                if (Console.KeyAvailable) {
+                    var key = Console.ReadKey(true);
+                    switch (key.Key)
+                    {
+                        case ConsoleKey.DownArrow:
+                            if (selectedOption > options.Length) {
+                                selectedOption = 1;
+                            }else {
+                                selectedOption++;
+                            }
+                            break;
+                        case ConsoleKey.UpArrow:
+                            if (selectedOption < options.Length) {
+                                selectedOption = options.Length;
+                            }else {
+                                selectedOption--;
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+            Console.Clear();
+            AnsiConsole.MarkupLine($"You selected: [bold yellow]{options[selectedOption]}[/]");
+        }
+
     }
 }

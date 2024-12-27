@@ -27,7 +27,7 @@ namespace Minigames
             _guesses = new string[MaxAttempts];
 
             Console.Clear();
-            while (_attempts < MaxAttempts)
+            while (_attempts <= MaxAttempts)
             {
                 Console.SetCursorPosition(0, 0);
                 DisplayAttempts();
@@ -135,6 +135,7 @@ namespace Minigames
             }
             else if (key == ConsoleKey.Enter && _currentGuess.Length == NumberLength)
             {
+                AnsiConsole.Write($"Your answer: {_currentGuess} | {_targetNumber}");
                 _guesses[_attempts] = _currentGuess;
                 _attempts++;
                 if (_currentGuess == _targetNumber)
