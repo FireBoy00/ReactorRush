@@ -179,7 +179,7 @@ namespace ReactorRush
             AnsiConsole.Write(table);
         }
 
-        public static void Prompt (string question, string[] options, string? author = null) {
+        public static string Prompt (string question, string[] options, string? author = null) {
             author ??= Narrator;
 
             Console.Clear();
@@ -212,14 +212,13 @@ namespace ReactorRush
                             break;
                         case ConsoleKey.Enter:
                             selectionMade = true;
-                            Console.Clear();
-                            AnsiConsole.Write($"You chose: {selectedOption} | {options[selectedOption-1]}");
-                            break;
+                            return options[selectedOption-1];
                         default:
                             break;
                     }
                 }
             }
+            return options[selectedOption-1];
         }
 
     }
