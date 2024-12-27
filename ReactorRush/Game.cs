@@ -109,7 +109,7 @@ namespace ReactorRush
             Thread.Sleep(2000);
             Run();
         }
-    
+
         private void Quit() {
             Console.Clear();
             Console.WriteLine("Thanks for playing!");
@@ -211,7 +211,7 @@ namespace ReactorRush
             // menu.HideHeaders();
             // menu.Border(TableBorder.None);
 
-            string[] levels = ["Power Room", "Colling System", "Ion Rods", "Reactor Core"];
+            string[] levels = ["Visitor Center", "Control Room", "Cooling System", "Steam Turbine Room", "Waste Storage Facility", "Containment Building", "Fuel Handling Area", "Emergency Backup Room", "Water Reservoir", "Radiation Monitor", "Laboratory", "Reactor Core"];
             // int columns = (levels.Length / 4) > 0 ? (levels.Length / 4) : 1;
             int columns = 3;
             int rows = 4;
@@ -320,14 +320,16 @@ namespace ReactorRush
             }
             #endregion
         }
-    
+
         private void StartLevel(int level) {
             Console.Clear();
-            var author = "Narrator";
+            Utility.Narrator = "Gabi";
             var welcomeMsg = "Welcome to the Power Room. Your task is to fix the power cables and restore power to the reactor. Good luck!Welcome to the Power Room. Your task is to fix the power cables and restore power to the reactor. Good luck!Welcome to the Power Room. Your task is to fix...Welcome to the Power Room. Your task is to fix the power cables and restore power to the reactor. Good luck!Welcome to the Power Room. Your task is to fix the power cables and restore power to the reactor. Good luck!Welcome to the Power Room. Your task is to fix...";
-            Utility.PrintStory(author, welcomeMsg);
-            Utility.PrintStory("FireBoy", "Test concluded!");
-            Utility.Prompt("What's your name?", ["Adrian", "Mathias", "Albert", "Eny", "A"]);
+            Utility.PrintStory(welcomeMsg);
+            Utility.PrintStory("Test concluded!", "FireBoy");
+            // minigames[1].Run();
+            Utility.Prompt("What's your name?", ["I don't know my name...", "In case of any anomalies or alarms, operators quickly diagnose and address the issues to prevent potential hazards.", "They adjust control rods and other mechanisms to manage the reactor's power output and maintain stability.", "The control room team coordinates with other plant personnel to manage routine operations and maintenance activities."]);
+            Utility.Prompt("What's your name?", ["..."]);
             Console.WriteLine("[DEBUG] Press any key to return to menue...");
             Console.ReadKey();
             Run();

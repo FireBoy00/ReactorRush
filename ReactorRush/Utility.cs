@@ -1,4 +1,5 @@
 using System;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using Spectre.Console;
 
@@ -6,8 +7,10 @@ namespace ReactorRush
 {
     public static class Utility
     {
-        public static void PrintStory(string author, string text, bool prompt = false, int typingSpeed = 25)
+        public static string Narrator = "Narrator v1.0";
+        public static void PrintStory(string text, string? author = null, bool prompt = false, int typingSpeed = 25)
         {
+            author ??= Narrator;
             Console.Clear();
             var panel = new Panel(string.Empty)
             {
@@ -137,10 +140,9 @@ namespace ReactorRush
                 }
             }
         }
-    
-        public static void Prompt (string question, string[] options, string author = "Instructor") {
-            Console.Clear();
-            PrintStory(author, question, true);
+
+        public static void PrintOptions(int x, string[] options, int selected = 1) {
+            Console.SetCursorPosition(0, x);
             var table = new Table
             {
                 Border = TableBorder.None,
@@ -149,9 +151,21 @@ namespace ReactorRush
 
             table.AddColumn(new TableColumn("").Centered());
 
-            foreach (var option in options)
-            {
-                var opt = new Panel(new Markup($"[yellow]{option}[/]"));
+            bool expandAll = options.Any(opt => opt.Length > 100);
+
+            for (int i = 0; i < options.Length; i++) {
+                var opt = new Panel(new Markup($"[yellow]{options[i]}[/]")).Border(BoxBorder.Square);
+                
+                if (i == selected - 1) {
+                    opt = new Panel(new Markup($"[bold aqua]{options[i]}[/]")).Border(BoxBorder.Double);
+                }
+                
+                if (expandAll) {
+                    table.Expand();
+                    table.Centered();
+                    opt = opt.Expand();
+                }
+                
                 table.AddRow(opt);
             }
 
@@ -163,6 +177,15 @@ namespace ReactorRush
             // Console.SetCursorPosition(0, topPadding);
 
             AnsiConsole.Write(table);
+        }
+
+        public static void Prompt (string question, string[] options, string? author = null) {
+            author ??= Narrator;
+
+            Console.Clear();
+            PrintStory(question, author, true);
+            int x = Console.GetCursorPosition().Top;
+            PrintOptions(x, options);
 
             var selectionMade = false;
             var selectedOption = 1;
@@ -172,27 +195,31 @@ namespace ReactorRush
                     switch (key.Key)
                     {
                         case ConsoleKey.DownArrow:
-                            if (selectedOption > options.Length) {
+                            if (selectedOption == options.Length) {
                                 selectedOption = 1;
                             }else {
                                 selectedOption++;
                             }
+                            PrintOptions(x, options, selectedOption);
                             break;
                         case ConsoleKey.UpArrow:
-                            if (selectedOption < options.Length) {
+                            if (selectedOption == 1) {
                                 selectedOption = options.Length;
                             }else {
                                 selectedOption--;
                             }
+                            PrintOptions(x, options, selectedOption);
+                            break;
+                        case ConsoleKey.Enter:
+                            selectionMade = true;
+                            Console.Clear();
+                            AnsiConsole.Write($"You chose: {selectedOption} | {options[selectedOption-1]}");
                             break;
                         default:
                             break;
                     }
                 }
             }
-
-            Console.Clear();
-            AnsiConsole.MarkupLine($"You selected: [bold yellow]{options[selectedOption]}[/]");
         }
 
     }

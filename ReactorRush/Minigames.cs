@@ -9,8 +9,8 @@ namespace Minigames
     {
         public static List<IMinigame> Minigames { get; } = new List<IMinigame>
         {
-            new CableFix(),
-            new Pindle()
+            new CableFix(), // 0
+            new Pindle() // 1
             // Add other minigames here
         };
     }
