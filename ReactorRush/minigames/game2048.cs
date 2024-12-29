@@ -3,7 +3,7 @@ using Spectre.Console;
 
 namespace Minigames
 {
-    public class Game2048 :IMinigame
+    public class Game2048 : IMinigame
     {
         public int SizeOfBoard { get; private set; }
         public int Score { get; private set; }
@@ -15,7 +15,7 @@ namespace Minigames
         {
             SizeOfBoard = sizeOfBoard;
             board = new int[SizeOfBoard, SizeOfBoard];
-            Run();
+            //Run();
         }
         public void Run()
         {
@@ -54,7 +54,7 @@ namespace Minigames
             {
                 for (int x = 0; x < SizeOfBoard; x++)
                 {
-                    switch (board[y,x])
+                    switch (board[y, x])
                     {
                         case 0:
                             AnsiConsole.Markup($"[maroon on cornsilk1]   {board[y, x]}    [/]");
