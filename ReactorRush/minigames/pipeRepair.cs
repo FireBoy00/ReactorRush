@@ -24,8 +24,12 @@ namespace Minigames
         }
         public void Run()
         {
+            Console.CursorVisible = false;
+            Array.Clear(board);
+            Array.Clear(isWaterGo);
             placeOfCursor[0] = 0;
             placeOfCursor[1] = 1;
+            Score = 0;
             for (int i = 0; i < SizeOfBoard; i++)
             {
                 board[0, i] = 5;

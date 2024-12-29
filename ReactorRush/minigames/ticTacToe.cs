@@ -29,10 +29,13 @@ namespace Minigames
         }*/
         public void Run()
         {
+            Console.CursorVisible = false;
+            Array.Clear(board);
+            Score = 0;
+            placeOfCursor[0] = 0;
+            placeOfCursor[1] = 0;
             PrintPlotline();
-
             PrintBoard();
-
             //Console.ReadKey();
             board[0, 0] = 3;
             while (!IsEnd() && !IsLost())
@@ -46,10 +49,6 @@ namespace Minigames
                     }
                 }
             }
-            /*board[2,1] = 1;
-            board[1,1] = 2;
-            board[0,0] = 3;
-            board[1,2] = 4;*/
             PrintBoard();
             if (!IsLost())
             {

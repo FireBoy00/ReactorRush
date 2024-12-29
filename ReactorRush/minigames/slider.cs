@@ -20,6 +20,7 @@ namespace Minigames
         }
         public void Run()
         {
+            Console.CursorVisible = false;
             placeOfZero[0] = SizeOfBoard - 1;
             placeOfZero[1] = SizeOfBoard - 1;
             do

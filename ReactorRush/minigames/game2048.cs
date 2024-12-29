@@ -3,7 +3,7 @@ using Spectre.Console;
 
 namespace Minigames
 {
-    public class Game2048 : IMinigame
+    public class Game2048 :IMinigame
     {
         public int SizeOfBoard { get; private set; }
         public int Score { get; private set; }
@@ -15,10 +15,12 @@ namespace Minigames
         {
             SizeOfBoard = sizeOfBoard;
             board = new int[SizeOfBoard, SizeOfBoard];
-            //Run();
+            Run();
         }
         public void Run()
         {
+            Console.CursorVisible = false;
+            Array.Clear(board);
             rollX = dice.Next(0, SizeOfBoard);
             rollY = dice.Next(0, SizeOfBoard);
             board[rollY, rollX] = 2;
@@ -55,37 +57,37 @@ namespace Minigames
                     switch (board[y,x])
                     {
                         case 0:
-                            AnsiConsole.Markup($"[maroon on Yellow2]   {board[y, x]}    [/]");
+                            AnsiConsole.Markup($"[maroon on cornsilk1]   {board[y, x]}    [/]");
                             break;
                         case 2:
-                            AnsiConsole.Markup($"[maroon on Yellow3_1]   {board[y, x]}    [/]");
+                            AnsiConsole.Markup($"[maroon on thistle1]   {board[y, x]}    [/]");
                             break;
                         case 4:
-                            AnsiConsole.Markup($"[maroon on Gold3_1]   {board[y, x]}    [/]");
+                            AnsiConsole.Markup($"[maroon on khaki1]   {board[y, x]}    [/]");
                             break;
                         case 8:
-                            AnsiConsole.Markup($"[maroon on darkgoldenrod]   {board[y, x]}    [/]");
+                            AnsiConsole.Markup($"[maroon on darkseagreen1_1]   {board[y, x]}    [/]");
                             break;
                         case 16:
-                            AnsiConsole.Markup($"[maroon on olive]   {board[y, x]}   [/]");
+                            AnsiConsole.Markup($"[maroon on lightsalmon1]   {board[y, x]}   [/]");
                             break;
                         case 32:
-                            AnsiConsole.Markup($"[maroon on Yellow3_1]   {board[y, x]}   [/]");
+                            AnsiConsole.Markup($"[maroon on lightcyan1]   {board[y, x]}   [/]");
                             break;
                         case 64:
-                            AnsiConsole.Markup($"[maroon on Yellow3_1]   {board[y, x]}   [/]");
+                            AnsiConsole.Markup($"[maroon on lightgoldenrod2_1]   {board[y, x]}   [/]");
                             break;
                         case 128:
-                            AnsiConsole.Markup($"[maroon on Yellow3_1]  {board[y, x]}   [/]");
+                            AnsiConsole.Markup($"[maroon on plum2]  {board[y, x]}   [/]");
                             break;
                         case 256:
-                            AnsiConsole.Markup($"[maroon on Yellow3_1]  {board[y, x]}   [/]");
+                            AnsiConsole.Markup($"[maroon on darkseagreen2]  {board[y, x]}   [/]");
                             break;
                         case 512:
-                            AnsiConsole.Markup($"[maroon on Yellow3_1]  {board[y, x]}   [/]");
+                            AnsiConsole.Markup($"[maroon on skyblue1]  {board[y, x]}   [/]");
                             break;
                         default:
-                            AnsiConsole.Markup($"[maroon on Yellow3_1]  {board[y, x]}  [/]");
+                            AnsiConsole.Markup($"[maroon on green4]  {board[y, x]}  [/]");
                             break;
                     }
                     //Console.Write(board[y, x] + "\t");
@@ -160,7 +162,7 @@ namespace Minigames
                             if (amountOf0 != SizeOfBoard)
                             {
                                 MoveDown(x, amountOf0);
-                                amountOf0 = SumUp(x, amountOf0);
+                                amountOf0 = SumDown(x, amountOf0);
                                 MoveDown(x, amountOf0);
                             }
                         }
