@@ -326,7 +326,7 @@ namespace ReactorRush
         private void StartLevel(int level) {
             int score = rooms[level - 1].StartLevel();
             Console.WriteLine($"SCORE: {score} :SCORE\n\n");
-            Console.WriteLine("[DEBUG] Press any key to return to menue...");
+            Console.WriteLine("[DEBUG] Press any key to return to menu...");
             Console.ReadKey();
             Run();
         }
