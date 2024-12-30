@@ -8,6 +8,7 @@ namespace Minigames
 
     public class Pindle : IMinigame
     {
+        public int Score { get; private set; }
         private const int NumberLength = 5;
         private const int MaxAttempts = 6;
         private readonly Random _random = new Random();

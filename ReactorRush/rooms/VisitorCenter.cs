@@ -8,7 +8,7 @@ namespace Rooms
     public class VisitorCenter : IRooms
     {
         private int score = 0;
-        private readonly List<IMinigame> minigames = new List<IMinigame>();
+        private readonly List<IMinigame> minigames = MinigameList.Minigames;
 
         public int StartLevel() {
             AnsiConsole.Clear();
@@ -26,6 +26,14 @@ namespace Rooms
             string prompt2 = Utility.Prompt("What's your name?", ["..."]);
             AnsiConsole.Clear();
             AnsiConsole.Write($"You chose: {prompt2}");
+
+            // Ensure the index is within the valid range
+            if (minigames.Count > 4) {
+                AnsiConsole.Write($"Score in PipeRepair: {minigames[4].Score}");
+            } else {
+                AnsiConsole.Write("PipeRepair minigame is not available.");
+            }
+
             Thread.Sleep(1000);
 
             AnsiConsole.Clear();
