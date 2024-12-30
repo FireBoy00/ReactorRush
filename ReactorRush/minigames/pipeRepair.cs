@@ -7,8 +7,8 @@ namespace Minigames
     {
         public int SizeOfBoard { get; private set; }
         public int Score { get; private set; }
-        public bool isWon { get; private set; }
-        public int maxEnergy { get; private set; }
+        public bool IsWon { get; private set; }
+        public int MaxEnergy { get; private set; }
         private int[,] board;
         private bool[,] isWaterGo;
         private int[] placeOfCursor = new int[2]; //board[placeOfCursor[1], placeOfCursor[0]]
@@ -22,7 +22,7 @@ namespace Minigames
             SizeOfBoard = sizeOfBoard;
             board = new int[SizeOfBoard + 2, SizeOfBoard];
             isWaterGo = new bool[SizeOfBoard + 2, SizeOfBoard];
-            maxEnergy = SizeOfBoard * 4;
+            MaxEnergy = SizeOfBoard * 4;
             //Run();
         }
         public void Run()
@@ -51,19 +51,21 @@ namespace Minigames
             StartWaterGo();
             PrintBoard();
             //Console.ReadKey();
-            while (!IsEnd() && Score <= maxEnergy)
+            while (!IsEnd() && Score < MaxEnergy)
             {
                 if (NextRound())
                     StartWaterGo();
             }
             PrintBoard();
             Console.WriteLine();
-            if(Score > maxEnergy){
-                isWon = false;
+            if (!IsEnd())
+            {
+                IsWon = false;
                 Console.WriteLine("YOU LOSE THAT GAME.");
             }
-            else{
-                isWon = true;
+            else
+            {
+                IsWon = true;
                 Console.WriteLine("CONGRATULATIONS,");
                 Console.WriteLine("YOU WON THAT GAME!");
             }
@@ -85,7 +87,7 @@ namespace Minigames
         private void PrintBoard()
         {
             Console.SetCursorPosition(0, 0);
-            Console.WriteLine("Number of energy used: " + Score);
+            Console.WriteLine("Amount of energy: " + (MaxEnergy - Score) + "  ");
             Console.WriteLine();
             for (int y = 0; y < SizeOfBoard + 2; y++)
             {
