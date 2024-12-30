@@ -76,59 +76,59 @@ namespace Minigames
             Console.SetCursorPosition(0, 0);
             Console.WriteLine("Number of energy used: " + Score);
             Console.WriteLine();
-            AnsiConsole.Markup($"[maroon on Yellow3_1]  [/]");
+            AnsiConsole.Markup($"[white on black]  [/]");
             for (int x = 0; x < SizeOfBoard; x++)
             {
-                AnsiConsole.Markup($"[maroon on Yellow3_1]_____ [/]");
+                AnsiConsole.Markup($"[white on black]_____ [/]");
             }
-            AnsiConsole.Markup($"[maroon on Yellow3_1] [/]");
+            AnsiConsole.Markup($"[white on black] [/]");
             Console.WriteLine();
             for (int y = 0; y < SizeOfBoard; y++)
             {
-                AnsiConsole.Markup($"[maroon on Yellow3_1] |[/]");
+                AnsiConsole.Markup($"[white on black] |[/]");
                 for (int x = 0; x < SizeOfBoard; x++)
                 {
                     switch (board[y, x])
                     {
                         case 1:
-                            AnsiConsole.Markup($"[maroon on Yellow3_1]__[/]");
-                            AnsiConsole.Markup($"[green3 on Yellow3_1]O[/]");
-                            AnsiConsole.Markup($"[maroon on Yellow3_1]__|[/]");
+                            AnsiConsole.Markup($"[white on black]__[/]");
+                            AnsiConsole.Markup($"[green3 on black]+[/]");
+                            AnsiConsole.Markup($"[white on black]__|[/]");
                             break;
                         case 2:
-                            AnsiConsole.Markup($"[maroon on Yellow3_1]__[/]");
-                            AnsiConsole.Markup($"[red3_1 on Yellow3_1]X[/]");
-                            AnsiConsole.Markup($"[maroon on Yellow3_1]__|[/]");
+                            AnsiConsole.Markup($"[white on black]__[/]");
+                            AnsiConsole.Markup($"[red3_1 on black]![/]");
+                            AnsiConsole.Markup($"[white on black]__|[/]");
                             break;
                         case 3:
-                            AnsiConsole.Markup($"[maroon on darkslategray3]_____[/]");
-                            AnsiConsole.Markup($"[maroon on Yellow3_1]|[/]");
+                            AnsiConsole.Markup($"[white on darkslategray3]_____[/]");
+                            AnsiConsole.Markup($"[white on black]|[/]");
                             break;
                         case 4:
-                            AnsiConsole.Markup($"[maroon on darkslategray3]__[/]");
-                            AnsiConsole.Markup($"[purple_2 on darkslategray3]O[/]");
-                            AnsiConsole.Markup($"[maroon on darkslategray3]__[/]");
-                            AnsiConsole.Markup($"[maroon on Yellow3_1]|[/]");
+                            AnsiConsole.Markup($"[white on darkslategray3]__[/]");
+                            AnsiConsole.Markup($"[purple_2 on darkslategray3]+[/]");
+                            AnsiConsole.Markup($"[white on darkslategray3]__[/]");
+                            AnsiConsole.Markup($"[white on black]|[/]");
                             break;
                         case 5:
-                            AnsiConsole.Markup($"[maroon on darkslategray3]__[/]");
-                            AnsiConsole.Markup($"[purple_2 on darkslategray3]X[/]");
-                            AnsiConsole.Markup($"[maroon on darkslategray3]__[/]");
-                            AnsiConsole.Markup($"[maroon on Yellow3_1]|[/]");
+                            AnsiConsole.Markup($"[white on darkslategray3]__[/]");
+                            AnsiConsole.Markup($"[purple_2 on darkslategray3]![/]");
+                            AnsiConsole.Markup($"[white on darkslategray3]__[/]");
+                            AnsiConsole.Markup($"[white on black]|[/]");
                             break;
                         default:
-                            AnsiConsole.Markup($"[maroon on Yellow3_1]_____|[/]");
+                            AnsiConsole.Markup($"[white on black]_____|[/]");
                             break;
                     }
                     //Console.Write(board[y, x] + "\t");
                 }
-                AnsiConsole.Markup($"[maroon on Yellow3_1] [/]");
+                AnsiConsole.Markup($"[white on black] [/]");
                 Console.WriteLine("");
             }
-            AnsiConsole.Markup($"[maroon on Yellow3_1]   [/]");
+            AnsiConsole.Markup($"[white on black]   [/]");
             for (int x = 0; x < SizeOfBoard; x++)
             {
-                AnsiConsole.Markup($"[maroon on Yellow3_1]      [/]");
+                AnsiConsole.Markup($"[white on black]      [/]");
             }
             Console.WriteLine();
             Console.BackgroundColor = ConsoleColor.Black;

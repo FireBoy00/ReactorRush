@@ -7,6 +7,7 @@ namespace Minigames
     {
         public int SizeOfBoard { get; private set; }
         public int Score { get; private set; }
+        public bool isWon { get; private set; }
         private int[,] board;
         private int rollX;
         private int rollY;
