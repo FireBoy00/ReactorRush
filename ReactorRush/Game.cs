@@ -48,7 +48,7 @@ namespace ReactorRush
             Console.SetCursorPosition(Console.WindowWidth / 2, Console.GetCursorPosition().Top + 4);
 
             while (!menuChosen) {
-                var key = Console.ReadKey();
+                var key = Console.ReadKey(true); // Read key without displaying it
                 switch (key.Key) {
                     case ConsoleKey.UpArrow:
                         if (selected == 1)
@@ -156,7 +156,7 @@ namespace ReactorRush
             var menuChosen = false;
             while (!menuChosen)
             {
-                var key = Console.ReadKey();
+                var key = Console.ReadKey(true);
                 switch (key.Key)
                 {
                     case ConsoleKey.UpArrow:
