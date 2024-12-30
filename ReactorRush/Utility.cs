@@ -22,19 +22,24 @@ namespace ReactorRush
             // Determine the width and height based on the text
             const int maxLineLength = 100;
             var formattedText = new StringBuilder();
-            var words = text.Split(' ');
-            var currentLine = new StringBuilder();
-
-            foreach (var word in words)
+            var paragraphs = text.Split('\n');
+            
+            foreach (var paragraph in paragraphs)
             {
-                if (currentLine.Length + word.Length + 1 > maxLineLength)
+                var words = paragraph.Split(' ');
+                var currentLine = new StringBuilder();
+
+                foreach (var word in words)
                 {
-                    formattedText.AppendLine(currentLine.ToString());
-                    currentLine.Clear();
+                    if (currentLine.Length + word.Length + 1 > maxLineLength)
+                    {
+                        formattedText.AppendLine(currentLine.ToString());
+                        currentLine.Clear();
+                    }
+                    currentLine.Append(word + " ");
                 }
-                currentLine.Append(word + " ");
+                formattedText.AppendLine(currentLine.ToString().TrimEnd());
             }
-            formattedText.AppendLine(currentLine.ToString().TrimEnd());
 
             var lines = formattedText.ToString().Split('\n');
             int maxWidth = lines.Max(line => line.Length) + 4; // Adding padding

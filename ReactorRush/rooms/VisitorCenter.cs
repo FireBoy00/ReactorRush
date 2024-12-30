@@ -14,7 +14,7 @@ namespace Rooms
             AnsiConsole.Clear();
 
             Utility.Narrator = "Gabi";
-            var welcomeMsg = "Welcome to the Power Room. Your task is to fix the power cables and restore power to the reactor. Good luck!Welcome to the Power Room. Your task is to fix the power cables and restore power to the reactor. Good luck!Welcome to the Power Room. Your task is to fix...Welcome to the Power Room. Your task is to fix the power cables and restore power to the reactor. Good luck!Welcome to the Power Room. Your task is to fix the power cables and restore power to the reactor. Good luck!Welcome to the Power Room. Your task is to fix...";
+            var welcomeMsg = "Welcome to the Power Room. Your task is to fix the power cables and restore power to the reactor. Good luck!\nWelcome to the Power Room. Your task is to fix the power cables and restore power to the reactor. \n\nGood luck!Welcome to the Power Room. Your task is to fix...\nWelcome to the Power Room. Your task is to fix the power cables and restore power to the reactor. \n\nGood luck!\n\nWelcome to the Power Room. Your task is to fix the power cables and restore power to the reactor. Good luck!Welcome to the Power Room. Your task is to fix...";
             Utility.PrintStory(welcomeMsg);
             Utility.PrintStory("Test concluded!", "FireBoy");
             minigames[1].Run();
