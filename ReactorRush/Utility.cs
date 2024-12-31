@@ -8,13 +8,13 @@ namespace ReactorRush
     public static class Utility
     {
         public static string Narrator = "Narrator v1.0";
-        public static void PrintStory(string text, string? author = null, bool prompt = false, int typingSpeed = 25)
+        public static void PrintStory(string text, string? author = null, bool prompt = false, bool newspaper = false, int typingSpeed = 25)
         {
             author ??= Narrator;
             Console.Clear();
             var panel = new Panel(string.Empty)
             {
-                Header = new PanelHeader($"<[bold yellow] {author} [/]>"),
+                Header = new PanelHeader($"<[bold yellow] {author} [/]>" ),
                 Border = BoxBorder.Rounded,
                 Padding = new Padding(2, 1)
             };
@@ -22,19 +22,24 @@ namespace ReactorRush
             // Determine the width and height based on the text
             const int maxLineLength = 100;
             var formattedText = new StringBuilder();
-            var words = text.Split(' ');
-            var currentLine = new StringBuilder();
-
-            foreach (var word in words)
+            var paragraphs = text.Split('\n');
+            
+            foreach (var paragraph in paragraphs)
             {
-                if (currentLine.Length + word.Length + 1 > maxLineLength)
+                var words = paragraph.Split(' ');
+                var currentLine = new StringBuilder();
+
+                foreach (var word in words)
                 {
-                    formattedText.AppendLine(currentLine.ToString());
-                    currentLine.Clear();
+                    if (currentLine.Length + word.Length + 1 > maxLineLength)
+                    {
+                        formattedText.AppendLine(currentLine.ToString());
+                        currentLine.Clear();
+                    }
+                    currentLine.Append(word + " ");
                 }
-                currentLine.Append(word + " ");
+                formattedText.AppendLine(currentLine.ToString().TrimEnd());
             }
-            formattedText.AppendLine(currentLine.ToString().TrimEnd());
 
             var lines = formattedText.ToString().Split('\n');
             int maxWidth = lines.Max(line => line.Length) + 4; // Adding padding
@@ -112,9 +117,16 @@ namespace ReactorRush
             AnsiConsole.Write(centeredPanel);
 
             if (prompt) return;
+
+            ConsoleKey continueKey = ConsoleKey.Enter;
+            string[] continueKeyText = ["ENTER", "continue"];
+            if (newspaper) {
+                continueKey = ConsoleKey.Backspace;
+                continueKeyText = ["BACKSPACE", "exit the article"];
+            }
             // Instruct the user to press ENTER to continue
-            instructionText = "Press ENTER to continue...";
-            instruction = new Panel("[grey]Press [yellow]ENTER[/] to continue...[/]")
+            instructionText = $"Press {continueKeyText[0]} to {continueKeyText[1]}...";
+            instruction = new Panel($"[grey]Press [yellow]{continueKeyText[0]}[/] to {continueKeyText[1]}...[/]")
             {
                 Border = BoxBorder.Rounded,
                 Padding = new Padding(1, 0)
@@ -127,15 +139,15 @@ namespace ReactorRush
             Console.SetCursorPosition(0, Console.WindowHeight - 5);
             AnsiConsole.Write(centeredInstruction);
 
-            var enterPressed = false;
-            while (!enterPressed)
+            var continueKeyPressed = false;
+            while (!continueKeyPressed)
             {
                 if (Console.KeyAvailable)
                 {
                     var key = Console.ReadKey(true);
-                    if (key.Key == ConsoleKey.Enter)
+                    if (key.Key == continueKey)
                     {
-                        enterPressed = true;
+                        continueKeyPressed = true;
                     }
                 }
             }
@@ -221,5 +233,76 @@ namespace ReactorRush
             return options[selectedOption-1];
         }
 
+        public static void PrintNewspaper(string headline, string[] articles, string author = "Newspaper")
+        {
+            bool exitNewspaper = false;
+            while (!exitNewspaper)
+            {
+                Console.Clear();
+                PrintStory(headline, author, true);
+                int x = Console.GetCursorPosition().Top;
+                PrintOptions(x, articles);
+
+                // Inform the user they can use "SPACE" to exit the newspaper
+                string exitInstructionText = "Press BACKSPACE to exit the newspaper...";
+                var exitInstruction = new Panel("[grey]Press [yellow]BACKSPACE[/] to exit the newspaper...[/]")
+                {
+                    Border = BoxBorder.Rounded,
+                    Padding = new Padding(1, 0)
+                };
+                var exitInstructionWidth = exitInstructionText.Length + 4;
+                var centeredExitInstruction = new Padder(exitInstruction)
+                    .PadLeft((Console.WindowWidth - exitInstructionWidth) / 2)
+                    .PadBottom(0);
+
+                Console.SetCursorPosition(0, Console.WindowHeight - 5);
+                AnsiConsole.Write(centeredExitInstruction);
+
+                var selectionMade = false;
+                var selectedArticle = 1;
+                while (!selectionMade)
+                {
+                    if (Console.KeyAvailable)
+                    {
+                        var key = Console.ReadKey(true);
+                        switch (key.Key)
+                        {
+                            case ConsoleKey.DownArrow:
+                                if (selectedArticle == articles.Length)
+                                {
+                                    selectedArticle = 1;
+                                }
+                                else
+                                {
+                                    selectedArticle++;
+                                }
+                                PrintOptions(x, articles, selectedArticle);
+                                break;
+                            case ConsoleKey.UpArrow:
+                                if (selectedArticle == 1)
+                                {
+                                    selectedArticle = articles.Length;
+                                }
+                                else
+                                {
+                                    selectedArticle--;
+                                }
+                                PrintOptions(x, articles, selectedArticle);
+                                break;
+                            case ConsoleKey.Enter:
+                                selectionMade = true;
+                                PrintStory(articles[selectedArticle - 1], author, false, true);
+                                break;
+                            case ConsoleKey.Backspace:
+                                exitNewspaper = true;
+                                selectionMade = true;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

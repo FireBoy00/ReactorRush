@@ -48,7 +48,7 @@ namespace ReactorRush
             Console.SetCursorPosition(Console.WindowWidth / 2, Console.GetCursorPosition().Top + 4);
 
             while (!menuChosen) {
-                var key = Console.ReadKey();
+                var key = Console.ReadKey(true); // Read key without displaying it
                 switch (key.Key) {
                     case ConsoleKey.UpArrow:
                         if (selected == 1)
@@ -156,7 +156,7 @@ namespace ReactorRush
             var menuChosen = false;
             while (!menuChosen)
             {
-                var key = Console.ReadKey();
+                var key = Console.ReadKey(true);
                 switch (key.Key)
                 {
                     case ConsoleKey.UpArrow:
@@ -321,7 +321,7 @@ namespace ReactorRush
         private void StartLevel(int level) {
             int score = rooms[level - 1].StartLevel();
             Console.WriteLine($"SCORE: {score} :SCORE\n\n");
-            Console.WriteLine("[DEBUG] Press any key to return to menu...");
+            Console.WriteLine("[DEBUG] Press any key to return to menue...");
             Console.ReadKey();
             Run();
         }
