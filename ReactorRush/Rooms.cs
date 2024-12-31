@@ -11,7 +11,8 @@ namespace Rooms
         {
             new VisitorCenter(), // 0
             new Control(), //1
-            new SteamTurbine() //4
+            new SteamTurbine(), //4
+            new ReactorCore() //12
             // Add other rooms here
         };
     }

@@ -10,16 +10,17 @@ namespace Rooms
         private int score = 0;
         private readonly List<IMinigame> minigames = MinigameList.Minigames;
 
-        public int StartLevel() {
+        public int StartLevel()
+        {
             AnsiConsole.Clear();
 
             Utility.Narrator = "Agatta";
             Utility.PrintStory("You step into the Control Room, a space alive with data and sound. This is where decisions are made, and the reactor’s power is carefully managed.\n\nThis is where science meets strategy. As the operator, you will oversee energy production, balance outputs, and ensure that everything runs smoothly. All your actions here will define the success of the reactor and its contribution to a sustainable future.");
 
-            Utility.PrintStory("Here is what the team does in this room: \n\nKeep an Eye on Things \n      Operators continuously monitor the reactor's systems and parameters, ensuring everything is functioning within safe limits"+
-            "\n\nAdjusting Controls\n      They adjust control rods and other mechanisms to manage the reactor's power output and maintain stability. "+
-            "\n\nRespond to Warnings\n      In case of any anomalies or alarms, operators quickly diagnose and address the issues to prevent potential hazards."+
-            "\n\nWork as a Team\n      The control room crew coordinates with other plant workers to handle routine tasks and maintenance."+
+            Utility.PrintStory("Here is what the team does in this room: \n\nKeep an Eye on Things \n      Operators continuously monitor the reactor's systems and parameters, ensuring everything is functioning within safe limits" +
+            "\n\nAdjusting Controls\n      They adjust control rods and other mechanisms to manage the reactor's power output and maintain stability. " +
+            "\n\nRespond to Warnings\n      In case of any anomalies or alarms, operators quickly diagnose and address the issues to prevent potential hazards." +
+            "\n\nWork as a Team\n      The control room crew coordinates with other plant workers to handle routine tasks and maintenance." +
             "\n\nFocus on Safety\n      Safety protocols are strictly followed to protect both the plant and the surrounding environment from any risks.");
 
             Utility.PrintStory("The system has flagged some settings that need tweaking. To stabilize the reactor, you need to get the controls back in order. But first: ");
@@ -31,13 +32,13 @@ namespace Rooms
             {
                 case "In case of any anomalies or alarms, operators quickly diagnose and address the issues to prevent potential hazards":
                 case "They adjust control rods and other mechanisms to manage the reactor's power output and maintain stability":
-                Utility.PrintStory("This is not the right answer, pay attention to such words: handle, coordinate... ");
-                score -=1;
-                break;
+                    Utility.PrintStory("This is not the right answer, pay attention to such words: handle, coordinate... ");
+                    score -= 1;
+                    break;
                 case "The control room team coordinates with other plant personnel to handle routine and maintenance":
-                score +=5;
-                Utility.PrintStory("You chose the right answer, procced with your given task. Good luck! ");
-                break;
+                    score += 5;
+                    Utility.PrintStory("You chose the right answer, procced with your given task. Good luck! ");
+                    break;
             }
             AnsiConsole.Clear();
             minigames[2].Run();
