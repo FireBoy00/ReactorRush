@@ -9,7 +9,8 @@ namespace Rooms
     {
         public static List<IRooms> Rooms { get; } = new List<IRooms>
         {
-            new VisitorCenter() // 0
+            new VisitorCenter(), // 0
+            new WasteStorageFacility(),
             // Add other rooms here
         };
     }
