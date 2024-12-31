@@ -24,6 +24,7 @@ namespace Rooms
             if (minigames[4].Score > 40) {
                 Utility.PrintStory("Oh no! You couldn’t repair the broken pipe, and it led to a disaster.\nThis is the most likely disaster in a nuclear power plant: the cooling system failed, causing rapid overheating. Normally, reactors are designed in such a way that they cannot form a supercritical mass of fissionable material and therefore cannot create a nuclear explosion. However, failures of systems and safeguards can cause catastrophic accidents, including chemical explosions and nuclear meltdowns.\nYou can still try to repair it, so try again!");
                 NumberOfTries++;
+                AnsiConsole.Clear();
                 minigames[4].Run();
             }
             else {

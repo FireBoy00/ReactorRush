@@ -11,6 +11,7 @@ namespace Rooms
         {
             new VisitorCenter(), // 0
             new CoolingSystem(), // 1    - but should be changed to 2 later, so it's in the order of the rooms displayed
+            new FuelHandlingArea() 
             // Add other rooms here
         };
     }
