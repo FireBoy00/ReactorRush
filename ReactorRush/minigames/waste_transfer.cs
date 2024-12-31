@@ -1,21 +1,24 @@
 using System;
 using System.Text;
+using Spectre.Console.Rendering;
 using System.Threading;
 using Spectre.Console;
 
 namespace Minigames
 {
-    public class WasteDisposalGame : IMinigame
+    public class WasteDisposal : IMinigame
     {
         private int score;
+
         public int Score
         {
             get { return score; }
             private set { score = value; }
         }
+
         public void Run()
         {
-            Console.OutputEncoding = System.Text.Encoding.UTF8; // for ☢, ▮, ⁖⁙⁝, ¯, ‖
+            Console.OutputEncoding = System.Text.Encoding.UTF8; // for special characters
 
             int tank1Waste = 7; // Initial waste in Tank 1
             int tank2Waste = 0; // Tank 2 starts empty
@@ -24,16 +27,20 @@ namespace Minigames
             {
                 Console.Clear();
                 DrawTanks(tank1Waste, tank2Waste);
+
                 Console.WriteLine("\nPress Enter to transfer waste...");
+
                 if (Console.ReadKey(true).Key == ConsoleKey.Enter)
                 {
                     AnimateWasteTransfer(ref tank1Waste, ref tank2Waste);
+                    Score += 10; 
                 }
             }
 
             Console.Clear();
             DrawTanks(tank1Waste, tank2Waste);
             Console.WriteLine("\nAll waste has been transferred!");
+            Console.WriteLine($"\nYour final score is: {Score}");
 
             Console.WriteLine("\nPress any key to exit...");
             Console.ReadKey(true);
@@ -85,7 +92,7 @@ namespace Minigames
         {
             string[] transferFrames = new string[]
             {
-        @"
+                @"
                  /‾‾‾‾‾‾‾‾‾‾‾‾‾‾|
                 /               |
                |              __|__
@@ -95,11 +102,12 @@ namespace Minigames
                |              _(≬)_
                |             |     |
                |             |     |
-               |             |_____|                   
+               |             |_____|
             ___⊥___                   
 
         ",
-        @"
+                @"
+
                                   /‾‾‾‾‾‾‾‾‾‾‾‾‾‾|
                                  /               |
                                 |              __|__
@@ -109,10 +117,11 @@ namespace Minigames
                                 |              _(≬)_
                                 |             |   ▫ |
                                 |             |  ▫  |
-                                |             |_____|                   
+                                |             |_____|
                              ___⊥___                   
         ",
-        @"
+                @"
+                
                                                   /‾‾‾‾‾‾‾‾‾‾‾‾‾‾|
                                                  /               |
                                                 |              __|__
@@ -122,24 +131,21 @@ namespace Minigames
                                                 |              _(≬)_
                                                 |             | ▫ ▫ |
                                                 |             |  ▫▫ |
-                                                |             |_____|                   
+                                                |             |_____|
                                              ___⊥___                
         "
             };
 
-            // Loop through frames to simulate movement
             foreach (string frame in transferFrames)
             {
                 Console.Clear();
                 Console.WriteLine("Transferring waste...");
                 Console.WriteLine(frame);
-                Thread.Sleep(500); // Delay to make animation visible
+                Thread.Sleep(500); 
             }
 
-            // Update waste levels after transfer animation completes
             tank1Waste--;
             tank2Waste++;
         }
-
     }
 }
