@@ -61,6 +61,7 @@ namespace Minigames
             if (!IsEnd())
             {
                 IsWon = false;
+                Score += 10;
                 Console.WriteLine("YOU LOSE THAT GAME.");
             }
             else
