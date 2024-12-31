@@ -15,6 +15,7 @@ namespace Minigames
         }
         public void Run()
         {
+            var originalEncoding = Console.OutputEncoding;
             Console.OutputEncoding = System.Text.Encoding.UTF8; // for ☢, ▮, ⁖⁙⁝, ¯, ‖
 
             int tank1Waste = 7; // Initial waste in Tank 1
@@ -36,6 +37,7 @@ namespace Minigames
             Console.WriteLine("\nAll waste has been transferred!");
 
             Console.WriteLine("\nPress any key to exit...");
+            Console.OutputEncoding = originalEncoding;
             Console.ReadKey(true);
         }
 
