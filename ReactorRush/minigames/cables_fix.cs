@@ -5,6 +5,7 @@ namespace Minigames
 {
     public class CableFix : IMinigame
     {
+        public int Score { get; private set; }
         private int width;
         private int height;
         private int startX;

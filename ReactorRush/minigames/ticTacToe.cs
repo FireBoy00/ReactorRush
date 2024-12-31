@@ -7,6 +7,7 @@ namespace Minigames
     {
         public int SizeOfBoard { get; private set; }
         public int Score { get; private set; }
+        public bool IsWon { get; private set; }
         private int[,] board;
         private int rollX;
         private int rollY;
@@ -50,7 +51,8 @@ namespace Minigames
                 }
             }
             PrintBoard();
-            if (!IsLost())
+            IsWon = !IsLost();
+            if (IsWon)
             {
                 Console.WriteLine("Congratulations! You fixed the wires.");
             }

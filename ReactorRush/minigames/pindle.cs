@@ -8,12 +8,14 @@ namespace Minigames
 
     public class Pindle : IMinigame
     {
+        public int Score { get; private set; }
         private const int NumberLength = 5;
         private const int MaxAttempts = 6;
         private readonly Random _random = new Random();
         private string _targetNumber = string.Empty;
         private int _attempts;
         private bool _gameOver = false;
+        private bool _gameFailed = false;
         private string _currentGuess = string.Empty;
         private string[] _guesses = new string[MaxAttempts];
 
@@ -23,6 +25,7 @@ namespace Minigames
             _targetNumber = GenerateTargetNumber();
             _attempts = 0;
             _gameOver = false;
+            _gameFailed = false;
             _currentGuess = string.Empty;
             _guesses = new string[MaxAttempts];
 
@@ -42,7 +45,7 @@ namespace Minigames
                     break;
                 }
 
-                if (Console.KeyAvailable)
+                if (Console.KeyAvailable && !_gameFailed)
                 {
                     var key = Console.ReadKey(true).Key;
                     HandleKeyPress(key);
@@ -135,6 +138,7 @@ namespace Minigames
             }
             else if (key == ConsoleKey.Enter && _currentGuess.Length == NumberLength)
             {
+                Console.WriteLine($"{_currentGuess} | {_targetNumber}");
                 _guesses[_attempts] = _currentGuess;
                 _attempts++;
                 if (_currentGuess == _targetNumber)
@@ -150,6 +154,7 @@ namespace Minigames
 
                 if (_attempts == MaxAttempts)
                 {
+                    _attempts++;
                     Console.Clear();
                     Console.WriteLine($"Game Over! The correct number was {_targetNumber}.");
                 }
