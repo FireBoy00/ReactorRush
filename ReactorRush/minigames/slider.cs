@@ -27,7 +27,7 @@ namespace Minigames
             {
                 Array.Clear(board);
                 //seting new values for board
-                board[SizeOfBoard - 1, SizeOfBoard - 1] = SizeOfBoard*SizeOfBoard;
+                board[SizeOfBoard - 1, SizeOfBoard - 1] = SizeOfBoard * SizeOfBoard;
                 for (int i = 1; i < SizeOfBoard * SizeOfBoard; i++)
                 {
                     NextRoll(i);
@@ -187,69 +187,69 @@ namespace Minigames
             }
             else
             {*/
-                // Even-sized board: solvable if inversions are even (empty space fixed at bottom-right)
-                return inversions % 2 == 0;
+            // Even-sized board: solvable if inversions are even (empty space fixed at bottom-right)
+            return inversions % 2 == 0;
             //}
         }
-#endregion
+        #endregion
 
-#region Move
-private void NextRound()
-{
-    PrintBoard();
-    var key = Console.ReadKey();
-    bool read = false;
-
-    while (!read)
-    {
-        switch (key.Key)
+        #region Move
+        private void NextRound()
         {
-            case ConsoleKey.UpArrow:
-                read = true;
-                if (placeOfZero[1] != SizeOfBoard - 1)
+            PrintBoard();
+            var key = Console.ReadKey();
+            bool read = false;
+
+            while (!read)
+            {
+                switch (key.Key)
                 {
-                    board[placeOfZero[1], placeOfZero[0]] = board[placeOfZero[1] + 1, placeOfZero[0]];
-                    board[placeOfZero[1] + 1, placeOfZero[0]] = 0;
-                    placeOfZero[1]++;
-                    Score++;
+                    case ConsoleKey.UpArrow:
+                        read = true;
+                        if (placeOfZero[1] != SizeOfBoard - 1)
+                        {
+                            board[placeOfZero[1], placeOfZero[0]] = board[placeOfZero[1] + 1, placeOfZero[0]];
+                            board[placeOfZero[1] + 1, placeOfZero[0]] = 0;
+                            placeOfZero[1]++;
+                            Score++;
+                        }
+                        break;
+                    case ConsoleKey.DownArrow:
+                        read = true;
+                        if (placeOfZero[1] != 0)
+                        {
+                            board[placeOfZero[1], placeOfZero[0]] = board[placeOfZero[1] - 1, placeOfZero[0]];
+                            board[placeOfZero[1] - 1, placeOfZero[0]] = 0;
+                            placeOfZero[1]--;
+                            Score++;
+                        }
+                        break;
+                    case ConsoleKey.LeftArrow:
+                        read = true;
+                        if (placeOfZero[0] != SizeOfBoard - 1)
+                        {
+                            board[placeOfZero[1], placeOfZero[0]] = board[placeOfZero[1], placeOfZero[0] + 1];
+                            board[placeOfZero[1], placeOfZero[0] + 1] = 0;
+                            placeOfZero[0]++;
+                            Score++;
+                        }
+                        break;
+                    case ConsoleKey.RightArrow:
+                        read = true;
+                        if (placeOfZero[0] != 0)
+                        {
+                            board[placeOfZero[1], placeOfZero[0]] = board[placeOfZero[1], placeOfZero[0] - 1];
+                            board[placeOfZero[1], placeOfZero[0] - 1] = 0;
+                            placeOfZero[0]--;
+                            Score++;
+                        }
+                        break;
+                    default:
+                        key = Console.ReadKey();
+                        break;
                 }
-                break;
-            case ConsoleKey.DownArrow:
-                read = true;
-                if (placeOfZero[1] != 0)
-                {
-                    board[placeOfZero[1], placeOfZero[0]] = board[placeOfZero[1] - 1, placeOfZero[0]];
-                    board[placeOfZero[1] - 1, placeOfZero[0]] = 0;
-                    placeOfZero[1]--;
-                    Score++;
-                }
-                break;
-            case ConsoleKey.LeftArrow:
-                read = true;
-                if (placeOfZero[0] != SizeOfBoard - 1)
-                {
-                    board[placeOfZero[1], placeOfZero[0]] = board[placeOfZero[1], placeOfZero[0] + 1];
-                    board[placeOfZero[1], placeOfZero[0] + 1] = 0;
-                    placeOfZero[0]++;
-                    Score++;
-                }
-                break;
-            case ConsoleKey.RightArrow:
-                read = true;
-                if (placeOfZero[0] != 0)
-                {
-                    board[placeOfZero[1], placeOfZero[0]] = board[placeOfZero[1], placeOfZero[0] - 1];
-                    board[placeOfZero[1], placeOfZero[0] - 1] = 0;
-                    placeOfZero[0]--;
-                    Score++;
-                }
-                break;
-            default:
-                key = Console.ReadKey();
-                break;
+            }
         }
-    }
-}
         #endregion
     }
 }
