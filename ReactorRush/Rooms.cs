@@ -1,8 +1,11 @@
+using ReactorRush;
+
 namespace Rooms
 {
     public interface IRooms
     {
-        int StartLevel();
+        int StartLevel(Player player);
+        int Score { get; }
     }
 
     public static class RoomsList
@@ -11,6 +14,7 @@ namespace Rooms
         {
             new VisitorCenter(), // 0
             new Control(), //1
+            new CoolingSystem(), // 3
             new SteamTurbine(), //4
             new ReactorCore() //12
             // Add other rooms here
