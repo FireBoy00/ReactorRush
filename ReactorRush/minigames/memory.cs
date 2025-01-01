@@ -11,7 +11,7 @@ namespace Minigames
         private const int Cols = 4;
         public int Score { get; private set; } = 0; // increase every time the user finds a pair
         private const int MaxScore = Rows * Cols / 2;
-        private Dictionary<int, string>? cardMap;
+        private Dictionary<int, string> cardMap = new Dictionary<int, string>();
         private List<int> flippedCards = new List<int>();
         private int mistakes = 0; // increase every time the user flips two non-pair cards
         public int MaxMistakes { get; private set; } = 8;
@@ -169,7 +169,7 @@ namespace Minigames
                 Console.WriteLine($"Maximum mistakes allowed: {MaxMistakes}");
                 Console.WriteLine($"Mistakes made: {mistakes}");
                 Console.Write("Enter card number: ");
-                string input = Console.ReadLine();
+                string input = Console.ReadLine() ?? string.Empty;
                 if (int.TryParse(input, out int cardNumber))
                 {
                     FlipCard(cardNumber);
