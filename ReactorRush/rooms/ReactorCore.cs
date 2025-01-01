@@ -15,7 +15,7 @@ namespace Rooms
             Score = 0;
             AnsiConsole.Clear();
 
-            Utility.Narrator = "Agatta";
+            Utility.Narrator = "Reactor Safety Engineer"; //Reactor Core Technician or Critical Systems Technician or Reactor Safety Engineer
             Utility.PrintStory("Welcome to the last room of the nuclear reactor! It operates under high pressure and requires constant monitoring to ensure stability. As the control room operator, you are responsible for keeping things running smoothly. However, sometimes things go wrong, and you will need to quickly fix any valve (a device for controlling the passage of fluid) failures that may occur. ");
             Utility.PrintStory("The reactor core, with its carefully designed hexagonal fuel blocks and graphite moderator, operates with precision. Overheating or coolant loss can lead to shutdowns, but your task today is to prevent a failure within the core's intricate systems.");
             Utility.PrintStory("I have a very responsible task for you in this room, but I'm sure you can handle it, after all, you already know almost everything about how the reactor works." + "\n\nWelcome to Reactor Line Check, a place where you can test the operational stability of a nuclear reactor system. Your mission is to verify the system's integrity by marking stable points on the reactor grid while addressing unexpected errors.");

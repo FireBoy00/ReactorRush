@@ -14,7 +14,7 @@ namespace Rooms
         {
             AnsiConsole.Clear();
 
-            Utility.Narrator = "Agatta";
+            Utility.Narrator = "Critical Support Technician"; //Critical Support Technician or Backup Operations Technician
 
             Utility.PrintStory("The Emergency Backup room is a critical part of the nuclear power plant’s safety system. Its primary role is to ensure that essential functions can continue during power outages, preventing potential disasters. This room houses backup power systems designed to maintain operations like cooling spent fuel, managing remained decay heat from the reactor, and supporting crucial services such as system controls, communication, lighting, and ventilation. ");
             Utility.PrintStory("What are the functionality of this room you may ask me and I would tell you..." +
