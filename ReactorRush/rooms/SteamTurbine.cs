@@ -10,7 +10,7 @@ namespace Rooms
         public int Score { get; private set; }
         private readonly List<IMinigame> minigames = MinigameList.Minigames;
 
-        public int StartLevel()
+        public int StartLevel(Player player)
         {
             Score = 0;
             AnsiConsole.Clear();
@@ -47,6 +47,7 @@ namespace Rooms
                 }
             } while (minigames[3].Score < 1600);
             AnsiConsole.Clear();
+            player.UpdateRoomStatus(this.GetType().Name, Score > 0); // Update the room status
             return Score;
         }
     }
