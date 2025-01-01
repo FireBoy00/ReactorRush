@@ -55,8 +55,7 @@ namespace Rooms
             }
             Utility.PrintStory("Now that you understand the purpose of the Emergency Backup room, it is time to put your skills to the test. During an unexpected outage, a critical power cable has been damaged. It is your job to fix the cables and restore backup power to the system. \n\nYou need to drag and connect the left and right sides of the cable.");
             minigames[0].Run();
-            if(minigames[0].Score == 1)
-            //if (true)
+            if (minigames[0].Score > 0)
             {
                 Utility.PrintStory("Well done! The backup system is fully operational, and you have ensured the reactor’s safety. Move on to the next room to continue.");
             }
