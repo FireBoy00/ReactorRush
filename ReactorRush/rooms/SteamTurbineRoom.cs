@@ -5,7 +5,7 @@ using Minigames;
 
 namespace Rooms
 {
-    public class SteamTurbine : IRooms
+    public class SteamTurbineRoom : IRooms
     {
         public int Score { get; private set; }
         private readonly List<IMinigame> minigames = MinigameList.Minigames;

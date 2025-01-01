@@ -5,7 +5,7 @@ using Minigames;
 
 namespace Rooms
 {
-    public class Control : IRooms
+    public class ControlRoom : IRooms
     {
         public int Score { get; private set; }
         private readonly List<IMinigame> minigames = MinigameList.Minigames;
