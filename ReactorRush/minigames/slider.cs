@@ -38,6 +38,7 @@ namespace Minigames
             Score = 0;
             //FindZero(); //It is good but normaly that game start from right bottom edge
             board[SizeOfBoard - 1, SizeOfBoard - 1] = 0;
+            PrintPlotline();
             PrintBoard();
 
             //Console.ReadKey();
@@ -46,10 +47,18 @@ namespace Minigames
                 NextRound();
             }
             PrintBoard();
-            Console.WriteLine("YOU WON THAT MINIGAME!");
+            Console.WriteLine("YOU WON THIS MINIGAME!");
             Console.WriteLine("\nTo continue, click any key...");
             Console.ReadKey();
             //Console.WriteLine("Number of moves made: "+Score);
+        }
+        private void PrintPlotline()
+        {
+            Console.WriteLine("Your task is to put the numbers on the board in order.\n");
+            Console.WriteLine("To do this, use the arrows (you can only move the numbers next to the empty field).");
+            Console.WriteLine("\nClick any key to continue.");
+            Console.ReadKey();
+            Console.Clear();
         }
         #region Control
         private void NextRoll(int forNumber)

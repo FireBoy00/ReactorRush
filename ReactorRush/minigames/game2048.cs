@@ -28,7 +28,7 @@ namespace Minigames
             rollY = dice.Next(0, SizeOfBoard);
             board[rollY, rollX] = 2;
             Score = 0;
-            //PrintPlotline();
+            PrintPlotline();
             NextRound();
             while (!IsEnd())
             {
@@ -112,6 +112,8 @@ namespace Minigames
         private void PrintPlotline()
         {
             //Console.WriteLine("You must get score minimum " + MinScore + " to win that game.");
+            Console.WriteLine("Use the arrows to move all numbers on the board.");
+            Console.WriteLine("When you pull two of the same numbers together, they add up. The goal is to achieve the biggest number you can.");
             Console.WriteLine("\nClick any key to continiue.");
             Console.ReadKey();
             Console.Clear();
