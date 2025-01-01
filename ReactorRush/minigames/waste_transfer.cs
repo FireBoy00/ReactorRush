@@ -12,6 +12,7 @@ namespace Minigames
 
         public void Run()
         {
+            Score = 0;
             var originalEncoding = Console.OutputEncoding;
 
             Console.OutputEncoding = System.Text.Encoding.UTF8; // for special characters
@@ -41,6 +42,7 @@ namespace Minigames
             Console.WriteLine("\nPress any key to exit...");
             Console.OutputEncoding = originalEncoding;
             Console.ReadKey(true);
+            AnsiConsole.Clear();
         }
 
         private static void DrawTanks(int tank1Waste, int tank2Waste)

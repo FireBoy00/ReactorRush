@@ -38,7 +38,7 @@ namespace Rooms
             AnsiConsole.Clear();
             Utility.PrintStory("Your turn has come, help maintain this crucial system! One of the waste containers has shifted, so you should transfer it to another one before any issues arise.");
 
-            if (minigames.Count >= 5)
+            if (minigames.Count >= minigameIndex)
             {
                 minigames[minigameIndex].Run();
                 player.UpdateMinigameStatus(minigames[minigameIndex].GetType().Name, true); // Update the minigame status

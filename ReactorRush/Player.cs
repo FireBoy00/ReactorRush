@@ -41,7 +41,7 @@ namespace ReactorRush
             var minigame = minigames.FirstOrDefault(r => r.GetType().Name == minigameName);
             if (minigames != null)
             {
-                roomsPassed[minigameName] = passed;
+                minigamesPassed[minigameName] = passed;
             }
         }
 

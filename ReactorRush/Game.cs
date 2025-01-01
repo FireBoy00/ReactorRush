@@ -99,11 +99,27 @@ namespace ReactorRush
 
         private void Settings()
         {
-            // Demo Settings logic with a few messages and then it quits
             Console.Clear();
-            Console.WriteLine($"Your score is: {player.Score}");
-            Console.WriteLine($"You passed \"VisitorCenter\": {player.HasPassedRoom("VisitorCenter")}");
-            Thread.Sleep(2000);
+            AnsiConsole.Write(new Markup($"[bold yellow]Your score is: {player.Score}[/]\n"));
+
+            AnsiConsole.Write(new Markup("\n[bold underline]Rooms:[/]\n"));
+            foreach (var room in rooms)
+            {
+                var roomName = room.GetType().Name;
+                var status = player.HasPassedRoom(roomName) ? "[green]Passed[/]" : "[red]Not Passed[/]";
+                AnsiConsole.Write(new Markup($"{roomName}: {status}\n"));
+            }
+
+            AnsiConsole.Write(new Markup("\n[bold underline]Minigames:[/]\n"));
+            foreach (var minigame in minigames)
+            {
+                var minigameName = minigame.GetType().Name;
+                var status = player.HasPassedMinigame(minigameName) ? "[green]Passed[/]" : "[red]Not Passed[/]";
+                AnsiConsole.Write(new Markup($"{minigameName}: {status}\n"));
+            }
+
+            AnsiConsole.Write(new Markup("\n[bold]Press any key to return to the main menu...[/]"));
+            Console.ReadKey();
             Run();
         }
 
@@ -116,6 +132,16 @@ namespace ReactorRush
 
         private void DisplayMinigameMenu(int selected = 1)
         {
+            var passedMinigames = minigames.Where(m => player.HasPassedMinigame(m.GetType().Name)).ToList();
+            if (passedMinigames.Count == 0)
+            {
+                Console.Clear();
+                AnsiConsole.Write(new Padder(new FigletText("No passed minigames available!").Centered().Color(Color.Red)).PadTop(10));
+                Thread.Sleep(1500);
+                Run();
+                return;
+            }
+
             Console.CursorVisible = false; // Hide the cursor
             Console.SetCursorPosition(0, 0);
             AnsiConsole.Write(new Padder(new FigletText("Select Minigame").Centered().Color(Color.DarkOrange3)).PadTop(7));
@@ -127,9 +153,9 @@ namespace ReactorRush
             menu.Border(TableBorder.None);
 
             menu.AddColumn(new TableColumn("Minigames").LeftAligned());
-            for (int i = 0; i < minigames.Count; i++)
+            for (int i = 0; i < passedMinigames.Count; i++)
             {
-                var minigameName = minigames[i].GetType().Name;
+                var minigameName = passedMinigames[i].GetType().Name;
                 if (selected == i + 1)
                 {
                     menu.AddRow(new Panel(new Markup($"[bold aqua]{i + 1}. {minigameName}[/]")).Expand().PadLeft(2).PadRight(1).Border(BoxBorder.Double));
@@ -141,13 +167,13 @@ namespace ReactorRush
             }
 
             // Add the "Back" button
-            if (selected == minigames.Count + 1)
+            if (selected == passedMinigames.Count + 1)
             {
-                menu.AddRow(new Panel(new Markup($"[bold aqua]{minigames.Count + 1}. Back[/]")).Expand().PadLeft(2).PadRight(1).Border(BoxBorder.Double));
+                menu.AddRow(new Panel(new Markup($"[bold aqua]{passedMinigames.Count + 1}. Back[/]")).Expand().PadLeft(2).PadRight(1).Border(BoxBorder.Double));
             }
             else
             {
-                menu.AddRow(new Panel(new Markup($"[bold orange3]{minigames.Count + 1}. [/][yellow]Back[/]")).Expand().PadRight(2).Border(BoxBorder.Square));
+                menu.AddRow(new Panel(new Markup($"[bold orange3]{passedMinigames.Count + 1}. [/][yellow]Back[/]")).Expand().PadRight(2).Border(BoxBorder.Square));
             }
 
             AnsiConsole.Write(menu);
@@ -161,13 +187,13 @@ namespace ReactorRush
                 {
                     case ConsoleKey.UpArrow:
                         if (selected == 1)
-                            selected = minigames.Count + 1; // If it would go past 1, reset it to the last option
+                            selected = passedMinigames.Count + 1; // If it would go past 1, reset it to the last option
                         else
                             selected--;
                         DisplayMinigameMenu(selected);
                         break;
                     case ConsoleKey.DownArrow:
-                        if (selected == minigames.Count + 1)
+                        if (selected == passedMinigames.Count + 1)
                             selected = 1; // If it would go past the last option, reset it to 1
                         else
                             selected++;
@@ -175,13 +201,13 @@ namespace ReactorRush
                         break;
                     case ConsoleKey.Enter:
                         Console.Clear();
-                        if (selected == minigames.Count + 1)
+                        if (selected == passedMinigames.Count + 1)
                         {
                             Run(); // Go back to the main menu
                         }
                         else
                         {
-                            minigames[selected - 1].Run();
+                            passedMinigames[selected - 1].Run();
                             Thread.Sleep(1000);
                             DisplayMinigameMenu(selected);
                         }
