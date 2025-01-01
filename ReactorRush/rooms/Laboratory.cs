@@ -54,7 +54,7 @@ namespace Rooms
                         if (prompt7 == "USA")
                         {
                             Utility.PrintStory($"You chose: {prompt7}\nCorrect! It is in second place and has 50 research reactors.");
-                            score += 3;
+                            score += 5;
                             string prompt14 = Utility.Prompt("What is the second one?", ["India", "Russia"]);
 
                             if (prompt14 == "Russia")
@@ -185,7 +185,7 @@ namespace Rooms
                         AnsiConsole.MarkupLine("Russia");
                         Utility.PrintStory("Correct! It is in the first place and has 52 research reactors.");
                         string prompt10 = Utility.Prompt("What is the second one?", ["China", "India", "USA"]);
-                        score += 5;
+                        score += 10;
                         if (prompt10 == "China")
                         {
                             Utility.PrintStory($"You chose: {prompt10}\nIncorrect! It is in second place and has 16 research reactors.");
