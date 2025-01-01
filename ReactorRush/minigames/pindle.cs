@@ -39,9 +39,10 @@ namespace Minigames
 
                 if (_gameOver)
                 {
+                    Score = MaxAttempts - _attempts + 1;
                     Thread.Sleep(1000);
                     Console.Clear();
-                    Console.WriteLine("Congratulations! You guessed the number!");
+                    Console.WriteLine("Congratulations! You guessed the number!\n\n Your score is: " + Score);
                     break;
                 }
 
@@ -155,8 +156,9 @@ namespace Minigames
                 if (_attempts == MaxAttempts)
                 {
                     _attempts++;
+                    Score = 0;
                     Console.Clear();
-                    Console.WriteLine($"Game Over! The correct number was {_targetNumber}.");
+                    Console.WriteLine($"Game Over! The correct number was {_targetNumber}.\n\n Your score is: " + Score);
                 }
             }
         }

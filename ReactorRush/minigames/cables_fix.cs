@@ -52,13 +52,17 @@ namespace Minigames
                             Console.Clear();
                             Console.WriteLine("You have successfully fixed the cable!");
                             DisplayCompletionTime();
+                            Thread.Sleep(2000);
                             break;
                         }
                     }
                     if (IsGameOver())
                     {
+                        Score = 0;
                         Console.Clear();
                         Console.WriteLine("Game Over! You couldn't reach the end.");
+                        Console.WriteLine($"You got a score of {Score} points.");
+                        Thread.Sleep(1000);
                         break;
                     }
                     while (Console.KeyAvailable) Console.ReadKey(true); // Clear the input buffer
@@ -202,6 +206,18 @@ namespace Minigames
         {
             TimeSpan totalTime = DateTime.Now - startTime;
             Console.WriteLine($"You took {totalTime:mm\\:ss} to fix the cable.");
+
+            if (totalTime.TotalSeconds <= 3) {
+                Score = 10;
+            }else if (totalTime.TotalSeconds <= 5) {
+                Score = 5;
+            }else if (totalTime.TotalSeconds <= 7) {
+                Score = 2;
+            }else {
+                Score = 1;
+            }
+
+            Console.WriteLine($"You got a score of {Score} points.");
         }
     }
 }
