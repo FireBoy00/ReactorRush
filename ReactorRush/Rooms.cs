@@ -16,6 +16,7 @@ namespace Rooms
             new ControlRoom(), //1
             new CoolingSystem(), // 3
             new SteamTurbineRoom(), //4
+            new EmergencyBackupRoom(), //8
             new ReactorCore() //12
             // Add other rooms here
         };
