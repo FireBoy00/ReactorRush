@@ -8,10 +8,10 @@ namespace Rooms
 {
     public class Laboratory : IRooms
     {
-        private int score = 0;
+        public int Score { get; private set; }
         private readonly List<IMinigame> minigames = MinigameList.Minigames;
 
-        public int StartLevel()
+        public int StartLevel(Player player)
         {
             AnsiConsole.Clear();
 
@@ -27,17 +27,17 @@ namespace Rooms
             if (prompt1 == "Generating electricity")
             {
                 Utility.PrintStory($"You chose: {prompt1}\nIncorrect! The right one is below.");
-                score -= 2;
+                Score -= 2;
             }
             else if (prompt1 == "Producing neutron beams for research")
             {
                 Utility.PrintStory($"You chose: {prompt1}\nCorrect!");
-                score += 10;
+                Score += 10;
             }
             else
             {
                 Utility.PrintStory($"You chose: {prompt1}\nIncorrect! The right one is above.");
-                score -= 2;
+                Score -= 2;
             }
 
             while (true)
@@ -49,46 +49,46 @@ namespace Rooms
                     case "China":
                         AnsiConsole.MarkupLine("China");
                         Utility.PrintStory("Incorrect! It has 16 research reactors.");
-                        score -= 2;
+                        Score -= 2;
                         string prompt7 = Utility.Prompt("Try again! Maybe this time you will choose the right one.", ["USA", "India", "Russia"]);
                         if (prompt7 == "USA")
                         {
                             Utility.PrintStory($"You chose: {prompt7}\nCorrect! It is in second place and has 50 research reactors.");
-                            score += 5;
+                            Score += 5;
                             string prompt14 = Utility.Prompt("What is the second one?", ["India", "Russia"]);
 
                             if (prompt14 == "Russia")
                             {
                                 Utility.PrintStory($"You chose: {prompt14}\nCorrect! It is in the first place and has 52 research reactors.");
-                                score += 3;
+                                Score += 3;
                             }
                             else
                             {
                                 Utility.PrintStory($"You chose: {prompt14}\nIncorrect! It has 7 research reactors.\n\nThe correct answers were Russia and USA.");
-                                score -= 2;
+                                Score -= 2;
                             }
                         }
                         else if (prompt7 == "India")
                         {
                             Utility.PrintStory($"You chose: {prompt7}\nIncorrect! It has 7 research reactors.\n\nThe right answers were Russia and USA.");
-                            score -= 2;
+                            Score -= 2;
                         }
                         else
                         {
                             Utility.PrintStory($"You chose: {prompt7}\nCorrect! It is in the first place and has 52 research reactors.");
-                            score += 5;
+                            Score += 5;
 
                             string prompt14 = Utility.Prompt("What is the second one?", ["India", "USA"]);
 
                             if (prompt14 == "USA")
                             {
                                 Utility.PrintStory($"You chose: {prompt14}\nCorrect! It is in the first place and has 50 research reactors.");
-                                score += 3;
+                                Score += 3;
                             }
                             else
                             {
                                 Utility.PrintStory($"You chose: {prompt14}\nIncorrect! It has 7 research reactors.\n\nThe correct answers were Russia and USA.");
-                                score -= 2;
+                                Score -= 2;
                             }
                         }
                         break;
@@ -96,45 +96,45 @@ namespace Rooms
                     case "India":
                         AnsiConsole.MarkupLine("India");
                         Utility.PrintStory("Incorrect! It has 7 research reactors.");
-                        score -= 2;
+                        Score -= 2;
                         string prompt8 = Utility.Prompt("Try again! Maybe this time you will choose the right one.", ["China", "USA", "Russia"]);
                         if (prompt8 == "USA")
                         {
                             Utility.PrintStory($"You chose: {prompt8}\nCorrect! It is in second place and has 50 research reactors.");
-                            score += 5;
+                            Score += 5;
 
                             string prompt15 = Utility.Prompt("What is the second one?", ["China", "Russia"]);
                             if (prompt15 == "Russia")
                             {
                                 Utility.PrintStory($"You chose: {prompt15}\nCorrect! It is in the first place and has 52 research reactors.");
-                                score += 3;
+                                Score += 3;
                             }
                             else
                             {
                                 Utility.PrintStory($"You chose: {prompt15}\nIncorrect! It has 16 research reactors.\n\nThe correct answers were Russia and USA.");
-                                score -= 2;
+                                Score -= 2;
                             }
                         }
                         else if (prompt8 == "China")
                         {
                             Utility.PrintStory($"You chose: {prompt8}\nIncorrect! It has 16 research reactors.\n\nThe right answers were Russia and USA.");
-                            score -= 2;
+                            Score -= 2;
                         }
                         else
                         {
                             Utility.PrintStory($"You chose: {prompt8}\nCorrect! It is in the first place and has 52 research reactors.");
-                            score += 5;
+                            Score += 5;
 
                             string prompt14 = Utility.Prompt("What is the second one?", ["China", "USA"]);
                             if (prompt14 == "USA")
                             {
                                 Utility.PrintStory($"You chose: {prompt14}\nCorrect! It is in the first place and has 50 research reactors.");
-                                score += 3;
+                                Score += 3;
                             }
                             else
                             {
                                 Utility.PrintStory($"You chose: {prompt14}\nIncorrect! It has 16 research reactors.\n\nThe correct answers were Russia and USA.");
-                                score -= 2;
+                                Score -= 2;
                             }
                         }
                         break;
@@ -142,7 +142,7 @@ namespace Rooms
                     case "USA":
                         AnsiConsole.MarkupLine("USA");
                         Utility.PrintStory("Correct! It is in second place and has 50 research reactors.");
-                        score += 10;
+                        Score += 10;
                         string prompt9 = Utility.Prompt("What is the second one?", ["China", "India", "Russia"]);
                         if (prompt9 == "China")
                         {
@@ -151,12 +151,12 @@ namespace Rooms
                             if (prompt11 == "India")
                             {
                                 Utility.PrintStory($"You chose: {prompt11}\nIncorrect! It has 7 research reactors.\n\nThe right answers were Russia and USA.");
-                                score -= 2;
+                                Score -= 2;
                             }
                             else
                             {
                                 Utility.PrintStory($"You chose: {prompt11}\nCorrect! It is in the first place and has 52 research reactors.");
-                                score += 3;
+                                Score += 3;
                             }
                         }
                         else if (prompt9 == "India")
@@ -166,18 +166,18 @@ namespace Rooms
                             if (prompt12 == "China")
                             {
                                 Utility.PrintStory($"You chose: {prompt12}\nIncorrect! It has 16 research reactors.\n\nThe right answers were Russia and USA.");
-                                score -= 2;
+                                Score -= 2;
                             }
                             else
                             {
                                 Utility.PrintStory($"You chose: {prompt12}\nCorrect! It is in the first place and has 52 research reactors.");
-                                score += 3;
+                                Score += 3;
                             }
                         }
                         else
                         {
                             Utility.PrintStory($"You chose: {prompt9}\nCorrect! It is in the first place and has 52 research reactors.");
-                            score += 5;
+                            Score += 5;
                         }
                         break;
 
@@ -185,7 +185,7 @@ namespace Rooms
                         AnsiConsole.MarkupLine("Russia");
                         Utility.PrintStory("Correct! It is in the first place and has 52 research reactors.");
                         string prompt10 = Utility.Prompt("What is the second one?", ["China", "India", "USA"]);
-                        score += 10;
+                        Score += 10;
                         if (prompt10 == "China")
                         {
                             Utility.PrintStory($"You chose: {prompt10}\nIncorrect! It is in second place and has 16 research reactors.");
@@ -193,12 +193,12 @@ namespace Rooms
                             if (prompt13 == "India")
                             {
                                 Utility.PrintStory($"You chose: {prompt13}\nIncorrect! It has 7 research reactors.\n\nThe right answers were Russia and USA.");
-                                score -= 2;
+                                Score -= 2;
                             }
                             else
                             {
                                 Utility.PrintStory($"You chose: {prompt13}\nCorrect! It is in the first place and has 50 research reactors.");
-                                score += 3;
+                                Score += 3;
                             }
                         }
                         else if (prompt10 == "India")
@@ -208,19 +208,19 @@ namespace Rooms
                             if (prompt11 == "China")
                             {
                                 Utility.PrintStory($"You chose: {prompt11}\nIncorrect! It has 16 research reactors.\n\nThe right answers were Russia and USA.");
-                                score -= 2;
+                                Score -= 2;
                             }
                             else
                             {
                                 Utility.PrintStory($"You chose: {prompt11}\nCorrect! It is in the first place and has 50 research reactors.");
-                                score += 3;
+                                Score += 3;
                             }
                         }
                         else
                         {
                             Utility.PrintStory($"You chose: {prompt10}\nCorrect! It is in the first place and has 50 research reactors.");
                         }
-                        score += 5;
+                        Score += 5;
                         break;
 
                     default:
@@ -237,27 +237,28 @@ namespace Rooms
                     AnsiConsole.MarkupLine("Medical Advancements: focus on enhancing isotope production or exploring new medical applications");
                     string prompt4 = Utility.Prompt("What other medical applications could benefit from neutron irradiation?", ["Cancer treatment", "Sterilization of medical equipment", "Imaging for detailed scans of soft tissues"]);
                     Utility.PrintStory($"You chose {prompt3} and you suggested {prompt4}");
-                    score += 5;
+                    Score += 5;
                     break;
 
                 case "Material Science: propose ideas for testing materials or developing next-generation alloys":
                     AnsiConsole.MarkupLine("Material Science: propose ideas for testing materials or developing next-generation alloys");
                     string prompt5 = Utility.Prompt("What extreme conditions should we simulate to evaluate materials further?", ["High temperatures to mimic reactor cores", "Intense radiation exposure over extended periods", "Rapid pressure changes, referring to accidents in reactor"]);
                     Utility.PrintStory($"You chose {prompt3} and you suggested {prompt5}");
-                    score += 5;
+                    Score += 5;
                     break;
 
                 case "Energy Innovations: explore how research reactors can support cleaner energy solutions":
                     AnsiConsole.MarkupLine("Energy Innovations: explore how research reactors can support cleaner energy solutions");
                     string prompt6 = Utility.Prompt("Recycling spent fuel using advanced reprocessing", ["Using alternative fuel types that produce less waste"]);
                     Utility.PrintStory($"You chose {prompt3} and you suggested {prompt6}");
-                    score += 5;
+                    Score += 5;
                     break;
             }
             Utility.PrintStory("Feedback Time!\n\nThank you for your suggestions! Remember, science thrives on collaboration and fresh perspectives.\n\nNow, you are ready to move on to the final room. The end awaits!");
 
             AnsiConsole.Clear();
-            return score;
+            player.UpdateRoomStatus(this.GetType().Name, Score > 0); // Update the room status
+            return Score;
         }
     }
 }

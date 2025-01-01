@@ -8,13 +8,13 @@ namespace Rooms
 {
     public class VisitorCenter : IRooms
     {
-        private int score = 0;
         string prompt3 = "";
         bool isCorrect = false;
         bool correctSDGs = false;
+        public int Score { get; private set; }
         private readonly List<IMinigame> minigames = MinigameList.Minigames;
 
-        public int StartLevel()
+        public int StartLevel(Player player)
         {
             AnsiConsole.Clear();
 
@@ -42,17 +42,17 @@ namespace Rooms
                 {
                     Utility.PrintStory($"You chose: {prompt3}\nCorrect! Well done! Let us move on.");
                     isCorrect = true;
-                    score += 10;
+                    Score += 10;
                 }
                 else if (prompt3 == "Strategic Development Guide (SDG)")
                 {
                     Utility.PrintStory($"You chose: {prompt3}\nIncorrect! Try again. Remember, it is related to sustainability!");
-                    score -= 2;
+                    Score -= 2;
                 }
                 else if (prompt3 == "Sustainable Destiny Goals (SDG)")
                 {
                     Utility.PrintStory($"You chose: {prompt3}\nClose… But not quite,  give it another shot!");
-                    score -= 1;
+                    Score -= 1;
                 }
                 else
                 {
@@ -83,21 +83,22 @@ namespace Rooms
                 {
                     Utility.PrintStory("Impressive! You have a great memory. Let us proceed!");
                     correctSDGs = true;
-                    score += 10;
+                    Score += 10;
                 }
                 else
                 {
                     Utility.PrintStory("That is not right. You lose 2 points. Try again!");
-                    score -= 2;
-                    if (score < 0)
+                    Score -= 2;
+                    if (Score < 0)
                     {
-                        score = 0;
+                        Score = 0;
                     }
                 }
             }
 
             AnsiConsole.Clear();
-            return score;
+            player.UpdateRoomStatus(this.GetType().Name, Score > 0); // Update the room status
+            return Score;
         }
     }
 }

@@ -7,10 +7,10 @@ namespace Rooms
 {
     public class RadiationMonitor : IRooms
     {
-        private int score = 0;
+        public int Score { get; private set; }
         private readonly List<IMinigame> minigames = MinigameList.Minigames;
 
-        public int StartLevel()
+        public int StartLevel(Player player)
         {
             AnsiConsole.Clear();
 
@@ -27,30 +27,31 @@ namespace Rooms
             if (prompt1 == "The radiation levels are steady and within the expected range, indicating the system is functioning normally, so there is no need for more attention")
             {
                 Utility.PrintStory($"You chose: {prompt1}\nExactly the response we expected from you!");
-                score += 10;
+                Score += 10;
             }
             else
             {
                 Utility.PrintStory($"You chose: {prompt1}\nThis is not the right way to act in the nuclear reator! You should have checked the radiation levels... The right one was above.");
-                score -= 2;
+                Score -= 2;
             }
             string prompt2 = Utility.Prompt("What would you do if the levels spike?", ["Notify the control room immediately and follow emergency procedures, such as evacuating the area and isolating the radiation source", "Ignore the spike or assume it's a false alarm without verification, risking safety and protocol breaches"]);
             if (prompt2 == "Notify the control room immediately and follow emergency procedures, such as evacuating the area and isolating the radiation source")
             {
                 Utility.PrintStory($"You chose: {prompt2}\nCorrect!");
-                score += 10;
+                Score += 10;
             }
             else
             {
                 Utility.PrintStory($"You chose: {prompt2}\nIncorrect! You should never ignore such monitors, in general all monitoring devices.");
-                score -= 2;
+                Score -= 2;
             }
             Utility.PrintStory("Thank you for monitoring these critical indicators! Now you know that you have to keep an eye on those bars - they are more than just lines. Go to the next room! ");
 
             Thread.Sleep(1000);
 
             AnsiConsole.Clear();
-            return score;
+            player.UpdateRoomStatus(this.GetType().Name, Score > 0); // Update the room status
+            return Score;
         }
     }
 }

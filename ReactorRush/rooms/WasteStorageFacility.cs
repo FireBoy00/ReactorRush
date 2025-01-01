@@ -7,10 +7,10 @@ namespace Rooms
 {
     public class WasteStorageFacility : IRooms
     {
-        private int score = 0;
+        public int Score { get; private set; }
         private readonly List<IMinigame> minigames = MinigameList.Minigames;
 
-        public int StartLevel()
+        public int StartLevel(Player player)
         {
             AnsiConsole.Clear();
 
@@ -26,12 +26,12 @@ namespace Rooms
             if (prompt1 == "Yes")
             {
                 Utility.PrintStory($"You chose: {prompt1}\nOf course it does, high-level waste, for example, is stored for decades to allow its radioactivity to decay, making it much safer to handle and dispose of later.");
-                score += 10;
+                Score += 10;
             }
             else
             {
                 Utility.PrintStory($"You chose: {prompt1}\nIt does lose its radioactivity over time. You are wrong!");
-                score -= 2;
+                Score -= 2;
             }
 
             AnsiConsole.Clear();
@@ -42,7 +42,7 @@ namespace Rooms
                 minigames[6].Run();
 
                 Utility.PrintStory("Wonderful job! You successfully secured the radioactive waste container, preventing a potential hazard. This is exactly how responsible waste management works - protecting people, the environment, and the future of nuclear energy. Now let's move to the next challenge!");
-                score += 35;
+                Score += 35;
             }
             else
             {
@@ -52,7 +52,8 @@ namespace Rooms
             Thread.Sleep(1000);
 
             AnsiConsole.Clear();
-            return score;
+            player.UpdateRoomStatus(this.GetType().Name, Score > 0); // Update the room status
+            return Score;
         }
     }
 }
