@@ -70,6 +70,7 @@ namespace Minigames
                 Console.WriteLine("CONGRATULATIONS,");
                 Console.WriteLine("YOU WON THIS GAME!");
             }
+            Console.WriteLine("\nTo continue, click any key...");
             Console.ReadKey();
             //Console.WriteLine("Number of moves made: "+Score);
         }

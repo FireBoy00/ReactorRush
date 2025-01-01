@@ -47,6 +47,7 @@ namespace Minigames
             }
             PrintBoard();
             Console.WriteLine("YOU WON THAT MINIGAME!");
+            Console.WriteLine("\nTo continue, click any key...");
             Console.ReadKey();
             //Console.WriteLine("Number of moves made: "+Score);
         }

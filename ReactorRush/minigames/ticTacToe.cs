@@ -62,6 +62,7 @@ namespace Minigames
                 Console.WriteLine("Unfortunately, the system has defeated you.");
                 Score = 0;
             }
+            Console.WriteLine("\nTo continue, click any key...");
             Console.ReadKey();
             //Console.WriteLine("Number of moves made: "+Score);
         }
