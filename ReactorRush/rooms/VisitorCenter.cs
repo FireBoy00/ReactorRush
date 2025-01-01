@@ -18,7 +18,7 @@ namespace Rooms
         {
             AnsiConsole.Clear();
 
-            Utility.Narrator = "Gabija";
+            Utility.Narrator = "Nuclear Energy Specialist";
             string prompt1 = Utility.Prompt("Welcome aboard Reactor Rush, where the future of sustainable energy begins. Inspired by the 7th and 12th Sustainable Development Goals, it's designed to tackle the energy challenges of today. Are you familiar with these goals? Let's find out together!", ["Yes", "No"]);
             if (prompt1 == "Yes")
             {
@@ -61,11 +61,11 @@ namespace Rooms
             }
 
             Utility.PrintStory("Proceeding to the next section...");
-            Utility.PrintStory("Do you remember on which SDGs we are focusing?\nEnter two positive numbers (e.g., 1 2 or 1, 2): ");
+            Utility.PrintStory("Do you remember on which SDGs we are focusing?\n");
 
             while (!correctSDGs)
             {
-                var promptPanel = new Panel(new Markup("Enter the SDG numbers (e.g., 1 2 or 1, 2):"))
+                var promptPanel = new Panel(new Markup("Remember to enter only two numbers (e.g., 1 2 or 1, 2):"))
                 {
                     Border = BoxBorder.Rounded,
                     Padding = new Padding(1, 1),
