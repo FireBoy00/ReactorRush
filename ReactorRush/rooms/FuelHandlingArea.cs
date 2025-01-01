@@ -8,6 +8,7 @@ namespace Rooms
     public class FuelHandlingArea : IRooms
     {
         public int Score { get; private set; }
+        private readonly int minigameIndex = 6; // Index of the minigame in the minigames list
         private readonly List<IMinigame> minigames = MinigameList.Minigames;
 
         public int StartLevel(Player player) {
@@ -30,22 +31,23 @@ namespace Rooms
             Utility.PrintStory(welcomeMsg4);
 
             AnsiConsole.Clear();
-            minigames[6].Run();
+            minigames[minigameIndex].Run();
 
             int NumberOfTries = 1;
-            if (minigames[6].Score < 6) {
+            if (minigames[minigameIndex].Score < 6) {
                 Utility.PrintStory("Oops! Try again to strengthen your understanding. Pay close attention to the key roles and concepts before your next attempt!");
                 NumberOfTries++;
                 AnsiConsole.Clear();
-                minigames[6].Run();
-                if (minigames[6].Score == 6) {
+                minigames[minigameIndex].Run();
+                if (minigames[minigameIndex].Score == 6) {
                     Utility.PrintStory("Good job! Now you understand the main concepts of a reactor. Keep going!");
+                    player.UpdateMinigameStatus(minigames[minigameIndex].GetType().Name, true); // Update the minigame status
                 }
                 else {
                     Utility.PrintStory("Try one more time");
                     NumberOfTries++;
                     AnsiConsole.Clear();
-                    minigames[6].Run();
+                    minigames[minigameIndex].Run();
                 }
             }
             else {

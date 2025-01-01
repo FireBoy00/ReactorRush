@@ -8,6 +8,7 @@ namespace Rooms
     public class SteamTurbineRoom : IRooms
     {
         public int Score { get; private set; }
+        private readonly int minigameIndex = 3; // Index of the minigame in the minigames list
         private readonly List<IMinigame> minigames = MinigameList.Minigames;
 
         public int StartLevel(Player player)
@@ -30,22 +31,23 @@ namespace Rooms
             do
             {
                 AnsiConsole.Clear();
-                minigames[3].Run();
-                if (minigames[3].Score >= 3200)
+                minigames[minigameIndex].Run();
+                player.UpdateMinigameStatus(minigames[minigameIndex].GetType().Name, minigames[minigameIndex].Score >= 1600); // Update the minigame status
+                if (minigames[minigameIndex].Score >= 3200)
                 {
-                    Utility.PrintStory("Outstanding! You have achieved a score of " + minigames[3].Score + "! Your energy conversion skills are top-notch, powering the entire facility with ease. Keep it up, your efforts are seen! ");
+                    Utility.PrintStory("Outstanding! You have achieved a score of " + minigames[minigameIndex].Score + "! Your energy conversion skills are top-notch, powering the entire facility with ease. Keep it up, your efforts are seen! ");
                     Score += 5;
                 }
-                else if (minigames[3].Score >= 1600)
+                else if (minigames[minigameIndex].Score >= 1600)
                 {
-                    Utility.PrintStory("Wonderful job! You scored " + minigames[3].Score + ". You have made a significant contribution to the plant’s output. With a few practices, you will reach maximum efficiency in no time. Keep going! ");
+                    Utility.PrintStory("Wonderful job! You scored " + minigames[minigameIndex].Score + ". You have made a significant contribution to the plant’s output. With a few practices, you will reach maximum efficiency in no time. Keep going! ");
                     Score += 3;
                 }
                 else
                 {
-                    Utility.PrintStory("Good try! You have scored " + minigames[3].Score + ". While your energy conversion needs improvement, every bit helps. Keep practicing, enhancing your skills and boosting the plant’s performance! ");
+                    Utility.PrintStory("Good try! You have scored " + minigames[minigameIndex].Score + ". While your energy conversion needs improvement, every bit helps. Keep practicing, enhancing your skills and boosting the plant’s performance! ");
                 }
-            } while (minigames[3].Score < 1600);
+            } while (minigames[minigameIndex].Score < 1600);
             AnsiConsole.Clear();
             player.UpdateRoomStatus(this.GetType().Name, Score > 0); // Update the room status
             return Score;

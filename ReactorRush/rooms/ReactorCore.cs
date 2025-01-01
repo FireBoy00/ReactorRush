@@ -8,6 +8,7 @@ namespace Rooms
     public class ReactorCore : IRooms
     {
         public int Score { get; private set; }
+        private readonly int minigameIndex = 5; // Index of the minigame in the minigames list
         private readonly List<IMinigame> minigames = MinigameList.Minigames;
 
         public int StartLevel(Player player)
@@ -36,9 +37,10 @@ namespace Rooms
                 }
             }
             AnsiConsole.Clear();
-            minigames[5].Run();
-            if (minigames[5].Score == 1)
+            minigames[minigameIndex].Run();
+            if (minigames[minigameIndex].Score == 1)
             {
+                player.UpdateMinigameStatus(minigames[minigameIndex].GetType().Name, true); // Update the minigame status
                 Utility.PrintStory("The valve system stabilized. Reactor core pressure and temperature are within safe limits. Well done, operator.");
                 Score += 5;
             }
@@ -48,9 +50,10 @@ namespace Rooms
                 do
                 {
                     AnsiConsole.Clear();
-                    minigames[5].Run();
-                    if (minigames[5].Score == 1)
+                    minigames[minigameIndex].Run();
+                    if (minigames[minigameIndex].Score == 1)
                     {
+                        player.UpdateMinigameStatus(minigames[minigameIndex].GetType().Name, true); // Update the minigame status
                         Utility.PrintStory("Success!");
                         Score += 2;
                     }
@@ -58,7 +61,7 @@ namespace Rooms
                     {
                         Utility.PrintStory("Critical valve failure detected. Reactor core overheating. Immediate action required. This time you cannot make a mistake. Try again! ");
                     }
-                } while (minigames[5].Score == 0);
+                } while (minigames[minigameIndex].Score == 0);
             }
 
             Utility.PrintStory("Congratulations, you have ensured the reactor's continued safety.");

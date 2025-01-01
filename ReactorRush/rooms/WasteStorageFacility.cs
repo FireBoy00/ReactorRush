@@ -8,6 +8,7 @@ namespace Rooms
     public class WasteStorageFacility : IRooms
     {
         public int Score { get; private set; }
+        private readonly int minigameIndex = 7; // Index of the minigame in the minigames list
         private readonly List<IMinigame> minigames = MinigameList.Minigames;
 
         public int StartLevel(Player player)
@@ -39,10 +40,11 @@ namespace Rooms
 
             if (minigames.Count >= 5)
             {
-                minigames[7].Run();
+                minigames[minigameIndex].Run();
+                player.UpdateMinigameStatus(minigames[minigameIndex].GetType().Name, true); // Update the minigame status
 
                 Utility.PrintStory("Wonderful job! You successfully secured the radioactive waste container, preventing a potential hazard. This is exactly how responsible waste management works - protecting people, the environment, and the future of nuclear energy. Now let's move to the next challenge!");
-                Score += minigames[7].Score;
+                Score += minigames[minigameIndex].Score;
             }
             else
             {
