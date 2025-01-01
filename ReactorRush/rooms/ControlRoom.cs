@@ -15,7 +15,7 @@ namespace Rooms
             Score = 0;
             AnsiConsole.Clear();
 
-            Utility.Narrator = "Agatta";
+            Utility.Narrator = "Control Room Ambassador";
             Utility.PrintStory("You step into the Control Room, a space alive with data and sound. This is where decisions are made, and the reactor’s power is carefully managed.\n\nThis is where science meets strategy. As the operator, you will oversee energy production, balance outputs, and ensure that everything runs smoothly. All your actions here will define the success of the reactor and its contribution to a sustainable future.");
 
             Utility.PrintStory("Here is what the team does in this room: \n\nKeep an Eye on Things \n      Operators continuously monitor the reactor's systems and parameters, ensuring everything is functioning within safe limits" +
