@@ -8,13 +8,7 @@ namespace Minigames
 {
     public class WasteDisposal : IMinigame
     {
-        private int score;
-
-        public int Score
-        {
-            get { return score; }
-            private set { score = value; }
-        }
+        public int Score { get; private set; }
 
         public void Run()
         {
@@ -42,7 +36,7 @@ namespace Minigames
             Console.Clear();
             DrawTanks(tank1Waste, tank2Waste);
             Console.WriteLine("\nAll waste has been transferred!");
-            Console.WriteLine($"\nYour final score is: {Score}");
+            Console.WriteLine($"\nYour final Score is: {Score}");
 
             Console.WriteLine("\nPress any key to exit...");
             Console.OutputEncoding = originalEncoding;
