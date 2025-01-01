@@ -18,7 +18,7 @@ namespace Minigames
         private Dictionary<int, string> cardMap; // should it be nullable?
         private List<int> flippedCards = new List<int>();
         private int mistakes = 0; // increase every time the user flips two non-pair cards
-        public int MaxMistakes { get; private set; } = 6;
+        public int MaxMistakes { get; private set; } = 8;
         public int MemoriseSec { get; private set; } = 45;
         List<string> items = new List<string>
                 {
