@@ -1,8 +1,10 @@
+using ReactorRush;
+
 namespace Rooms
 {
     public interface IRooms
     {
-        int StartLevel();
+        int StartLevel(Player player);
         int Score { get; }
     }
 

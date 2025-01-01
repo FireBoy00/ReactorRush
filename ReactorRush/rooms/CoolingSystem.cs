@@ -10,7 +10,7 @@ namespace Rooms
         public int Score { get; private set; }
         private readonly List<IMinigame> minigames = MinigameList.Minigames;
         
-        public int StartLevel() {
+        public int StartLevel(Player player) {
             AnsiConsole.Clear();
 
             Utility.Narrator = "Operator";

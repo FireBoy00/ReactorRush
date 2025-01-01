@@ -11,6 +11,7 @@ namespace ReactorRush
         public bool menuChosen = false;
         private readonly List<IMinigame> minigames = MinigameList.Minigames;
         private readonly List<IRooms> rooms = RoomsList.Rooms;
+        private readonly Player player = new Player();
 
         public void Run()
         {
@@ -100,9 +101,8 @@ namespace ReactorRush
         {
             // Demo Settings logic with a few messages and then it quits
             Console.Clear();
-            Console.WriteLine("Settings:");
-            Console.WriteLine("1. Difficulty Level");
-            Console.WriteLine("2. Sound On/Off");
+            Console.WriteLine($"Your score is: {player.Score}");
+            Console.WriteLine($"You passed \"VisitorCenter\": {player.HasPassedRoom("VisitorCenter")}");
             Thread.Sleep(2000);
             Run();
         }
@@ -334,7 +334,7 @@ namespace ReactorRush
         }
 
         private void StartLevel(int level) {
-            int score = rooms[level - 1].StartLevel();
+            int score = rooms[level - 1].StartLevel(player);
             Console.WriteLine($"SCORE: {score} :SCORE\n\n");
             Console.WriteLine("[DEBUG] Press any key to return to menu...");
             Console.ReadKey();
