@@ -32,7 +32,7 @@ namespace ReactorRush
             menu.Border(TableBorder.None);
 
             menu.AddColumn(new TableColumn("Menu").LeftAligned());
-            string[] options = ["Start Game", "Minigames", "Settings", "Quit"];
+            string[] options = ["Start Game", "Minigames", "Statistics", "Quit"];
             for (int i = 0; i < options.Length; i++)
             {
                 if (selected == i + 1)
@@ -75,7 +75,7 @@ namespace ReactorRush
                                 DisplayMinigameMenu();
                                 break;
                             case 3:
-                                Settings();
+                                Statistics();
                                 break;
                             case 4:
                                 Quit();
@@ -97,7 +97,7 @@ namespace ReactorRush
             DisplayLevelSelectionMenu();
         }
 
-        private void Settings()
+        private void Statistics()
         {
             Console.Clear();
             AnsiConsole.Write(new Markup($"[bold yellow]Your score is: {player.Score}[/]\n"));
