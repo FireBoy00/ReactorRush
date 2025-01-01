@@ -11,6 +11,7 @@ namespace ReactorRush
         public bool menuChosen = false;
         private readonly List<IMinigame> minigames = MinigameList.Minigames;
         private readonly List<IRooms> rooms = RoomsList.Rooms;
+        private readonly Player player = new Player();
 
         public void Run()
         {
@@ -100,9 +101,8 @@ namespace ReactorRush
         {
             // Demo Settings logic with a few messages and then it quits
             Console.Clear();
-            Console.WriteLine("Settings:");
-            Console.WriteLine("1. Difficulty Level");
-            Console.WriteLine("2. Sound On/Off");
+            Console.WriteLine($"Your score is: {player.Score}");
+            Console.WriteLine($"You passed \"VisitorCenter\": {player.HasPassedRoom("VisitorCenter")}");
             Thread.Sleep(2000);
             Run();
         }
@@ -205,11 +205,8 @@ namespace ReactorRush
             #region LevelSelectionMenu
             var menu = new Grid();
             menu.Centered();
-            // menu.HideHeaders();
-            // menu.Border(TableBorder.None);
 
             string[] levels = ["Visitor Center", "Control Room", "Cooling System", "Steam Turbine Room", "Waste Storage Facility", "Containment Building", "Fuel Handling Area", "Emergency Backup Room", "Water Reservoir", "Radiation Monitor", "Laboratory", "Reactor Core"];
-            // int columns = (levels.Length / 4) > 0 ? (levels.Length / 4) : 1;
             int columns = 3;
             int rows = 4;
 
@@ -231,7 +228,15 @@ namespace ReactorRush
                         }
                         else
                         {
-                            row.Add(new Panel(new Markup($"[yellow]{levels[index]}[/]")).Expand().Border(BoxBorder.Square));
+                            // Check if the level is available
+                            if (rooms.Any(m => m.GetType().Name == levels[index].Trim().Replace(" ", "")))
+                            {
+                                row.Add(new Panel(new Markup($"[yellow]{levels[index]}[/]")).Expand().Border(BoxBorder.Square));
+                            }
+                            else
+                            {
+                                row.Add(new Panel(new Markup($"[bold red]{levels[index]}[/]")).Expand().Border(BoxBorder.Square));
+                            }
                         }
                     }
                     else
@@ -306,7 +311,17 @@ namespace ReactorRush
                         else
                         {
                             // Start the selected level
-                            StartLevel(selected);
+                            var room = rooms.FirstOrDefault(m => m.GetType().Name == levels[selected - 1].Trim().Replace(" ", ""));
+                            if (room != null)
+                            {
+                                StartLevel(rooms.IndexOf(room) + 1);
+                            }
+                            else
+                            {
+                                Console.WriteLine("This level is not available yet.");
+                                Thread.Sleep(1000);
+                                DisplayLevelSelectionMenu(selected);
+                            }
                         }
                         return;
                     case ConsoleKey.Escape: 
@@ -319,9 +334,9 @@ namespace ReactorRush
         }
 
         private void StartLevel(int level) {
-            int score = rooms[level - 1].StartLevel();
+            int score = rooms[level - 1].StartLevel(player);
             Console.WriteLine($"SCORE: {score} :SCORE\n\n");
-            Console.WriteLine("[DEBUG] Press any key to return to menue...");
+            Console.WriteLine("[DEBUG] Press any key to return to menu...");
             Console.ReadKey();
             Run();
         }

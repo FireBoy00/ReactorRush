@@ -99,6 +99,8 @@ namespace Rooms
             AnsiConsole.Clear();
             player.UpdateRoomStatus(this.GetType().Name, Score > 0); // Update the room status
             return Score;
+            player.UpdateRoomStatus(this.GetType().Name, Score > 0); // Update the room status
+            return Score;
         }
     }
 }
