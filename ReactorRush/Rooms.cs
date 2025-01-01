@@ -1,17 +1,27 @@
+using ReactorRush;
+
 namespace Rooms
 {
     public interface IRooms
     {
-        int StartLevel();
+        int StartLevel(Player player);
+        int Score { get; }
     }
 
     public static class RoomsList
     {
         public static List<IRooms> Rooms { get; } = new List<IRooms>
         {
-            new VisitorCenter(), // 0
-            new CoolingSystem(), // 1    - but should be changed to 2 later, so it's in the order of the rooms displayed
-            new ReactorCore(), // 2
+            new VisitorCenter(), // 1
+            new ControlRoom(), // 2
+            new CoolingSystem(), // 3
+            new SteamTurbineRoom(), // 4
+            new WasteStorageFacility(), // 5
+            new FuelHandlingArea(), // 7
+            new EmergencyBackupRoom(), // 8
+            new RadiationMonitor(), // 10
+            new Laboratory(), // 11
+            new ReactorCore(), //12
             new WaterReservoir(), // 3
             // Add other rooms here
         };

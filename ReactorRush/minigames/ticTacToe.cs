@@ -35,14 +35,14 @@ namespace Minigames
             Score = 0;
             placeOfCursor[0] = 0;
             placeOfCursor[1] = 0;
-            PrintPlotline();
+            //PrintPlotline();
             PrintBoard();
             //Console.ReadKey();
             board[0, 0] = 3;
             while (!IsEnd() && !IsLost())
             {
                 int ratDamage = dice.Next(1, ratEnergy);
-                if (NextRound()&&!IsEnd())
+                if (NextRound() && !IsEnd())
                 {
                     for (int i = 0; i < ratDamage; i++)
                     {
@@ -54,12 +54,15 @@ namespace Minigames
             IsWon = !IsLost();
             if (IsWon)
             {
-                Console.WriteLine("Congratulations! You fixed the wires.");
+                Console.WriteLine("Congratulations! The system is working properly.");
+                Score = 1;
             }
             else
             {
-                Console.WriteLine("Unfortunately, the rats were stronger, try again next time.");
+                Console.WriteLine("Unfortunately, the system has defeated you.");
+                Score = 0;
             }
+            Console.WriteLine("\nTo continue, click any key...");
             Console.ReadKey();
             //Console.WriteLine("Number of moves made: "+Score);
         }
@@ -144,7 +147,7 @@ namespace Minigames
                 rollX = dice.Next(0, SizeOfBoard);
                 rollY = dice.Next(0, SizeOfBoard);
                 board[rollY, rollX] = 2;
-            } while (board[rollY, rollX]%3 != 2);
+            } while (board[rollY, rollX] % 3 != 2);
             if (rollX == placeOfCursor[1] && rollY == placeOfCursor[0])
             {
                 board[rollY, rollX] += 3;
