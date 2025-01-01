@@ -7,7 +7,7 @@ namespace Rooms
 {
     public class FuelHandlingArea : IRooms
     {
-        private int score = 0;
+        public int Score { get; private set; }
         private readonly List<IMinigame> minigames = MinigameList.Minigames;
 
         public int StartLevel() {
@@ -38,29 +38,32 @@ namespace Rooms
                 NumberOfTries++;
                 AnsiConsole.Clear();
                 minigames[6].Run();
-            }
-            else {
-                if (NumberOfTries == 1) {
-                    Utility.PrintStory("Congratulations! You have matched all the cards and answered correctly. You are now one step closer to mastering nuclear energy systems!"); 
+                if (minigames[6].Score == 6) {
+                    Utility.PrintStory("Good job! Now you understand the main concepts of a reactor. Keep going!");
                 }
                 else {
-                    Utility.PrintStory("Good job! Now you understand the main concepts of a reactor. Keep going!"); 
-                    // Mistake: for some reason this text is not shown... 
+                    Utility.PrintStory("Try one more time");
+                    NumberOfTries++;
+                    AnsiConsole.Clear();
+                    minigames[6].Run();
                 }
+            }
+            else {
+                Utility.PrintStory("Congratulations! You have matched all the cards and answered correctly. You are now one step closer to mastering nuclear energy systems!"); 
             }
 
             if (NumberOfTries == 1) {
-                score = 5;
+                Score = 5;
             } 
             else if (NumberOfTries == 2) {
-                score = 3;
+                Score = 3;
             }
             else {
-                score = 1;
+                Score = 1;
             }
 
             AnsiConsole.Clear();
-            return score;
+            return Score;
         }
     }
 }
