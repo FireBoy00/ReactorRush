@@ -1,7 +1,6 @@
 using System;
 using Spectre.Console;
 using ReactorRush;
-using System.Threading;
 using Minigames;
 
 namespace Rooms
