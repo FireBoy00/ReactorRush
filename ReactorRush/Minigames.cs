@@ -16,7 +16,8 @@ namespace Minigames
             new Game2048(), // 3
             new PipeRepair(), // 4
             new TicTacToe(5,2), // 5
-            new Memory() // 6
+            new Memory(), // 6
+            new WasteDisposal() // 7
             // Add other minigames here
         };
     }

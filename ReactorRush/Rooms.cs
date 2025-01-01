@@ -14,7 +14,10 @@ namespace Rooms
         {
             new VisitorCenter(), // 0
             new CoolingSystem(), // 1
-            new FuelHandlingArea() 
+            new FuelHandlingArea(), // 2
+            new WasteStorageFacility(), // 6
+            new RadiationMonitor(), // 11
+            new Laboratory() // 12
             // Add other rooms here
         };
     }
