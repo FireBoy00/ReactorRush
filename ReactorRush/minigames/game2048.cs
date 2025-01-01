@@ -7,8 +7,8 @@ namespace Minigames
     {
         public int SizeOfBoard { get; private set; }
         public int Score { get; private set; }
-        public bool IsWon { get; private set; }
-        public int MinScore { get; private set; }
+        //public bool IsWon { get; private set; }
+        //public int MinScore { get; private set; }
         private int[,] board;
         private int rollX;
         private int rollY;
@@ -17,7 +17,7 @@ namespace Minigames
         {
             SizeOfBoard = sizeOfBoard;
             board = new int[SizeOfBoard, SizeOfBoard];
-            MinScore = SizeOfBoard * SizeOfBoard * 200;
+            //MinScore = SizeOfBoard * SizeOfBoard * 200;
             //Run();
         }
         public void Run()
@@ -28,7 +28,7 @@ namespace Minigames
             rollY = dice.Next(0, SizeOfBoard);
             board[rollY, rollX] = 2;
             Score = 0;
-            PrintPlotline();
+            //PrintPlotline();
             NextRound();
             while (!IsEnd())
             {
@@ -36,14 +36,15 @@ namespace Minigames
             }
             PrintBoard();
             Console.WriteLine("END MINIGAME!");
-            if(Score >= MinScore){
+            Console.WriteLine("To continue, click any key...");
+            /*if(Score >= MinScore){
                 IsWon = true;
-                Console.WriteLine("Your score is really good, you won that minigame.");
+                //Console.WriteLine("Your score is really good, you won that minigame.");
             }
             else{
                 IsWon = false;
-                Console.WriteLine("Your score is too small.");
-            }
+                //Console.WriteLine("Your score is too small.");
+            }*/
             Console.ReadKey();
             //Console.WriteLine("Your score: "+Score);
         }
@@ -110,7 +111,7 @@ namespace Minigames
         }
         private void PrintPlotline()
         {
-            Console.WriteLine("You must get score minimum " + MinScore + " to win that game.");
+            //Console.WriteLine("You must get score minimum " + MinScore + " to win that game.");
             Console.WriteLine("\nClick any key to continiue.");
             Console.ReadKey();
             Console.Clear();

@@ -61,14 +61,16 @@ namespace Minigames
             if (!IsEnd())
             {
                 IsWon = false;
-                Console.WriteLine("YOU LOSE THAT GAME.");
+                Score += 10;
+                Console.WriteLine("YOU LOST THIS GAME.");
             }
             else
             {
                 IsWon = true;
                 Console.WriteLine("CONGRATULATIONS,");
-                Console.WriteLine("YOU WON THAT GAME!");
+                Console.WriteLine("YOU WON THIS GAME!");
             }
+            Console.WriteLine("\nTo continue, click any key...");
             Console.ReadKey();
             //Console.WriteLine("Number of moves made: "+Score);
         }
