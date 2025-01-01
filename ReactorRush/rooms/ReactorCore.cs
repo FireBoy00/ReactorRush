@@ -7,11 +7,12 @@ namespace Rooms
 {
     public class ReactorCore : IRooms
     {
-        private int score = 0;
+        public int Score { get; private set; }
         private readonly List<IMinigame> minigames = MinigameList.Minigames;
 
         public int StartLevel()
         {
+            Score = 0;
             AnsiConsole.Clear();
 
             Utility.Narrator = "Agatta";
@@ -39,7 +40,7 @@ namespace Rooms
             if (minigames[5].Score == 1)
             {
                 Utility.PrintStory("The valve system stabilized. Reactor core pressure and temperature are within safe limits. Well done, operator.");
-                score += 5;
+                Score += 5;
             }
             else
             {
@@ -51,7 +52,7 @@ namespace Rooms
                     if (minigames[5].Score == 1)
                     {
                         Utility.PrintStory("Success!");
-                        score += 2;
+                        Score += 2;
                     }
                     else
                     {
@@ -63,7 +64,7 @@ namespace Rooms
             Utility.PrintStory("Congratulations, you have ensured the reactor's continued safety.");
 
             AnsiConsole.Clear();
-            return score;
+            return Score;
         }
     }
 }

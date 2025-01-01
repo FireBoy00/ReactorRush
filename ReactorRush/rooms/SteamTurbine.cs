@@ -7,11 +7,12 @@ namespace Rooms
 {
     public class SteamTurbine : IRooms
     {
-        private int score = 0;
+        public int Score { get; private set; }
         private readonly List<IMinigame> minigames = MinigameList.Minigames;
 
         public int StartLevel()
         {
+            Score = 0;
             AnsiConsole.Clear();
 
             Utility.Narrator = "Agatta";
@@ -33,12 +34,12 @@ namespace Rooms
                 if (minigames[3].Score >= 3200)
                 {
                     Utility.PrintStory("Outstanding! You have achieved a score of " + minigames[3].Score + "! Your energy conversion skills are top-notch, powering the entire facility with ease. Keep it up, your efforts are seen! ");
-                    score += 5;
+                    Score += 5;
                 }
                 else if (minigames[3].Score >= 1600)
                 {
                     Utility.PrintStory("Wonderful job! You scored " + minigames[3].Score + ". You have made a significant contribution to the plant’s output. With a few practices, you will reach maximum efficiency in no time. Keep going! ");
-                    score += 3;
+                    Score += 3;
                 }
                 else
                 {
@@ -46,7 +47,7 @@ namespace Rooms
                 }
             } while (minigames[3].Score < 1600);
             AnsiConsole.Clear();
-            return score;
+            return Score;
         }
     }
 }

@@ -7,11 +7,12 @@ namespace Rooms
 {
     public class Control : IRooms
     {
-        private int score = 0;
+        public int Score { get; private set; }
         private readonly List<IMinigame> minigames = MinigameList.Minigames;
 
         public int StartLevel()
         {
+            Score = 0;
             AnsiConsole.Clear();
 
             Utility.Narrator = "Agatta";
@@ -33,10 +34,10 @@ namespace Rooms
                 case "In case of any anomalies or alarms, operators quickly diagnose and address the issues to prevent potential hazards":
                 case "They adjust control rods and other mechanisms to manage the reactor's power output and maintain stability":
                     Utility.PrintStory("This is not the right answer, pay attention to such words: handle, coordinate... ");
-                    score -= 1;
+                    Score -= 1;
                     break;
                 case "The control room team coordinates with other plant personnel to handle routine and maintenance":
-                    score += 5;
+                    Score += 5;
                     Utility.PrintStory("You chose the right answer, procced with your given task. Good luck! ");
                     break;
             }
@@ -46,7 +47,7 @@ namespace Rooms
             Utility.PrintStory("Oh, you seem confused. I forgot to mention that this tour will be conducted in a period of 12 days ensuring you know how a state of the art reactor works! Enough of this for now."); //it shuld be configurable
 
             AnsiConsole.Clear();
-            return score;
+            return Score;
         }
     }
 }
