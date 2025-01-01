@@ -257,7 +257,14 @@ namespace ReactorRush
                             // Check if the level is available
                             if (rooms.Any(m => m.GetType().Name == levels[index].Trim().Replace(" ", "")))
                             {
-                                row.Add(new Panel(new Markup($"[yellow]{levels[index]}[/]")).Expand().Border(BoxBorder.Square));
+                                if (player.HasPassedRoom(levels[index].Trim().Replace(" ", "")))
+                                {
+                                    row.Add(new Panel(new Markup($"[green]{levels[index]}[/]")).Expand().Border(BoxBorder.Square));
+                                }
+                                else
+                                {
+                                    row.Add(new Panel(new Markup($"[yellow]{levels[index]}[/]")).Expand().Border(BoxBorder.Square));
+                                }
                             }
                             else
                             {
