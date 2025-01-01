@@ -19,7 +19,7 @@ namespace Minigames
         private List<int> flippedCards = new List<int>();
         private int mistakes = 0; // increase every time the user flips two non-pair cards
         public int MaxMistakes { get; private set; } = 6;
-        public int MemoriseSec { get; private set; } = 20;
+        public int MemoriseSec { get; private set; } = 45;
         List<string> items = new List<string>
                 {
                     "Nuclear reactors", "contain and control nuclear chain reactions that produce heat",
