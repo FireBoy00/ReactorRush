@@ -14,6 +14,7 @@ namespace Rooms
         {
             new VisitorCenter(), // 0
             new CoolingSystem(), // 1
+            new FuelHandlingArea() 
             // Add other rooms here
         };
     }
