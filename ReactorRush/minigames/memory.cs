@@ -1,11 +1,7 @@
-// we will give feedback based on the number of tries 
-
 using System;
 using Spectre.Console;
-using System.Timers;
-using System.Collections.Generic; // necessary for using dictionaries
-using System.Linq; // necessary for shuffling the cards (OrderBy)
-using Spectre.Console.Rendering;
+
+// we will give feedback based on the number of tries 
 
 namespace Minigames
 {
@@ -15,7 +11,7 @@ namespace Minigames
         private const int Cols = 4;
         public int Score { get; private set; } = 0; // increase every time the user finds a pair
         private const int MaxScore = Rows * Cols / 2;
-        private Dictionary<int, string> cardMap; // should it be nullable?
+        private Dictionary<int, string>? cardMap;
         private List<int> flippedCards = new List<int>();
         private int mistakes = 0; // increase every time the user flips two non-pair cards
         public int MaxMistakes { get; private set; } = 8;
