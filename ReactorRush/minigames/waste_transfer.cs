@@ -18,6 +18,8 @@ namespace Minigames
 
         public void Run()
         {
+            var originalEncoding = Console.OutputEncoding;
+
             Console.OutputEncoding = System.Text.Encoding.UTF8; // for special characters
 
             int tank1Waste = 7; // Initial waste in Tank 1
@@ -33,7 +35,7 @@ namespace Minigames
                 if (Console.ReadKey(true).Key == ConsoleKey.Enter)
                 {
                     AnimateWasteTransfer(ref tank1Waste, ref tank2Waste);
-                    Score += 10; 
+                    Score += 5; 
                 }
             }
 
@@ -43,6 +45,7 @@ namespace Minigames
             Console.WriteLine($"\nYour final score is: {Score}");
 
             Console.WriteLine("\nPress any key to exit...");
+            Console.OutputEncoding = originalEncoding;
             Console.ReadKey(true);
         }
 
