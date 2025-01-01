@@ -7,7 +7,7 @@ namespace Rooms
 {
     public class VisitorCenter : IRooms
     {
-        private int score = 0;
+        public int Score { get; private set; }
         private readonly List<IMinigame> minigames = MinigameList.Minigames;
 
         public int StartLevel() {
@@ -37,7 +37,7 @@ namespace Rooms
             Thread.Sleep(1000);
 
             AnsiConsole.Clear();
-            return score;
+            return Score;
         }
     }
 }

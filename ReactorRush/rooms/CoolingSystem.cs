@@ -7,7 +7,7 @@ namespace Rooms
 {
     public class CoolingSystem : IRooms
     {
-        private int score = 0;
+        public int Score { get; private set; }
         private readonly List<IMinigame> minigames = MinigameList.Minigames;
         
         public int StartLevel() {
@@ -36,23 +36,23 @@ namespace Rooms
             }
 
             if (minigames[4].Score < 16) {
-                score = 5;
+                Score = 5;
             } 
             else if (minigames[4].Score < 21) {
-                score = 4;
+                Score = 4;
             }
             else if (minigames[4].Score < 26) {
-                score = 3;
+                Score = 3;
             }
             else if (minigames[4].Score < 31) {
-                score = 2;
+                Score = 2;
             }
             else {
-                score = 1;
+                Score = 1;
             }
 
             AnsiConsole.Clear();
-            return score;
+            return Score;
         }
     }
 }
