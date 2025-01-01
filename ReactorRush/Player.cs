@@ -9,10 +9,6 @@ namespace ReactorRush
         private readonly List<IRooms> rooms = RoomsList.Rooms;
         private readonly List<IMinigame> minigames = MinigameList.Minigames;
         public int Score { get { 
-            foreach (var room in rooms)
-            {
-                Console.WriteLine($"Room: {room.GetType().Name}, Score: {room.Score}");
-            }
             return rooms.Sum(room => room.Score);
         } }
         private readonly Dictionary<string, bool> roomsPassed = [];

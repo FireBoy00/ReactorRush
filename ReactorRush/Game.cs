@@ -102,21 +102,33 @@ namespace ReactorRush
             Console.Clear();
             AnsiConsole.Write(new Markup($"[bold yellow]Your score is: {player.Score}[/]\n"));
 
-            AnsiConsole.Write(new Markup("\n[bold underline]Rooms:[/]\n"));
+            var table = new Table();
+            table.AddColumn(new TableColumn("[bold underline]Rooms[/]").LeftAligned());
+            table.AddColumn(new TableColumn("[bold underline]Status[/]").RightAligned());
+            table.AddColumn(new TableColumn("[bold underline]Score[/]").RightAligned());
+
             foreach (var room in rooms)
             {
                 var roomName = room.GetType().Name;
                 var status = player.HasPassedRoom(roomName) ? "[green]Passed[/]" : "[red]Not Passed[/]";
-                AnsiConsole.Write(new Markup($"{roomName}: {status}\n"));
+                table.AddRow(roomName, status, room.Score.ToString());
             }
 
-            AnsiConsole.Write(new Markup("\n[bold underline]Minigames:[/]\n"));
+            AnsiConsole.Write(table);
+
+            var minigameTable = new Table();
+            minigameTable.AddColumn(new TableColumn("[bold underline]Minigames[/]").LeftAligned());
+            minigameTable.AddColumn(new TableColumn("[bold underline]Status[/]").RightAligned());
+            minigameTable.AddColumn(new TableColumn("[bold underline]Score[/]").RightAligned());
+
             foreach (var minigame in minigames)
             {
                 var minigameName = minigame.GetType().Name;
                 var status = player.HasPassedMinigame(minigameName) ? "[green]Passed[/]" : "[red]Not Passed[/]";
-                AnsiConsole.Write(new Markup($"{minigameName}: {status}\n"));
+                minigameTable.AddRow(minigameName, status, minigame.Score.ToString());
             }
+
+            AnsiConsole.Write(minigameTable);
 
             AnsiConsole.Write(new Markup("\n[bold]Press any key to return to the main menu...[/]"));
             Console.ReadKey();

@@ -51,7 +51,8 @@ namespace Rooms
                 }
             }
             else {
-                Utility.PrintStory("Congratulations! You have matched all the cards and answered correctly. You are now one step closer to mastering nuclear energy systems!"); 
+                Utility.PrintStory("Congratulations! You have matched all the cards and answered correctly. You are now one step closer to mastering nuclear energy systems!");
+                player.UpdateMinigameStatus(minigames[minigameIndex].GetType().Name, true); // Update the minigame status
             }
 
             if (NumberOfTries == 1) {
