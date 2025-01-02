@@ -31,13 +31,15 @@ namespace Rooms
                 {
                     case "To store extra tools for maintenance.":
                         Utility.PrintStory("Wrong, do you think we actually need a separate room to store extra tools, no...");
+                        Score -= 1;
                         break;
                     case "To provide emergency power during outages.":
                         Utility.PrintStory("Of course this is right, because all the time we were talking about backup systems.");
-                        Score += 2;
+                        Score += 5;
                         break;
                     case "To monitor radiation levels in real-time.":
                         Utility.PrintStory("Wrong, that is what Radiation Monitoring room is for (we will introduce that to you later).");
+                        Score -= 1;
                         break;
                 }
             } while (prompt1 != "To provide emergency power during outages.");
@@ -50,13 +52,15 @@ namespace Rooms
                 {
                     case "Operations would pause temporarily but resume shortly.":
                         Utility.PrintStory("Wrong! Read the question again “if <…> failed during crisis.”");
+                        Score -= 1;
                         break;
                     case "It could lead to the overheating of reactor components and increased risks of the accident.":
                         Utility.PrintStory("Right, we do not want something similar, so it is important to have such room, test and maintain it.");
-                        Score += 2;
+                        Score += 5;
                         break;
                     case "Nothing significant, the plant has no critical need for backup power.":
                         Utility.PrintStory("Not true, like almost everything in the world, it needs backup resources. Do not forget that we are speaking about the nuclear reactor, which includes radiation.");
+                        Score -= 1;
                         break;
                 }
             } while (prompt1 != "It could lead to the overheating of reactor components and increased risks of the accident.");
@@ -67,6 +71,7 @@ namespace Rooms
             if (minigames[minigameIndex].Score > 0)
             {
                 Utility.PrintStory("Well done! The backup system is fully operational, and you have ensured the reactor’s safety. Move on to the next room to continue.");
+                Score += 5;
             }
             else
             {
