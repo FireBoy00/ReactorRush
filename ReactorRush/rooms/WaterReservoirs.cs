@@ -7,6 +7,7 @@ namespace Rooms
 {
     public class WaterReservoir : IRooms
     {
+        //! Add posibility for player to gain points
         public int Score { get; private set; }
         private readonly List<IMinigame> minigames = MinigameList.Minigames;
 
@@ -14,7 +15,7 @@ namespace Rooms
         {
             AnsiConsole.Clear();
 
-            Utility.Narrator = "Gabi";
+            Utility.Narrator = "Gabi"; //! Change the narrator
             Utility.PrintStory("This room plays a critical role in ensuring the reactor operates efficiently and safely. Water is a vital component in the cooling and energy generation process of a nuclear power plant, and here, you will learn how this system works and why maintaining it is essential. ");
             Utility.PrintStory("I think this is the right time to talk about its purpose, what is it?");
             Utility.PrintStory("The Water Reservoir is a key part of the plant’s secondary cooling system. It stores and supplies water that condenses steam discharged from the turbines. This ensures a continues cycle of steam generation and condensation, which is crucial for maintaining the efficiency and safety of the plant.");
@@ -41,7 +42,9 @@ namespace Rooms
             }while(prompt12 != "To avoid damage to the steam generator and maintain efficiency." );
             Utility.PrintStory("You are faced with a practical challenge: a sudden swing in water levels! The system alerts you to correct the water level to maintain stability. ");
             Utility.PrintStory("Your task is to adjust valves to stabilize the water levels. Watch the indicators closely and react quickly to prevent overflows or shortages. ");
-            //? Minigame minigames[2].Run();
+
+            //! Add the minigame
+            
             AnsiConsole.Clear();
             player.UpdateRoomStatus(this.GetType().Name, Score > 0); // Update the room status
             return Score;
