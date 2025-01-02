@@ -9,7 +9,7 @@ namespace Rooms
     {
         public int Score { get; private set; }
         private readonly List<IMinigame> minigames = MinigameList.Minigames;
-        private readonly int minigameIndex = 8;
+        private readonly int minigameIndex = 9;
         public int StartLevel(Player player)
         {
             Score = 0;

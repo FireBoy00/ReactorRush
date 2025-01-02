@@ -19,7 +19,7 @@ namespace Minigames
             new Memory(), // 6
             new WasteDisposal(), // 7
             new RadiationLevels(5, 40), // 8
-            new WaterLevels() // 8
+            new WaterLevels() // 9
             // Add other minigames here
         };
     }
