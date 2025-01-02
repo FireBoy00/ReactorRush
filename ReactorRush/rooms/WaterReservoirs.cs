@@ -56,7 +56,6 @@ namespace Rooms
                 waterLevelsGame.Run();
 
                 int waterLevel = waterLevelsGame.GetWaterLevel();
-                int score = waterLevelsGame.Score; // Access the Score
 
                 while (waterLevel == 0 || waterLevel == 1 || waterLevel == 9 || waterLevel == 10)
                 {
@@ -69,11 +68,12 @@ namespace Rooms
                 if (firstAttempt)
                 {
                     Utility.PrintStory("Excellent work! The water levels are stable, and the system is functioning perfectly! You may proceed to the next room. ");
+                    Score += 10;
                 }else {
                     Utility.PrintStory("The water levels are stable, and the system is functioning perfectly! You may proceed to the next room.");
+                    Score += 5;
                 }
                 player.UpdateMinigameStatus(minigames[minigameIndex].GetType().Name, true); // Update the minigame status
-                Score += score;
             }
             else
             {
