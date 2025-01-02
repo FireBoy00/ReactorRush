@@ -16,6 +16,7 @@ namespace ReactorRush
         public void Run()
         {
             Console.Clear();
+            player.UpdateMinigameStatus(minigames[8].GetType().Name, true); // Update the minigame status
             DisplayMenu();
         }
 

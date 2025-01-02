@@ -2,16 +2,17 @@ using System;
 using Spectre.Console;
 using ReactorRush;
 using Minigames;
+
 namespace Rooms
 {
     public class WaterReservoir : IRooms
     {
-        //! Add posibility for player to gain points
         public int Score { get; private set; }
         private readonly List<IMinigame> minigames = MinigameList.Minigames;
         private readonly int minigameIndex = 8;
         public int StartLevel(Player player)
         {
+            Score = 0;
             AnsiConsole.Clear();
 
             Utility.Narrator = "Gabi"; //! Change the narrator
@@ -43,31 +44,34 @@ namespace Rooms
             Utility.PrintStory("You are faced with a practical challenge: a sudden swing in water levels! The system alerts you to correct the water level to maintain stability. ");
             Utility.PrintStory("Your task is to adjust valves to stabilize the water levels. Watch the indicators closely and react quickly to prevent overflows or shortages. ");
 
+            var waterLevelsGame = (WaterLevels)minigames[minigameIndex]; // Cast to access WaterLevels-specific properties
             if (minigames.Count > minigameIndex)
             {
-                var waterLevelsGame = (WaterLevels)minigames[minigameIndex]; // Cast to access WaterLevels-specific properties
-                waterLevelsGame.Run(); 
+                bool firstAttempt = true; // Flag to check if it's the first attempt
+                waterLevelsGame.Run();
 
                 int waterLevel = waterLevelsGame.GetWaterLevel();
                 int score = waterLevelsGame.Score; // Access the Score
 
-                if (waterLevel == 0 || waterLevel == 1 || waterLevel == 9 || waterLevel == 10)
+                while (waterLevel == 0 || waterLevel == 1 || waterLevel == 9 || waterLevel == 10)
                 {
                     Utility.PrintStory("Water levels are still critical! Please try again to prevent a system shutdown.");
-                    waterLevelsGame.Run(); 
-                    Utility.PrintStory("The water levels are stable, and the system is functioning perfectly! You may proceed to the next room.");
-                    Score += score; 
-                }
-                else
-                {
-                    Utility.PrintStory("Excellent work! The water levels are stable, and the system is functioning perfectly! You may proceed to the next room. ");
+                    waterLevelsGame.Run();
+                    waterLevel = waterLevelsGame.GetWaterLevel();
+                    firstAttempt = false;
                 }
 
-                Score += score; 
+                if (firstAttempt)
+                {
+                    Utility.PrintStory("Excellent work! The water levels are stable, and the system is functioning perfectly! You may proceed to the next room. ");
+                }else {
+                    Utility.PrintStory("The water levels are stable, and the system is functioning perfectly! You may proceed to the next room.");
+                }
+                Score += score;
             }
             else
             {
-                Utility.PrintStory("Waste transfer minigame is not available.");
+                Utility.PrintStory($"{waterLevelsGame.GetType().Name} minigame is not available.");
             }
 
             AnsiConsole.Clear();
