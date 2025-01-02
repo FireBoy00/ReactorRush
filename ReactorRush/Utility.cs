@@ -308,7 +308,7 @@ namespace ReactorRush
         {
             author ??= Narrator;
 
-            Console.Clear();
+            AnsiConsole.Clear();
             PrintStory(question, author, true);
 
             var input = new StringBuilder();
