@@ -29,6 +29,8 @@ namespace Minigames
             _currentGuess = string.Empty;
             _guesses = new string[MaxAttempts];
 
+            PrintPlotline();
+
             Console.Clear();
             while (_attempts <= MaxAttempts)
             {
@@ -52,6 +54,16 @@ namespace Minigames
                     HandleKeyPress(key);
                 }
             }
+        }
+
+        private void PrintPlotline()
+        {
+            Console.WriteLine("Your task is to figure out what the code is.\n");
+            Console.WriteLine("After you typed in a 5-digits number, you will see if the digits are included in the code or not.");
+            Console.WriteLine("GREEN: the digit is in the correct place; \nYELLOW: the digit is included in the code but it's in the incorrect place; \nRED: the code does not include the digit");
+            Console.WriteLine("\nClick any key to continue.");
+            Console.ReadKey();
+            Console.Clear();
         }
 
         private string GenerateTargetNumber()
@@ -139,7 +151,8 @@ namespace Minigames
             }
             else if (key == ConsoleKey.Enter && _currentGuess.Length == NumberLength)
             {
-                Console.WriteLine($"{_currentGuess} | {_targetNumber}");
+                // Console.WriteLine($"{_currentGuess} | {_targetNumber}");
+                Console.WriteLine($"{_currentGuess}"); 
                 _guesses[_attempts] = _currentGuess;
                 _attempts++;
                 if (_currentGuess == _targetNumber)

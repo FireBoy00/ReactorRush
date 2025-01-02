@@ -82,7 +82,7 @@ namespace Minigames
             Console.WriteLine("To move around the board, use the arrow keys.");
             Console.WriteLine("To rotate a given element 90* to the right (clockwise), click Enter.");
             Console.WriteLine("To rotate it 90* to the left (counterclockwise), click Space.");
-            Console.WriteLine("\nClick any key to continiue.");
+            Console.WriteLine("\nClick any key to continue.");
             Console.ReadKey();
             Console.Clear();
         }
