@@ -17,7 +17,8 @@ namespace Minigames
             new PipeRepair(), // 4
             new TicTacToe(5,2), // 5
             new Memory(), // 6
-            new WasteDisposal() // 7
+            new WasteDisposal(), // 7
+            new WaterLevels() // 8
             // Add other minigames here
         };
     }
