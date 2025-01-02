@@ -72,6 +72,7 @@ namespace Rooms
                 }else {
                     Utility.PrintStory("The water levels are stable, and the system is functioning perfectly! You may proceed to the next room.");
                 }
+                player.UpdateMinigameStatus(minigames[minigameIndex].GetType().Name, true); // Update the minigame status
                 Score += score;
             }
             else
