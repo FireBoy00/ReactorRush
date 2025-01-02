@@ -7,7 +7,6 @@ namespace Rooms
 {
     public class WaterReservoir : IRooms
     {
-        //! Add posibility for player to gain points
         public int Score { get; private set; }
         private readonly List<IMinigame> minigames = MinigameList.Minigames;
 
@@ -28,22 +27,27 @@ namespace Rooms
             prompt12 = Utility.Prompt("Why is it essential to remove impurities from the water in the reservoir before it enters the steam generator?", ["To prevent steam explosion risks.","To reduce heat transfer efficiency.", "To avoid damage to the steam generator and maintain efficiency.", "To lower the water pressure in the system."]);
             
            
-            if(prompt12 == "To prevent steam explosion risks.")
+            if(prompt12 == "To prevent steam explosion risks.") {
                 Utility.PrintStory("Incorrect! Try again.");
-                else
-            if(prompt12 == "To reduce heat transfer efficiency.")
+                Score -= 2;
+            }
+            else if(prompt12 == "To reduce heat transfer efficiency.") {
                 Utility.PrintStory("Incorrect! Try again.");
-                else
-            if(prompt12 == "To avoid damage to the steam generator and maintain efficiency.")
+                Score -= 2;
+            }    
+            else if(prompt12 == "To avoid damage to the steam generator and maintain efficiency.") {
                 Utility.PrintStory("You chose the right answer, procced with your given task. Good luck!");
-                else
-            if(prompt12 == "To lower the water pressure in the system.")
+                Score += 10;
+            }    
+            else if(prompt12 == "To lower the water pressure in the system.") {
                 Utility.PrintStory("Incorrect! Try again.");
+                Score -= 2;
+            }    
             }while(prompt12 != "To avoid damage to the steam generator and maintain efficiency." );
             Utility.PrintStory("You are faced with a practical challenge: a sudden swing in water levels! The system alerts you to correct the water level to maintain stability. ");
             Utility.PrintStory("Your task is to adjust valves to stabilize the water levels. Watch the indicators closely and react quickly to prevent overflows or shortages. ");
 
-            //! Add the minigame
+            //! Add the minigame + Score for that
             
             AnsiConsole.Clear();
             player.UpdateRoomStatus(this.GetType().Name, Score > 0); // Update the room status

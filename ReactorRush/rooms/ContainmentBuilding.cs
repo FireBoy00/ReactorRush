@@ -11,7 +11,7 @@ namespace Rooms
         string prompt1 = "";
         bool isCorrect2 = false;
         string prompt2 = "";
-        public int Score { get; private set; }
+        public int Score { get; private set; } = 0;
         private readonly List<IMinigame> minigames = MinigameList.Minigames;
 
         public int StartLevel(Player player) {
@@ -37,12 +37,12 @@ namespace Rooms
                 else if (prompt1 == "To produce electricity")
                 {
                     Utility.PrintStory($"You chose: {prompt1}\nWrong. Small hint: it is related to radiation.");
-                    Score -= 1;
+                    Score -= 2;
                 }
                 else if (prompt1 == "To cool down the reactor")
                 {
                     Utility.PrintStory($"You chose: {prompt1}\nWrong. Small hint: it is related to radiation.");
-                    Score -= 1;
+                    Score -= 2;
                 }
                 else
                 {
@@ -63,12 +63,12 @@ namespace Rooms
                 else if (prompt2 == "The reactor would stop working entirely")
                 {
                     Utility.PrintStory($"You chose: {prompt2}\nThe reactor itself is still working, do you understand why? Because it still has fuel, turbines and so on.");
-                    Score -= 1;
+                    Score -= 2;
                 }
                 else if (prompt2 == "Nothing; it is just an extra feature")
                 {
                     Utility.PrintStory($"You chose: {prompt2}\nThis does not make sense at all, in such a reactor everything is made on purpose.");
-                    Score -= 1;
+                    Score -= 2;
                 }
                 else
                 {
@@ -92,17 +92,23 @@ namespace Rooms
 
             Utility.PrintStory("Halfway there!\n\nYou are doing great and are halfway to completing the final challenge. Let us head to the next room and see what awaits you!");
 
-            if (minigames[1].Score >= 5) {
-                Score += 5;
+            if (minigames[1].Score == 6) {
+                Score += 10;
             }
-            else if (minigames[1].Score >= 3) {
-                Score += 4;
+            else if (minigames[1].Score == 5) {
+                Score += 9;
+            }
+            else if (minigames[1].Score == 4) {
+                Score += 8;
+            }
+            else if (minigames[1].Score == 3) {
+                Score += 7;
             }
             else if (minigames[1].Score == 2) {
-                Score += 2;
+                Score += 6;
             }
             else {
-                Score += 1;
+                Score += 5;
             }
 
             AnsiConsole.Clear();
