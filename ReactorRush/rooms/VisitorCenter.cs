@@ -59,7 +59,7 @@ namespace Rooms
                 else if (prompt3 == "Sustainable Destiny Goals (SDG)")
                 {
                     Utility.PrintStory($"You chose: {prompt3}\nClose… But not quite,  give it another shot!");
-                    Score -= 1;
+                    Score -= 2;
                 }
                 else
                 {

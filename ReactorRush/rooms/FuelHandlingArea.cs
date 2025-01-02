@@ -56,13 +56,13 @@ namespace Rooms
             }
 
             if (NumberOfTries == 1) {
-                Score = 5;
+                Score += 10;
             } 
             else if (NumberOfTries == 2) {
-                Score = 3;
+                Score += 8;
             }
             else {
-                Score = 1;
+                Score += 6;
             }
 
             AnsiConsole.Clear();

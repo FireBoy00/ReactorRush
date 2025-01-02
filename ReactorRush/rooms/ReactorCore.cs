@@ -42,7 +42,7 @@ namespace Rooms
             {
                 player.UpdateMinigameStatus(minigames[minigameIndex].GetType().Name, true); // Update the minigame status
                 Utility.PrintStory("The valve system stabilized. Reactor core pressure and temperature are within safe limits. Well done, operator.");
-                Score += 5;
+                Score += 10;
             }
             else
             {
@@ -55,7 +55,7 @@ namespace Rooms
                     {
                         player.UpdateMinigameStatus(minigames[minigameIndex].GetType().Name, true); // Update the minigame status
                         Utility.PrintStory("Success!");
-                        Score += 2;
+                        Score += 5;
                     }
                     else
                     {

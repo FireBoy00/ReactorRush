@@ -36,12 +36,12 @@ namespace Rooms
                 if (minigames[minigameIndex].Score >= 3200)
                 {
                     Utility.PrintStory("Outstanding! You have achieved a score of " + minigames[minigameIndex].Score + "! Your energy conversion skills are top-notch, powering the entire facility with ease. Keep it up, your efforts are seen! ");
-                    Score += 5;
+                    Score += 10;
                 }
                 else if (minigames[minigameIndex].Score >= 1600)
                 {
                     Utility.PrintStory("Wonderful job! You scored " + minigames[minigameIndex].Score + ". You have made a significant contribution to the plant’s output. With a few practices, you will reach maximum efficiency in no time. Keep going! ");
-                    Score += 3;
+                    Score += 6;
                 }
                 else
                 {
