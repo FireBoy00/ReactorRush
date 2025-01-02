@@ -9,11 +9,20 @@ namespace Rooms
     {
         string prompt3 = "";
         bool isCorrect = false;
-        bool correctSDGs = false;
+        bool correctSDG1 = false;
+        bool correctSDG2 = false;
+        string sdgInput1 = ""; 
+        string sdgInput2 = "";
         public int Score { get; private set; }
 
         public int StartLevel(Player player)
         {
+            Score = 0;
+            correctSDG1 = false;
+            correctSDG2 = false;
+            sdgInput1 = "";
+            sdgInput2 = "";
+
             AnsiConsole.Clear();
 
             Utility.Narrator = "Nuclear Energy Specialist";
@@ -59,37 +68,47 @@ namespace Rooms
             }
 
             Utility.PrintStory("Proceeding to the next section...");
-            Utility.PrintStory("Do you remember on which SDGs we are focusing?\n");
+            Utility.PrintStory("Do you remember on which SDGs we are focusing?");
 
-            while (!correctSDGs)
+            while (!correctSDG1)
             {
-                var promptPanel = new Panel(new Markup("Remember to enter only two numbers (e.g., 1 2 or 1, 2):"))
+                sdgInput1 = Utility.PromptTextInput("Enter the first SDG number:");
+                if (sdgInput1 == "7" || sdgInput1 == "12")
                 {
-                    Border = BoxBorder.Rounded,
-                    Padding = new Padding(1, 1),
-                    Header = new PanelHeader("Input Required", Justify.Center),
-                    Expand = true,
-                };
+                    Utility.PrintStory("Good! Now enter the second SDG number.");
+                    correctSDG1 = true;
+                }
+                else
+                {
+                    if (Score < 0)
+                    {
+                        Score = 0;
+                        Utility.PrintStory("The first number is incorrect. \nYour score has been reset to 0. \nTry again!");
+                    }else {
+                        Score -= 1;
+                        Utility.PrintStory("The first number is incorrect. \nYou lose 1 point. \nTry again!");
+                    }
+                }
+            }
 
-                AnsiConsole.Clear();
-                AnsiConsole.Write(Align.Center(promptPanel));
-
-                string sdgInput = AnsiConsole.Ask<string>("> ");
-
-                if (sdgInput == "7 and 12" || sdgInput == "7, 12" || sdgInput == "7 12" ||
-                    sdgInput == "12 and 7" || sdgInput == "12, 7" || sdgInput == "12 7")
+            while (!correctSDG2) 
+            {
+                sdgInput2 = Utility.PromptTextInput("Enter the second SDG number:");
+                if ((sdgInput1 == "7" && sdgInput2 == "12") || (sdgInput1 == "12" && sdgInput2 == "7"))
                 {
                     Utility.PrintStory("Impressive! You have a great memory. Let us proceed!");
-                    correctSDGs = true;
+                    correctSDG2 = true;
                     Score += 10;
                 }
                 else
                 {
-                    Utility.PrintStory("That is not right. You lose 2 points. Try again!");
-                    Score -= 2;
                     if (Score < 0)
                     {
                         Score = 0;
+                        Utility.PrintStory("The second number is incorrect. \nYour score has been reset to 0. \nTry again!");
+                    }else {
+                        Score -= 1;
+                        Utility.PrintStory("The second number is incorrect. \nYou lose 1 point. \nTry again!");
                     }
                 }
             }

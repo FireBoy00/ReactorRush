@@ -135,7 +135,7 @@ namespace ReactorRush
             Run();
         }
 
-        private void Quit() {
+        private static void Quit() {
             Console.Clear();
             Console.WriteLine("Thanks for playing!");
             Thread.Sleep(1000); // pause for 1 seconds before closing the console

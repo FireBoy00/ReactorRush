@@ -303,5 +303,62 @@ namespace ReactorRush
                 }
             }
         }
+
+        public static string PromptTextInput(string question, string? author = null)
+        {
+            author ??= Narrator;
+
+            Console.Clear();
+            PrintStory(question, author, true);
+
+            var input = new StringBuilder();
+
+            var topPadding = Console.GetCursorPosition().Top + 2;
+            Console.SetCursorPosition(0, topPadding);
+
+            while (true)
+            {
+                Panel? inputPanel = new Panel(input.ToString())
+                {
+                    Border = BoxBorder.Rounded,
+                    Padding = new Padding(1, 0),
+                    Width = Math.Max(input.Length + 4, 20), // Set minimum width
+                    Height = Math.Max(3, 3) // Set minimum height (1 line of text + padding)
+                };
+
+                var centeredInputPanel = new Padder(inputPanel)
+                    .PadLeft((Console.WindowWidth - (inputPanel.Width ?? 0)) / 2);
+
+                // Move cursor to display the panel
+                Console.CursorVisible = false;
+                Console.SetCursorPosition(0, topPadding);
+                AnsiConsole.Write(centeredInputPanel);
+
+                // Set cursor position inside the input panel
+                int cursorLeft = (Console.WindowWidth - (inputPanel.Width ?? 0)) / 2 + 2 + input.Length;
+                int cursorTop = topPadding + 2;
+                Console.CursorVisible = true;
+                Console.SetCursorPosition(cursorLeft, cursorTop);
+
+                var key = Console.ReadKey(true);
+                if (key.Key == ConsoleKey.Enter)
+                {
+                    Console.CursorVisible = false;
+                    // Move cursor normally after the input panel
+                    Console.SetCursorPosition(0, topPadding + inputPanel.Height + 2 ?? 0);
+                    break;
+                }
+                else if (key.Key == ConsoleKey.Backspace && input.Length > 0)
+                {
+                    input.Remove(input.Length - 1, 1);
+                }
+                else if (!char.IsControl(key.KeyChar))
+                {
+                    input.Append(key.KeyChar);
+                }
+            }
+
+            return input.ToString();
+        }
     }
 }
