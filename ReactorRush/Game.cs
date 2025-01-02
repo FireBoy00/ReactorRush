@@ -94,8 +94,7 @@ namespace ReactorRush
         private void StartGame()
         {
             Console.Clear();
-            MinigameList.Minigames[8].Run();
-            //DisplayLevelSelectionMenu();
+            DisplayLevelSelectionMenu();
         }
 
         private void Statistics()

@@ -17,7 +17,7 @@ namespace Rooms
 
             Utility.Narrator = "Nuclear Energy Specialist";
 
-
+            minigames[8].Run(); // Run the minigame
             Utility.PrintStory("Welcome to the Radiation Monitoring room - a critical hub for ensuring safety and control in the plant. Here you will find real-time data on radiation levels, displayed through dynamic bars that change based on the environment's activity.");
             Utility.PrintStory("What does this room do?");
             Utility.PrintStory("The monitoring systems in this room continuously track radiation levels using advanced detectors. These systems help ensure the safety of workers and the integrity of the plant by identifying changes in gamma radiation across different areas. From low levels that safeguard workers to high ranges that indicate breaches, the monitors are designed to act quickly and effectively.");

@@ -3,37 +3,49 @@ using Spectre.Console;
 
 namespace Minigames
 {
-    public class Radiationmonitoringgame : IMinigame
+    public class RadiationLevels : IMinigame
     {
         public int Score { get; private set; }
-        private int[] waterLevels;
+        private int[] radiationLevels;
         private bool[] valves;
         private int timeLimit;
-        public Radiationmonitoringgame (int arraySize, int limit) {
-            waterLevels = new int[arraySize];
+        public RadiationLevels(int arraySize, int limit) {
+            radiationLevels = new int[arraySize];
             
-            for (int i = 0; i < waterLevels.Length; i++)
+            for (int i = 0; i < radiationLevels.Length; i++)
             {
                 Random randomrand = new Random();
-                waterLevels[i] = randomrand.Next(1,10);
+                radiationLevels[i] = randomrand.Next(1,10);
             }
             valves = new bool[arraySize];
             timeLimit = limit;
         }
+        /// <summary>
+        /// Runs the radiation monitoring game.
+        /// </summary>
+        /// <remarks>
+        /// The game simulates monitoring radiation levels in a reactor. The game runs until the time limit is reached.
+        /// 
+        /// Instructions to win:
+        /// - The game increments radiation levels randomly.
+        /// - To win, the difference between consecutive radiation levels must not exceed 1.
+        /// - If the condition is met for all radiation levels, the game prints "WIN" and ends.
+        /// </remarks>
         public void Run()
         {   
             int time = 0;
             Random randomrand = new Random();
             while (time < timeLimit) {
                 time++;
-                waterLevels[randomrand.Next(waterLevels.Length)] += 1;
-                for (int i = 0; i < waterLevels.Length; i++)
+                radiationLevels[randomrand.Next(radiationLevels.Length)] += 1;
+                for (int i = 0; i < radiationLevels.Length; i++)
                 {
-                    if (i == waterLevels.Length - 1) {
+                    if (i == radiationLevels.Length - 1) {
                         Console.WriteLine("WIN");
+                        Thread.Sleep(3000);
                         return;
                     }
-                    if (Math.Abs(waterLevels[i] - waterLevels[i+1]) > 1)  {
+                    if (Math.Abs(radiationLevels[i] - radiationLevels[i+1]) > 1)  {
                         break;
                     }
                 }
@@ -44,10 +56,10 @@ namespace Minigames
         }
         void Valve(int index) {
             if (valves[index]) {
-                waterLevels[index]++;
+                radiationLevels[index]++;
             }
             else {
-                waterLevels[index]--;
+                radiationLevels[index]--;
             }
         }
         void Draw() {
@@ -55,11 +67,11 @@ namespace Minigames
             var canvas = new Canvas(128, 30);
 
             // Draw some shapes
-            for(var i = 0; i < waterLevels.Length; i++)
+            for(var i = 0; i < radiationLevels.Length; i++)
             {
                 // Cross
-                for (int j = 0; j < waterLevels[i]; j++) {
-                    canvas.SetPixel(j+45, i*waterLevels.Length, Color.Aqua);
+                for (int j = 0; j < radiationLevels[i]; j++) {
+                    canvas.SetPixel(j+45, i*radiationLevels.Length, Color.GreenYellow);
                 }
                 
             }
@@ -107,7 +119,7 @@ namespace Minigames
                         DrawValves(selected);
                         break;
                     case ConsoleKey.Enter:
-                        waterLevels[selected-1]-=2;
+                        radiationLevels[selected-1]-=2;
                         return;
                 }
             
