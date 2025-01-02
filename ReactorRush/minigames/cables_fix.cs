@@ -52,7 +52,9 @@ namespace Minigames
                             Console.Clear();
                             Console.WriteLine("You have successfully fixed the cable!");
                             DisplayCompletionTime();
-                            Thread.Sleep(2000);
+                            // Thread.Sleep(2000);
+                            Console.WriteLine("\nTo continue, click any key...");
+                            Console.ReadKey();
                             break;
                         }
                     }
@@ -62,7 +64,9 @@ namespace Minigames
                         Console.Clear();
                         Console.WriteLine("Game Over! You couldn't reach the end.");
                         Console.WriteLine($"You got a score of {Score} points.");
-                        Thread.Sleep(1000);
+                        // Thread.Sleep(1000);
+                        Console.WriteLine("\nTo continue, click any key...");
+                        Console.ReadKey();
                         break;
                     }
                     while (Console.KeyAvailable) Console.ReadKey(true); // Clear the input buffer
