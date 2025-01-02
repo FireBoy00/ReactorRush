@@ -396,6 +396,19 @@ namespace ReactorRush
             menu.Centered();
             menu.HideHeaders();
             menu.Border(TableBorder.None);
+            menu.AddRow(new Panel(new Markup($"You reached a score of")).Expand().Border(BoxBorder.None));
+            menu.AddRow(new Panel(new Markup($"{player.Score}")).Expand().Border(BoxBorder.None));
+            if (player.Score > 185) {
+                menu.AddRow(new Panel(new Markup($"What an outstanding score! You are clearly well-educated on the topic of nuclear energy.")).Expand().Border(BoxBorder.None).PadBottom(2));
+            }
+            else if (player.Score < 185 && player.Score > 102) {
+                menu.AddRow(new Panel(new Markup($"A respectable score. We hope we were able to add to your existing knowledge through our game.")).Expand().Border(BoxBorder.None).PadBottom(2));
+
+            }
+            else {
+                menu.AddRow(new Panel(new Markup($"We hope you found our game fun and insightful! However, you might want to take a look back at some of the rooms.")).Expand().Border(BoxBorder.None).PadBottom(2));
+            }
+
             menu.AddColumn(new TableColumn("Credits").Centered());
             menu.AddRow(new Panel(new Markup($"Credit goes to")).Expand().Border(BoxBorder.None).PadBottom(2));
             menu.AddRow(new Panel(new Markup($"Adrian Stanc")).Expand().Border(BoxBorder.None));
