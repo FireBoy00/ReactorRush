@@ -19,10 +19,10 @@ namespace Rooms
             new WasteStorageFacility(), // 5
             new FuelHandlingArea(), // 7
             new EmergencyBackupRoom(), // 8
+            new WaterReservoir(), // 9
             new RadiationMonitor(), // 10
             new Laboratory(), // 11
             new ReactorCore(), //12
-            new WaterReservoir(), // 3
             // Add other rooms here
         };
     }
