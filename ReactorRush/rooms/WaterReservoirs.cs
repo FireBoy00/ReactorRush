@@ -14,7 +14,7 @@ namespace Rooms
         {
             AnsiConsole.Clear();
 
-            Utility.Narrator = "Gabi";
+            Utility.Narrator = "Nuclear Energy Specialist";
             Utility.PrintStory("This room plays a critical role in ensuring the reactor operates efficiently and safely. Water is a vital component in the cooling and energy generation process of a nuclear power plant, and here, you will learn how this system works and why maintaining it is essential. ");
             Utility.PrintStory("I think this is the right time to talk about its purpose, what is it?");
             Utility.PrintStory("The Water Reservoir is a key part of the plant’s secondary cooling system. It stores and supplies water that condenses steam discharged from the turbines. This ensures a continues cycle of steam generation and condensation, which is crucial for maintaining the efficiency and safety of the plant.");
