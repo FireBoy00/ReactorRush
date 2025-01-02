@@ -16,6 +16,11 @@ namespace ReactorRush
         public void Run()
         {
             Console.Clear();
+            if (rooms.All(room => player.HasPassedRoom(room.GetType().Name)))
+            {
+                DisplayEndScreen();
+                return;
+            }
             DisplayMenu();
         }
 
@@ -94,8 +99,7 @@ namespace ReactorRush
         private void StartGame()
         {
             Console.Clear();
-            MinigameList.Minigames[8].Run();
-            //DisplayLevelSelectionMenu();
+            DisplayLevelSelectionMenu();
         }
 
         private void Statistics()
@@ -391,48 +395,50 @@ namespace ReactorRush
             AnsiConsole.Clear();
             
             Console.SetCursorPosition(0, 0);
-            AnsiConsole.Write(new Padder(new FigletText("Thanks for playing!").Centered().Color(Color.DarkOrange3)).PadTop(7));
-            var menu = new Table();
-            menu.Centered();
-            menu.HideHeaders();
-            menu.Border(TableBorder.None);
-            menu.AddRow(new Panel(new Markup($"You reached a score of")).Expand().Border(BoxBorder.None));
-            menu.AddRow(new Panel(new Markup($"{player.Score}")).Expand().Border(BoxBorder.None));
-            if (player.Score > 185) {
-                menu.AddRow(new Panel(new Markup($"What an outstanding score! You are clearly well-educated on the topic of nuclear energy.")).Expand().Border(BoxBorder.None).PadBottom(2));
-            }
-            else if (player.Score < 185 && player.Score > 102) {
-                menu.AddRow(new Panel(new Markup($"A respectable score. We hope we were able to add to your existing knowledge through our game.")).Expand().Border(BoxBorder.None).PadBottom(2));
+            AnsiConsole.Write(new Padder(new FigletText($"{player.Score}").Centered().Color(Color.DarkOrange3)).PadTop(4));
 
+            Panel messagePanel;
+            if (player.Score > 185) {
+                messagePanel = new Panel(new Markup("[bold]What an outstanding score! You are clearly well-educated on the topic of nuclear energy.[/]").Centered()).Expand().Border(BoxBorder.None);
+            }
+            else if (player.Score <= 185 && player.Score > 102) {
+                messagePanel = new Panel(new Markup("[bold]A respectable score. We hope we were able to add to your existing knowledge through our game.[/]").Centered()).Expand().Border(BoxBorder.None);
             }
             else {
-                menu.AddRow(new Panel(new Markup($"We hope you found our game fun and insightful! However, you might want to take a look back at some of the rooms.")).Expand().Border(BoxBorder.None).PadBottom(2));
+                messagePanel = new Panel(new Markup("[bold]We hope you found our game fun and insightful! However, you might want to take a look back at some of the rooms.[/]").Centered()).Expand().Border(BoxBorder.None);
             }
 
+            AnsiConsole.Write(messagePanel);
+
+            Color personColor = Color.Orange3;
+            Color roleColor = Color.DarkOrange3;
+
+            var menu = new Table();
+            menu.Centered();
+            menu.Border(TableBorder.None);
+            menu.HideHeaders();
             menu.AddColumn(new TableColumn("Credits").Centered());
-            menu.AddRow(new Panel(new Markup($"Credit goes to")).Expand().Border(BoxBorder.None).PadBottom(2));
-            menu.AddRow(new Panel(new Markup($"Adrian Stanc")).Expand().Border(BoxBorder.None));
-            menu.AddRow(new Panel(new Markup($"Developer, Github & Discord manager")).Expand().Border(BoxBorder.None).PadBottom(2));
-            menu.AddRow(new Panel(new Markup($"Agata Majewska")).Expand().Border(BoxBorder.None));
-            menu.AddRow(new Panel(new Markup($"Developer, Lead designer")).Expand().Border(BoxBorder.None).PadBottom(2));
-            menu.AddRow(new Panel(new Markup($"Emma Sólyom")).Expand().Border(BoxBorder.None));
-            menu.AddRow(new Panel(new Markup($"Lead researcher")).Expand().Border(BoxBorder.None).PadBottom(2));
-            menu.AddRow(new Panel(new Markup($"Gabija Staskeviciute")).Expand().Border(BoxBorder.None));
-            menu.AddRow(new Panel(new Markup($"Story & Research")).Expand().Border(BoxBorder.None).PadBottom(2));
-            menu.AddRow(new Panel(new Markup($"Morten Lins")).Expand().Border(BoxBorder.None));
-            menu.AddRow(new Panel(new Markup($"Developer, QA")).Expand().Border(BoxBorder.None).PadBottom(2));
-            menu.AddRow(new Panel(new Markup($"Paul Donici")).Expand().Border(BoxBorder.None));
-            menu.AddRow(new Panel(new Markup($"Designer")).Expand().Border(BoxBorder.None).PadBottom(2));
-            menu.AddRow(new Panel(new Markup($"Spectre Console")).Expand().Border(BoxBorder.None));
-            menu.AddRow(new Panel(new Markup($"Text formatting library")).Expand().Border(BoxBorder.None));
+            menu.AddRow(new Panel(new Markup($"[bold {roleColor}]Credit goes to[/]").Centered()).Expand().Border(BoxBorder.None).PadBottom(2));
+            menu.AddEmptyRow();
+            menu.AddRow(new Panel(new Markup($"[bold {personColor}]Adrian Stancu[/]").Centered()).Expand().Border(BoxBorder.None));
+            menu.AddRow(new Panel(new Markup($"[bold {roleColor}]Developer, Github & Discord manager[/]").Centered()).Expand().Border(BoxBorder.None).PadBottom(2));
+            menu.AddRow(new Panel(new Markup($"[bold {personColor}]Agata Majewska[/]").Centered()).Expand().Border(BoxBorder.None));
+            menu.AddRow(new Panel(new Markup($"[bold {roleColor}]Developer, Lead designer[/]").Centered()).Expand().Border(BoxBorder.None).PadBottom(2));
+            menu.AddRow(new Panel(new Markup($"[bold {personColor}]Emma Sólyom[/]").Centered()).Expand().Border(BoxBorder.None));
+            menu.AddRow(new Panel(new Markup($"[bold {roleColor}]Lead researcher[/]").Centered()).Expand().Border(BoxBorder.None).PadBottom(2));
+            menu.AddRow(new Panel(new Markup($"[bold {personColor}]Gabija Staskeviciute[/]").Centered()).Expand().Border(BoxBorder.None));
+            menu.AddRow(new Panel(new Markup($"[bold {roleColor}]Story & Research[/]").Centered()).Expand().Border(BoxBorder.None).PadBottom(2));
+            menu.AddRow(new Panel(new Markup($"[bold {personColor}]Morten Lins[/]").Centered()).Expand().Border(BoxBorder.None));
+            menu.AddRow(new Panel(new Markup($"[bold {roleColor}]Developer, QA[/]").Centered()).Expand().Border(BoxBorder.None).PadBottom(2));
+            menu.AddRow(new Panel(new Markup($"[bold {personColor}]Paul Donici[/]").Centered()).Expand().Border(BoxBorder.None));
+            menu.AddRow(new Panel(new Markup($"[bold {roleColor}]Designer[/]").Centered()).Expand().Border(BoxBorder.None).PadBottom(2));
+            menu.AddRow(new Panel(new Markup($"[bold {personColor}]Spectre Console[/]").Centered()).Expand().Border(BoxBorder.None));
+            menu.AddRow(new Panel(new Markup($"[bold {roleColor}]Text formatting library[/]").Centered()).Expand().Border(BoxBorder.None));
 
+            Console.SetCursorPosition(0, Console.CursorTop + 4);
             AnsiConsole.Write(menu);
-
-
-            
             Console.ReadKey();
-
-
+            Quit();
         }
     }
 }
