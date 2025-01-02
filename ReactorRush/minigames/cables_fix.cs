@@ -19,6 +19,7 @@ namespace Minigames
 
         public void Run()
         {
+            Score = 0;
             Console.CursorVisible = false; // Hide the cursor
             width = Console.WindowWidth / 4;
             height = Console.WindowHeight / 4;

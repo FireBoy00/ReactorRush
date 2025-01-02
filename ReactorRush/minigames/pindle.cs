@@ -28,6 +28,7 @@ namespace Minigames
             _gameFailed = false;
             _currentGuess = string.Empty;
             _guesses = new string[MaxAttempts];
+            Score = 0;
 
             PrintPlotline();
 
