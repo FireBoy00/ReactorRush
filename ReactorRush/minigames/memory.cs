@@ -146,7 +146,7 @@ namespace Minigames
             // Keep the console application running until the countdown is complete
             while (timer.Enabled)
             {
-                System.Threading.Thread.Sleep(100);
+                Thread.Sleep(100);
             }
 
             // Ensure the game does not auto-close after the timer ends
@@ -201,6 +201,7 @@ namespace Minigames
                 Score = 0;
                 flippedCards.Clear();
             }
+            Console.CursorVisible = false; // hide the cursor
         }
 
         static void ClearLastLine()
