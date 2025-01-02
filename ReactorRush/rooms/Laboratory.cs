@@ -8,7 +8,6 @@ namespace Rooms
     public class Laboratory : IRooms
     {
         public int Score { get; private set; }
-        private readonly int minigameIndex = -1; // Index of the minigame in the minigames list
         private readonly List<IMinigame> minigames = MinigameList.Minigames;
 
         public int StartLevel(Player player)
