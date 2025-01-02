@@ -8,7 +8,7 @@ namespace Rooms
     public class RadiationMonitor : IRooms
     {
         public int Score { get; private set; }
-        // private readonly int minigameIndex = -1; // Index of the minigame in the minigames list
+        private readonly int minigameIndex = 8; // Index of the minigame in the minigames list
         private readonly List<IMinigame> minigames = MinigameList.Minigames;
 
         public int StartLevel(Player player)
@@ -17,12 +17,26 @@ namespace Rooms
 
             Utility.Narrator = "Nuclear Energy Specialist";
 
-
             Utility.PrintStory("Welcome to the Radiation Monitoring room - a critical hub for ensuring safety and control in the plant. Here you will find real-time data on radiation levels, displayed through dynamic bars that change based on the environment's activity.");
             Utility.PrintStory("What does this room do?");
             Utility.PrintStory("The monitoring systems in this room continuously track radiation levels using advanced detectors. These systems help ensure the safety of workers and the integrity of the plant by identifying changes in gamma radiation across different areas. From low levels that safeguard workers to high ranges that indicate breaches, the monitors are designed to act quickly and effectively.");
-            Utility.PrintStory("Did You Know?\n\nRadiation is a natural part of life and exists everywhere—even in the air we breathe and the bananas we eat! However, in a nuclear plant, keeping radiation levels under control is vital to protect people and maintain smooth operations.");
-            //bars here
+            Utility.PrintStory("Did You Know?\n\nRadiation is a natural part of life and exists everywhere—even in the air we breathe and the bananas we eat! However, in a nuclear plant, keeping radiation levels under control is vital to protect people and maintain smooth operations. ");
+            minigames[minigameIndex].Run(); // Run the minigame
+            bool minigameWon = false;
+            while (!minigameWon)
+            {
+                minigameWon = minigames[minigameIndex].Score > 0;
+                if (!minigameWon)
+                {
+                    Utility.PrintStory("You didn't succeed in the minigame. Remember, monitoring radiation levels accurately is crucial for safety. Try again!");
+                    minigames[minigameIndex].Run(); // Run the minigame again
+                }
+                else
+                {
+                    Utility.PrintStory("Great job! You've successfully completed the minigame, demonstrating your ability to monitor radiation levels effectively.");
+                }
+            }
+            player.UpdateMinigameStatus(minigames[minigameIndex].GetType().Name, minigames[minigameIndex].Score > 0); // Update the minigame status
             Utility.PrintStory("The bars in front of you represent radiation levels in different parts of the plant. Watch them carefully - each movement could indicate a story.");
             string prompt1 = Utility.Prompt("Is the system to track radiation levels functioning as it should? Is there a need for attention?", ["The radiation levels are steady and within the expected range, indicating the system is functioning normally, so there is no need for more attention", "I assume the system is fine without checking it on the displayed levels, no need for attention in any case"]);
             if (prompt1 == "The radiation levels are steady and within the expected range, indicating the system is functioning normally, so there is no need for more attention")

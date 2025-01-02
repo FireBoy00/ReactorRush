@@ -18,6 +18,7 @@ namespace Minigames
             new TicTacToe(5,2), // 5
             new Memory(), // 6
             new WasteDisposal(), // 7
+            new RadiationLevels(5, 40), // 8
             new WaterLevels() // 8
             // Add other minigames here
         };
