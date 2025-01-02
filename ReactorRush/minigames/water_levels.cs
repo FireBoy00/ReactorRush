@@ -8,9 +8,9 @@ namespace Minigames
         public int Score { get; private set; }
         public int GetWaterLevel() // Or create a getter method
         {
-            return waterLevel;
+            return WaterLevel;
         }
-        public int waterLevel = 3;  // Initial water level (0-10)
+        public int WaterLevel = 3;  // Initial water level (0-10)
         private readonly int maxLevel = 10;
         private readonly int minLevel = 0;
         private bool isGameOver = false;
@@ -24,7 +24,7 @@ namespace Minigames
 
             Score = 0;
             isGameOver = false;
-            waterLevel = 3;
+            WaterLevel = 3;
             previousCursorPos = 27;
             gameStartTime = DateTime.Now;
 
@@ -51,15 +51,15 @@ namespace Minigames
                 {
                     var key = Console.ReadKey(true).Key;
 
-                    if (key == ConsoleKey.UpArrow && waterLevel < maxLevel)
+                    if (key == ConsoleKey.UpArrow && WaterLevel < maxLevel)
                     {
-                        waterLevel++;
+                        WaterLevel++;
                         Score += 5;
                         DisplayMessage("You added water!\nYou got 5 points by the way.", ConsoleColor.DarkBlue);
                     }
-                    else if (key == ConsoleKey.DownArrow && waterLevel > minLevel)
+                    else if (key == ConsoleKey.DownArrow && WaterLevel > minLevel)
                     {
-                        waterLevel--;
+                        WaterLevel--;
                         Score += 5;
                         DisplayMessage("You removed water!\nYou got 5 points by the way.", ConsoleColor.Blue);
                     }
@@ -71,10 +71,10 @@ namespace Minigames
                     }
                     else
                     {
-                        if (waterLevel >= maxLevel && key == ConsoleKey.UpArrow)
+                        if (WaterLevel >= maxLevel && key == ConsoleKey.UpArrow)
                         {
                         }
-                        else if (waterLevel <= minLevel && key == ConsoleKey.DownArrow)
+                        else if (WaterLevel <= minLevel && key == ConsoleKey.DownArrow)
                         {
                         }
                         else
@@ -103,7 +103,7 @@ namespace Minigames
             // Display the water level vertically like a reservoir
             for (int i = maxLevel - 1; i >= 0; i--)
             {
-                if (i < waterLevel)
+                if (i < WaterLevel)
                 {
 
                     Console.WriteLine("|██████████████████████|");
@@ -118,7 +118,7 @@ namespace Minigames
             
             // Display current level and score with padding
             Console.SetCursorPosition(0, 18);
-            Console.WriteLine($"Current Level: {waterLevel}/{maxLevel}".PadRight(Console.WindowWidth));
+            Console.WriteLine($"Current Level: {WaterLevel}/{maxLevel}".PadRight(Console.WindowWidth));
             Console.SetCursorPosition(0, 19);
             Console.WriteLine($"Score: {Score}".PadRight(Console.WindowWidth));
         }
@@ -159,13 +159,13 @@ namespace Minigames
 
         private void CheckWaterLevel()
         {
-            if (waterLevel >= maxLevel)
+            if (WaterLevel >= maxLevel)
             {
                 DisplayMessage("Overflow! Water level is too high! Stabilize it quickly!\nRecommendation from the colleague: it's most efficient when it is in the middle.\nYou lost 5 points by the way.", ConsoleColor.Red);
                 Score -= 10;
                 if (Score < 0) Score = 0;
             }
-            else if (waterLevel <= minLevel)
+            else if (WaterLevel <= minLevel)
             {
                 DisplayMessage("Underflow! Water level is too low! Stabilize it quickly!\nRecommendation from the colleague: it's most efficient when it is in the middle.\nYou lost 10 points by the way.", ConsoleColor.Red);
                 Score -= 10;
@@ -173,7 +173,7 @@ namespace Minigames
             }
             else
             {
-                if (waterLevel == maxLevel - 1 || waterLevel == minLevel + 1)
+                if (WaterLevel == maxLevel - 1 || WaterLevel == minLevel + 1)
                 {
                     DisplayMessage("Warning: Approaching dangerous water level. Adjust valves carefully!\nYou lost 5 points by the way.", ConsoleColor.Yellow);
                     Score -= 5;
