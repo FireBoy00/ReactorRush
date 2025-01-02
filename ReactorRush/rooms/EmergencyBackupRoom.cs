@@ -13,6 +13,7 @@ namespace Rooms
 
         public int StartLevel(Player player)
         {
+            Score = 0;
             AnsiConsole.Clear();
 
             Utility.Narrator = "Critical Support Technician"; //Critical Support Technician or Backup Operations Technician

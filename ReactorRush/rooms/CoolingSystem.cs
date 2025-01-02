@@ -11,7 +11,9 @@ namespace Rooms
         private readonly int minigameIndex = 4; // Index of the minigame in the minigames list
         private readonly List<IMinigame> minigames = MinigameList.Minigames;
         
-        public int StartLevel(Player player) {
+        public int StartLevel(Player player)
+        {
+            Score = 0;
             AnsiConsole.Clear();
 
             Utility.Narrator = "Operator";

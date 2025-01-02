@@ -11,10 +11,12 @@ namespace Rooms
         string prompt1 = "";
         bool isCorrect2 = false;
         string prompt2 = "";
-        public int Score { get; private set; } = 0;
+        public int Score { get; private set; }
         private readonly List<IMinigame> minigames = MinigameList.Minigames;
 
-        public int StartLevel(Player player) {
+        public int StartLevel(Player player)
+        {
+            Score = 0;
             AnsiConsole.Clear();
 
             Utility.Narrator = "Operator";
