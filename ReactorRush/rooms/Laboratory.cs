@@ -8,7 +8,6 @@ namespace Rooms
     public class Laboratory : IRooms
     {
         public int Score { get; private set; }
-        private readonly int minigameIndex = -1; // Index of the minigame in the minigames list
         private readonly List<IMinigame> minigames = MinigameList.Minigames;
 
         public int StartLevel(Player player)
@@ -54,13 +53,13 @@ namespace Rooms
                         if (prompt7 == "USA")
                         {
                             Utility.PrintStory($"You chose: {prompt7}\nCorrect! It is in second place and has 50 research reactors.");
-                            Score += 5;
+                            Score += 10;
                             string prompt14 = Utility.Prompt("What is the second one?", ["India", "Russia"]);
 
                             if (prompt14 == "Russia")
                             {
                                 Utility.PrintStory($"You chose: {prompt14}\nCorrect! It is in the first place and has 52 research reactors.");
-                                Score += 3;
+                                Score += 10;
                             }
                             else
                             {
@@ -76,14 +75,14 @@ namespace Rooms
                         else
                         {
                             Utility.PrintStory($"You chose: {prompt7}\nCorrect! It is in the first place and has 52 research reactors.");
-                            Score += 5;
+                            Score += 10;
 
                             string prompt14 = Utility.Prompt("What is the second one?", ["India", "USA"]);
 
                             if (prompt14 == "USA")
                             {
                                 Utility.PrintStory($"You chose: {prompt14}\nCorrect! It is in the first place and has 50 research reactors.");
-                                Score += 3;
+                                Score += 10;
                             }
                             else
                             {
@@ -101,13 +100,13 @@ namespace Rooms
                         if (prompt8 == "USA")
                         {
                             Utility.PrintStory($"You chose: {prompt8}\nCorrect! It is in second place and has 50 research reactors.");
-                            Score += 5;
+                            Score += 10;
 
                             string prompt15 = Utility.Prompt("What is the second one?", ["China", "Russia"]);
                             if (prompt15 == "Russia")
                             {
                                 Utility.PrintStory($"You chose: {prompt15}\nCorrect! It is in the first place and has 52 research reactors.");
-                                Score += 3;
+                                Score += 10;
                             }
                             else
                             {
@@ -123,13 +122,13 @@ namespace Rooms
                         else
                         {
                             Utility.PrintStory($"You chose: {prompt8}\nCorrect! It is in the first place and has 52 research reactors.");
-                            Score += 5;
+                            Score += 10;
 
                             string prompt14 = Utility.Prompt("What is the second one?", ["China", "USA"]);
                             if (prompt14 == "USA")
                             {
                                 Utility.PrintStory($"You chose: {prompt14}\nCorrect! It is in the first place and has 50 research reactors.");
-                                Score += 3;
+                                Score += 10;
                             }
                             else
                             {
@@ -147,6 +146,7 @@ namespace Rooms
                         if (prompt9 == "China")
                         {
                             Utility.PrintStory($"You chose: {prompt9}\nIncorrect! It is in second place and has 16 research reactors.");
+                            Score -=2;
                             string prompt11 = Utility.Prompt("Try again! Maybe this time you will choose the right one.", ["India", "Russia"]);
                             if (prompt11 == "India")
                             {
@@ -156,12 +156,13 @@ namespace Rooms
                             else
                             {
                                 Utility.PrintStory($"You chose: {prompt11}\nCorrect! It is in the first place and has 52 research reactors.");
-                                Score += 3;
+                                Score += 10;
                             }
                         }
                         else if (prompt9 == "India")
                         {
                             Utility.PrintStory($"You chose: {prompt9}\nIncorrect! It has 7 research reactors.");
+                            Score -=2;
                             string prompt12 = Utility.Prompt("Try again! Maybe this time you will choose the right one.", ["China", "Russia"]);
                             if (prompt12 == "China")
                             {
@@ -171,13 +172,13 @@ namespace Rooms
                             else
                             {
                                 Utility.PrintStory($"You chose: {prompt12}\nCorrect! It is in the first place and has 52 research reactors.");
-                                Score += 3;
+                                Score += 10;
                             }
                         }
                         else
                         {
                             Utility.PrintStory($"You chose: {prompt9}\nCorrect! It is in the first place and has 52 research reactors.");
-                            Score += 5;
+                            Score += 10;
                         }
                         break;
 
@@ -189,6 +190,7 @@ namespace Rooms
                         if (prompt10 == "China")
                         {
                             Utility.PrintStory($"You chose: {prompt10}\nIncorrect! It is in second place and has 16 research reactors.");
+                            Score -=2;
                             string prompt13 = Utility.Prompt("Try again! Maybe this time you will choose the right one.", ["India", "Russia"]);
                             if (prompt13 == "India")
                             {
@@ -198,12 +200,13 @@ namespace Rooms
                             else
                             {
                                 Utility.PrintStory($"You chose: {prompt13}\nCorrect! It is in the first place and has 50 research reactors.");
-                                Score += 3;
+                                Score += 10;
                             }
                         }
                         else if (prompt10 == "India")
                         {
                             Utility.PrintStory($"You chose: {prompt10}\nIncorrect! It has 7 research reactors.");
+                            Score -= 2;
                             string prompt11 = Utility.Prompt("Try again! Maybe this time you will choose the right one.", ["China", "Russia"]);
                             if (prompt11 == "China")
                             {
@@ -213,14 +216,14 @@ namespace Rooms
                             else
                             {
                                 Utility.PrintStory($"You chose: {prompt11}\nCorrect! It is in the first place and has 50 research reactors.");
-                                Score += 3;
+                                Score += 10;
                             }
                         }
                         else
                         {
                             Utility.PrintStory($"You chose: {prompt10}\nCorrect! It is in the first place and has 50 research reactors.");
+                            Score += 10;
                         }
-                        Score += 5;
                         break;
 
                     default:

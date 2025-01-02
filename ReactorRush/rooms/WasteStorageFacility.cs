@@ -44,7 +44,7 @@ namespace Rooms
                 player.UpdateMinigameStatus(minigames[minigameIndex].GetType().Name, true); // Update the minigame status
 
                 Utility.PrintStory("Wonderful job! You successfully secured the radioactive waste container, preventing a potential hazard. This is exactly how responsible waste management works - protecting people, the environment, and the future of nuclear energy. Now let's move to the next challenge!");
-                Score += minigames[minigameIndex].Score;
+                Score += 5;
             }
             else
             {

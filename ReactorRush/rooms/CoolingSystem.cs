@@ -44,19 +44,19 @@ namespace Rooms
             }
 
             if (minigames[minigameIndex].Score < 16) {
-                Score = 5;
+                Score += 10;
             } 
             else if (minigames[minigameIndex].Score < 21) {
-                Score = 4;
+                Score += 8;
             }
             else if (minigames[minigameIndex].Score < 26) {
-                Score = 3;
+                Score += 6;
             }
             else if (minigames[minigameIndex].Score < 31) {
-                Score = 2;
+                Score += 4;
             }
             else {
-                Score = 1;
+                Score += 2;
             }
 
             AnsiConsole.Clear();
