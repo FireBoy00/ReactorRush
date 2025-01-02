@@ -11,7 +11,6 @@ namespace Rooms
         bool isCorrect = false;
         bool correctSDGs = false;
         public int Score { get; private set; }
-        private readonly List<IMinigame> minigames = MinigameList.Minigames;
 
         public int StartLevel(Player player)
         {

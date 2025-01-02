@@ -8,6 +8,7 @@ namespace Rooms
     public class ControlRoom : IRooms
     {
         public int Score { get; private set; }
+        private readonly int minigameIndex = 2; // Index of the minigame in the minigames list
         private readonly List<IMinigame> minigames = MinigameList.Minigames;
 
         public int StartLevel(Player player)
@@ -25,24 +26,30 @@ namespace Rooms
             "\n\nFocus on Safety\n      Safety protocols are strictly followed to protect both the plant and the surrounding environment from any risks.");
 
             Utility.PrintStory("The system has flagged some settings that need tweaking. To stabilize the reactor, you need to get the controls back in order. But first: ");
-            string prompt1 = Utility.Prompt("Do you remember what is meant by Work as a Team?",
-            ["In case of any anomalies or alarms, operators quickly diagnose and address the issues to prevent potential hazards",
-            "They adjust control rods and other mechanisms to manage the reactor's power output and maintain stability",
-            "The control room team coordinates with other plant personnel to handle routine and maintenance"]);
-            switch (prompt1)
+            string prompt1;
+            do
             {
-                case "In case of any anomalies or alarms, operators quickly diagnose and address the issues to prevent potential hazards":
-                case "They adjust control rods and other mechanisms to manage the reactor's power output and maintain stability":
-                    Utility.PrintStory("This is not the right answer, pay attention to such words: handle, coordinate... ");
-                    Score -= 1;
-                    break;
-                case "The control room team coordinates with other plant personnel to handle routine and maintenance":
-                    Score += 5;
-                    Utility.PrintStory("You chose the right answer, procced with your given task. Good luck! ");
-                    break;
-            }
+                prompt1 = Utility.Prompt("Do you remember what is meant by Work as a Team?",
+                ["In case of any anomalies or alarms, operators quickly diagnose and address the issues to prevent potential hazards",
+                "They adjust control rods and other mechanisms to manage the reactor's power output and maintain stability",
+                "The control room team coordinates with other plant personnel to handle routine and maintenance"]);
+                switch (prompt1)
+                {
+                    case "In case of any anomalies or alarms, operators quickly diagnose and address the issues to prevent potential hazards":
+                    case "They adjust control rods and other mechanisms to manage the reactor's power output and maintain stability":
+                        Utility.PrintStory("This is not the right answer, pay attention to such words: handle, coordinate... ");
+                        Score -= 1;
+                        break;
+                    case "The control room team coordinates with other plant personnel to handle routine and maintenance":
+                        Score += 5;
+                        Utility.PrintStory("You chose the right answer, procced with your given task. Good luck! ");
+                        break;
+                }
+            } while (prompt1 != "The control room team coordinates with other plant personnel to handle routine and maintenance");
+            
             AnsiConsole.Clear();
-            minigames[2].Run();
+            minigames[minigameIndex].Run();
+            player.UpdateMinigameStatus(minigames[minigameIndex].GetType().Name, true); // Update the minigame status
             Utility.PrintStory("Well done! You've reset the controls, and the reactor is running smoothly again. That's one big step toward mastering this facility! Go to the next room.");
             Utility.PrintStory("Oh, you seem confused. I forgot to mention that this tour will be conducted in a period of 12 days ensuring you know how a state of the art reactor works! Enough of this for now."); //it shuld be configurable
 
