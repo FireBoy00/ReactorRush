@@ -30,6 +30,7 @@ namespace Rooms
                 if (!minigameWon)
                 {
                     Utility.PrintStory("You didn't succeed in the minigame. Remember, monitoring radiation levels accurately is crucial for safety. Try again!");
+                    Score -= 2;
                     minigames[minigameIndex].Run(); // Run the minigame again
                 }
                 else
@@ -37,6 +38,7 @@ namespace Rooms
                     Utility.PrintStory("Great job! You've successfully completed the minigame, demonstrating your ability to monitor radiation levels effectively.");
                 }
             }
+            Score += 10; 
             player.UpdateMinigameStatus(minigames[minigameIndex].GetType().Name, minigames[minigameIndex].Score > 0); // Update the minigame status
             Utility.PrintStory("The bars in front of you represent radiation levels in different parts of the plant. Watch them carefully - each movement could indicate a story.");
             string prompt1 = Utility.Prompt("Is the system to track radiation levels functioning as it should? Is there a need for attention?", ["The radiation levels are steady and within the expected range, indicating the system is functioning normally, so there is no need for more attention", "I assume the system is fine without checking it on the displayed levels, no need for attention in any case"]);
