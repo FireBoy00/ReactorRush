@@ -380,10 +380,14 @@ namespace ReactorRush
 
         private void StartLevel(int level) {
             int score = rooms[level - 1].StartLevel(player);
-            Console.WriteLine($"SCORE: {score} :SCORE\n\n");
-            Console.WriteLine("[DEBUG] Press any key to return to menu...");
+            Console.SetCursorPosition(0, Console.WindowHeight * 1 / 3);
+            AnsiConsole.Write(new FigletText($"SCORE: {score}").Centered().Color(Color.Yellow));
+            Console.SetCursorPosition(2, Console.WindowHeight - 1);
+            AnsiConsole.Write(new Markup("[bold]Press any key to return to the level selection...[/]"));
             Console.ReadKey();
-            Run();
+            Console.SetCursorPosition(0, Console.WindowHeight - 1);
+            AnsiConsole.Write(new string(' ', Console.WindowWidth)); // Clear the "Press any key..." message
+            DisplayLevelSelectionMenu();
         }
     }
 }
