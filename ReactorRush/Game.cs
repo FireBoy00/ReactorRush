@@ -386,5 +386,40 @@ namespace ReactorRush
             Console.ReadKey();
             Run();
         }
+
+        private void DisplayEndScreen() {
+            AnsiConsole.Clear();
+            
+            Console.SetCursorPosition(0, 0);
+            AnsiConsole.Write(new Padder(new FigletText("Thanks for playing!").Centered().Color(Color.DarkOrange3)).PadTop(7));
+            var menu = new Table();
+            menu.Centered();
+            menu.HideHeaders();
+            menu.Border(TableBorder.None);
+            menu.AddColumn(new TableColumn("Credits").Centered());
+            menu.AddRow(new Panel(new Markup($"Credit goes to")).Expand().Border(BoxBorder.None).PadBottom(2));
+            menu.AddRow(new Panel(new Markup($"Adrian Stanc")).Expand().Border(BoxBorder.None));
+            menu.AddRow(new Panel(new Markup($"Developer, Github & Discord manager")).Expand().Border(BoxBorder.None).PadBottom(2));
+            menu.AddRow(new Panel(new Markup($"Agata Majewska")).Expand().Border(BoxBorder.None));
+            menu.AddRow(new Panel(new Markup($"Developer, Lead designer")).Expand().Border(BoxBorder.None).PadBottom(2));
+            menu.AddRow(new Panel(new Markup($"Emma Sólyom")).Expand().Border(BoxBorder.None));
+            menu.AddRow(new Panel(new Markup($"Lead researcher")).Expand().Border(BoxBorder.None).PadBottom(2));
+            menu.AddRow(new Panel(new Markup($"Gabija Staskeviciute")).Expand().Border(BoxBorder.None));
+            menu.AddRow(new Panel(new Markup($"Story & Research")).Expand().Border(BoxBorder.None).PadBottom(2));
+            menu.AddRow(new Panel(new Markup($"Morten Lins")).Expand().Border(BoxBorder.None));
+            menu.AddRow(new Panel(new Markup($"Developer, QA")).Expand().Border(BoxBorder.None).PadBottom(2));
+            menu.AddRow(new Panel(new Markup($"Paul Donici")).Expand().Border(BoxBorder.None));
+            menu.AddRow(new Panel(new Markup($"Designer")).Expand().Border(BoxBorder.None).PadBottom(2));
+            menu.AddRow(new Panel(new Markup($"Spectre Console")).Expand().Border(BoxBorder.None));
+            menu.AddRow(new Panel(new Markup($"Text formatting library")).Expand().Border(BoxBorder.None));
+
+            AnsiConsole.Write(menu);
+
+
+            
+            Console.ReadKey();
+
+
+        }
     }
 }
