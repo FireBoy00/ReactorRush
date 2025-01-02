@@ -18,11 +18,11 @@ namespace Rooms
 
             Utility.PrintStory("The Emergency Backup room is a critical part of the nuclear power plant’s safety system. Its primary role is to ensure that essential functions can continue during power outages, preventing potential disasters. This room houses backup power systems designed to maintain operations like cooling spent fuel, managing remained decay heat from the reactor, and supporting crucial services such as system controls, communication, lighting, and ventilation. ");
             Utility.PrintStory("What are the functionality of this room you may ask me and I would tell you..." +
-            "\n   1. Reliability in Crisis, backup systems are activated during a power failure immediately."
+            "\n  1. Reliability in Crisis, backup systems are activated during a power failure immediately."
             + "\n  2. Different solutions of redundancy, including fuel-based generators, battery backups, and sometimes compressed air for auxiliary systems. These ensure resilience in various scenarios, including natural disasters like tsunamis or human-caused threats."
             + "\n  3. All backup systems are tested and maintained regularly, for example, batteries must have high energy density and quick discharge capabilities.");
 
-            string prompt1 = Utility.Prompt("As you stand in this crucial facility, lets assess your understanding of its purpose\n\nWhat is the key role of the Emergency Backup room?", ["To store extra tools for maintenance.", "To provide emergency power during outages.", "To monitor radiation levels in real-time."]);
+            string prompt1 = Utility.Prompt("As you stand in this crucial facility, lets assess your understanding of its purpose.\n\nWhat is the key role of the Emergency Backup room?", ["To store extra tools for maintenance.", "To provide emergency power during outages.", "To monitor radiation levels in real-time."]);
 
             switch (prompt1)
             {

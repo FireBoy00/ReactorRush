@@ -17,6 +17,7 @@ namespace Rooms
             new CoolingSystem(), // 3
             new SteamTurbineRoom(), // 4
             new WasteStorageFacility(), // 5
+            new ContainmentBuilding(), // 6
             new FuelHandlingArea(), // 7
             new EmergencyBackupRoom(), // 8
             new RadiationMonitor(), // 10
