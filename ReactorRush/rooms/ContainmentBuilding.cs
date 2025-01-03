@@ -90,6 +90,7 @@ namespace Rooms
                 AnsiConsole.Clear();
                 minigames[1].Run();
             }
+            player.UpdateMinigameStatus(minigames[1].GetType().Name, true); // Update the minigame status
             Utility.PrintStory("Wonderful job, you have successfully escaped the incident by quickly entering the pin-code. Your sharp thinking has prevented any major damage. Which correlates to the 12th SDG by having responsible production.\nTime to move to the next challenge!");
 
             Utility.PrintStory("Halfway there!\n\nYou are doing great and are halfway to completing the final challenge. Let us head to the next room and see what awaits you!");
