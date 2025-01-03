@@ -152,8 +152,7 @@ namespace Minigames
             }
             else if (key == ConsoleKey.Enter && _currentGuess.Length == NumberLength)
             {
-                // Console.WriteLine($"{_currentGuess} | {_targetNumber}");
-                Console.WriteLine($"{_currentGuess}"); 
+                // Console.WriteLine($"{_currentGuess} | {_targetNumber}"); //! Debug
                 _guesses[_attempts] = _currentGuess;
                 _attempts++;
                 if (_currentGuess == _targetNumber)
