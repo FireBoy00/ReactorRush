@@ -9,6 +9,7 @@ namespace ReactorRush
     public class Game
     {
         public bool menuChosen = false;
+        public bool continueGame = false;
         private readonly List<IMinigame> minigames = MinigameList.Minigames;
         private readonly List<IRooms> rooms = RoomsList.Rooms;
         private readonly Player player = new Player();
@@ -16,7 +17,16 @@ namespace ReactorRush
         public void Run()
         {
             Console.Clear();
-            if (rooms.All(room => player.HasPassedRoom(room.GetType().Name)))
+
+            foreach (var room in rooms)
+            {
+                if (room.GetType().Name != "WasteStorageFacility")
+                {
+                    player.UpdateRoomStatus(room.GetType().Name, true);
+                }
+            }
+
+            if (!continueGame && rooms.All(room => player.HasPassedRoom(room.GetType().Name)))
             {
                 DisplayEndScreen();
                 return;
@@ -417,6 +427,7 @@ namespace ReactorRush
             Color personColor = Color.Orange3;
             Color roleColor = Color.DarkOrange3;
 
+            #region Credits
             var menu = new Table();
             menu.Centered();
             menu.Border(TableBorder.None);
@@ -441,8 +452,78 @@ namespace ReactorRush
 
             Console.SetCursorPosition(0, Console.CursorTop + 4);
             AnsiConsole.Write(menu);
-            Console.ReadKey();
-            Quit();
+            #endregion Credits
+
+            Console.SetCursorPosition(0, Console.WindowHeight - 4);
+            
+            string[] options = ["Continue Playing", "Quit Game"];
+            PrintButtons(options);
+        }
+    
+        private void PrintButtons(string[] options, int selected = 1, (int, int)? cursorPosition = null, bool clear = false) {
+            if (!clear) {
+                cursorPosition = (Console.CursorLeft, Console.CursorTop);
+            }else {
+                if (cursorPosition.HasValue)
+                {
+                    Console.SetCursorPosition(cursorPosition.Value.Item1, cursorPosition.Value.Item2);
+                }
+            }
+
+            var endMenu = new Table();
+            endMenu.Centered();
+            endMenu.HideHeaders();
+            endMenu.Border(TableBorder.None);
+
+            foreach (var option in options)
+            {
+                endMenu.AddColumn(new TableColumn(option).Centered());
+            }
+
+            var buttons = new List<Panel>();
+            for (int i = 0; i < options.Length; i++)
+            {
+                var border = selected == i + 1 ? BoxBorder.Double : BoxBorder.Square;
+                var color = selected == i + 1 ? "aqua" : "orange3";
+                buttons.Add(new Panel(new Markup($"[bold {color}]{options[i]}[/]")).Expand().Border(border));
+            }
+            endMenu.AddRow(buttons.ToArray());
+
+            AnsiConsole.Write(endMenu);
+
+            while (true)
+            {
+                var key = Console.ReadKey(true);
+                switch (key.Key)
+                {
+                    case ConsoleKey.LeftArrow:
+                        if (selected == 1)
+                            selected = options.Length;
+                        else
+                            selected--;
+                        PrintButtons(options, selected, cursorPosition, true);
+                        break;
+                    case ConsoleKey.RightArrow:
+                        if (selected == options.Length)
+                            selected = 1;
+                        else
+                            selected++;
+                        PrintButtons(options, selected, cursorPosition, true);
+                        break;
+                    case ConsoleKey.Enter:
+                        switch (selected)
+                        {
+                            case 1:
+                                continueGame = true;
+                                Run();
+                                break;
+                            case 2:
+                                Quit();
+                                break;
+                        }
+                        return;
+                }
+            }
         }
     }
 }
