@@ -18,13 +18,14 @@ namespace ReactorRush
         {
             Console.Clear();
 
-            foreach (var room in rooms)
-            {
-                if (room.GetType().Name != "WasteStorageFacility")
-                {
-                    player.UpdateRoomStatus(room.GetType().Name, true);
-                }
-            }
+            //! [DEBUG] Set the player's progress to true for all rooms except the WasteStorageFacility [DEBUG]
+            // foreach (var room in rooms)
+            // {
+            //     if (room.GetType().Name != "WasteStorageFacility")
+            //     {
+            //         player.UpdateRoomStatus(room.GetType().Name, true);
+            //     }
+            // }
 
             if (!continueGame && rooms.All(room => player.HasPassedRoom(room.GetType().Name)))
             {
@@ -455,7 +456,6 @@ namespace ReactorRush
             #endregion Credits
 
             Console.SetCursorPosition(0, Console.WindowHeight - 4);
-            
             string[] options = ["Continue Playing", "Quit Game"];
             PrintButtons(options);
         }
