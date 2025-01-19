@@ -54,7 +54,7 @@ namespace Rooms
             if (minigames.Count > minigameIndex)
             {
                 bool firstAttempt = true; // Flag to check if it's the first attempt
-                Console.Title = $"Water Reservoir - {minigames[minigameIndex].Name}";
+                Console.Title = $"Water Reservoir - {waterLevelsGame.Name}";
                 waterLevelsGame.Run();
                 Console.Title = "Water Reservoir";
 
@@ -63,7 +63,7 @@ namespace Rooms
                 while (waterLevel == 0 || waterLevel == 1 || waterLevel == 9 || waterLevel == 10)
                 {
                     Utility.PrintStory("Water levels are still critical! Please try again to prevent a system shutdown.");
-                    Console.Title = $"Water Reservoir - {minigames[minigameIndex].Name}";
+                    Console.Title = $"Water Reservoir - {waterLevelsGame.Name}";
                     waterLevelsGame.Run();
                     Console.Title = "Water Reservoir";
                     waterLevel = waterLevelsGame.GetWaterLevel();
