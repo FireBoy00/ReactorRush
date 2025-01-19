@@ -210,7 +210,6 @@ namespace ReactorRush
             }
 
             AnsiConsole.Write(menu);
-            Console.SetCursorPosition(Console.WindowWidth / 2, Console.GetCursorPosition().Top + 4);
 
             var menuChosen = false;
             while (!menuChosen)
@@ -240,6 +239,7 @@ namespace ReactorRush
                         }
                         else
                         {
+                            Console.Title = minigames[selected - 1].GetType().Name;
                             passedMinigames[selected - 1].Run();
                             Thread.Sleep(1000);
                             DisplayMinigameMenu(selected);
