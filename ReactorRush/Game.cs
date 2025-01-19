@@ -243,7 +243,16 @@ namespace ReactorRush
 
         private void Restar()
         {
-
+            foreach (var room in rooms)
+            {
+                var roomName = room.GetType().Name;
+                player.UpdateRoomStatus(roomName, false);
+            }
+            foreach (var minigame in minigames)
+            {
+                var minigameName = minigame.GetType().Name;
+                player.UpdateMinigameStatus(minigameName, false);
+            }
             DisplayMenu();
         }
         private /*static*/ void Quit()
