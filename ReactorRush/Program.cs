@@ -18,6 +18,7 @@ namespace ReactorRush
             Console.Clear();
 
             Game game = new Game();
+            game.Read();
             game.Run();
         }
     }

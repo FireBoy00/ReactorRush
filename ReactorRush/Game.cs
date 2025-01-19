@@ -18,7 +18,6 @@ namespace ReactorRush
 
         public void Run()
         {
-            Read();
             Console.Clear();
             Console.Title = "Reactor Rush";
 
@@ -195,7 +194,7 @@ namespace ReactorRush
             }
         }
 
-        private void Read()
+        public void Read()
         {
             try
             {
@@ -253,7 +252,10 @@ namespace ReactorRush
                 var minigameName = minigame.GetType().Name;
                 player.UpdateMinigameStatus(minigameName, false);
             }
-            DisplayMenu();
+            Console.Clear();
+            AnsiConsole.Write(new Padder(new FigletText("The game has been restarted!").Centered().Color(Color.Yellow)).PadTop(10));
+            Thread.Sleep(1500);
+            Run();
         }
         private /*static*/ void Quit()
         {
@@ -520,6 +522,7 @@ namespace ReactorRush
 
         private void DisplayEndScreen()
         {
+            Save();
             AnsiConsole.Clear();
             Console.Title = "Reactor Rush: End Screen";
             Console.SetCursorPosition(0, 0);
