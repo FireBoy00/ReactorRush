@@ -13,6 +13,7 @@ namespace Rooms
 
         public int StartLevel(Player player)
         {
+            Console.Title = "Fuel Handling Area";
             Score = 0;
             AnsiConsole.Clear();
 
@@ -34,6 +35,7 @@ namespace Rooms
 
             AnsiConsole.Clear();
             minigames[minigameIndex].Run();
+            Console.Title = "Fuel Handling Area";
 
             int NumberOfTries = 1;
             if (minigames[minigameIndex].Score < 6) {
@@ -41,6 +43,7 @@ namespace Rooms
                 NumberOfTries++;
                 AnsiConsole.Clear();
                 minigames[minigameIndex].Run();
+                Console.Title = "Fuel Handling Area";
                 if (minigames[minigameIndex].Score == 6) {
                     Utility.PrintStory("Good job! Now you understand the main concepts of a reactor. Keep going!");
                     player.UpdateMinigameStatus(minigames[minigameIndex].GetType().Name, true); // Update the minigame status
@@ -50,6 +53,7 @@ namespace Rooms
                     NumberOfTries++;
                     AnsiConsole.Clear();
                     minigames[minigameIndex].Run();
+                    Console.Title = "Fuel Handling Area";
                 }
             }
             else {

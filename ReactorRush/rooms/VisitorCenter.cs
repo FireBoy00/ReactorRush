@@ -17,6 +17,7 @@ namespace Rooms
 
         public int StartLevel(Player player)
         {
+            Console.Title = "Visitor Center";
             Score = 0;
             correctSDG1 = false;
             correctSDG2 = false;

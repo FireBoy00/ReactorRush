@@ -13,6 +13,7 @@ namespace Rooms
         
         public int StartLevel(Player player)
         {
+            Console.Title = "Cooling System";
             Score = 0;
             AnsiConsole.Clear();
 
@@ -22,6 +23,7 @@ namespace Rooms
 
             AnsiConsole.Clear();
             minigames[minigameIndex].Run();
+            Console.Title = "Cooling System";
  
             int NumberOfTries = 1;
             if (minigames[minigameIndex].Score >= 40) {
@@ -29,6 +31,7 @@ namespace Rooms
                 NumberOfTries++;
                 AnsiConsole.Clear();
                 minigames[minigameIndex].Run();
+                Console.Title = "Cooling System";
                 if (minigames[minigameIndex].Score < 40) {
                     player.UpdateMinigameStatus(minigames[minigameIndex].GetType().Name, true); // Update the minigame status
                     Utility.PrintStory("Success! You did it! Now the reactor is safe, and you can move to the next room.");
@@ -38,6 +41,7 @@ namespace Rooms
                     NumberOfTries++;
                     AnsiConsole.Clear();
                     minigames[minigameIndex].Run();
+                    Console.Title = "Cooling System";
                 }
             }
             else {

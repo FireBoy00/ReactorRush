@@ -30,6 +30,7 @@ namespace Minigames
         }*/
         public void Run()
         {
+            Console.Title = "Tic Tac Toe Minigame";
             Console.CursorVisible = false;
             Array.Clear(board);
             Score = 0;

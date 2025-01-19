@@ -13,6 +13,7 @@ namespace Rooms
 
         public int StartLevel(Player player)
         {
+            Console.Title = "Emergency Backup Room";
             Score = 0;
             AnsiConsole.Clear();
 
@@ -68,6 +69,7 @@ namespace Rooms
             
             Utility.PrintStory("Now that you understand the purpose of the Emergency Backup room, it is time to put your skills to the test. During an unexpected outage, a critical power cable has been damaged. It is your job to fix the cables and restore backup power to the system. \n\nYou need to drag and connect the left and right sides of the cable.");
             minigames[minigameIndex].Run();
+            Console.Title = "Emergency Backup Room";
             player.UpdateMinigameStatus(minigames[minigameIndex].GetType().Name, minigames[minigameIndex].Score > 0); // Update the minigame status
             if (minigames[minigameIndex].Score > 0)
             {
@@ -79,6 +81,7 @@ namespace Rooms
                 do
                 {
                     minigames[minigameIndex].Run();
+                    Console.Title = "Emergency Backup Room";
                 } while (minigames[minigameIndex].Score == 0);
                 Utility.PrintStory("Well done, move on to the next room to continue the game.");
             }

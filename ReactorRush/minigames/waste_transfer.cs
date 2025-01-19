@@ -12,6 +12,7 @@ namespace Minigames
 
         public void Run()
         {
+            Console.Title = "Waste Transfer Minigame";
             Score = 0;
             var originalEncoding = Console.OutputEncoding;
 

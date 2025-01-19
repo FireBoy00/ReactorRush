@@ -26,6 +26,7 @@ namespace Minigames
 
         public void Run()
         {
+            Console.Title = "Radiation Levels Minigame";
             Score = 0;
             for (int i = 0; i < radiationLevels.Length; i++)
             {

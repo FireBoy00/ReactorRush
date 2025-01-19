@@ -13,6 +13,7 @@ namespace Rooms
 
         public int StartLevel(Player player)
         {
+            Console.Title = "Reactor Core";
             Score = 0;
             AnsiConsole.Clear();
 
@@ -38,6 +39,7 @@ namespace Rooms
             }
             AnsiConsole.Clear();
             minigames[minigameIndex].Run();
+            Console.Title = "Reactor Core";
             if (minigames[minigameIndex].Score == 1)
             {
                 player.UpdateMinigameStatus(minigames[minigameIndex].GetType().Name, true); // Update the minigame status
@@ -51,6 +53,7 @@ namespace Rooms
                 {
                     AnsiConsole.Clear();
                     minigames[minigameIndex].Run();
+                    Console.Title = "Reactor Core";
                     if (minigames[minigameIndex].Score == 1)
                     {
                         player.UpdateMinigameStatus(minigames[minigameIndex].GetType().Name, true); // Update the minigame status

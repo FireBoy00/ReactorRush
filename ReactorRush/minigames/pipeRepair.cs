@@ -27,6 +27,7 @@ namespace Minigames
         }
         public void Run()
         {
+            Console.Title = "Pipe Repair Minigame";
             Console.CursorVisible = false;
             Array.Clear(board);
             Array.Clear(isWaterGo);

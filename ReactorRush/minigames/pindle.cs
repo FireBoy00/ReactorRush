@@ -21,6 +21,7 @@ namespace Minigames
 
         public void Run()
         {
+            Console.Title = "Pindle Minigame";
             Console.CursorVisible = false;
             _targetNumber = GenerateTargetNumber();
             _attempts = 0;

@@ -37,6 +37,7 @@ namespace Minigames
 
         public void Run()
         {
+            Console.Title = "Memory Minigame";
             Score = 0;
             Countdown();
         }

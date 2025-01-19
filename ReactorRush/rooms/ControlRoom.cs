@@ -13,6 +13,7 @@ namespace Rooms
 
         public int StartLevel(Player player)
         {
+            Console.Title = "Control Room";
             Score = 0;
             AnsiConsole.Clear();
 
@@ -50,6 +51,7 @@ namespace Rooms
             AnsiConsole.Clear();
             minigames[minigameIndex].Run();
             player.UpdateMinigameStatus(minigames[minigameIndex].GetType().Name, true); // Update the minigame status
+            Console.Title = "Control Room";
             Utility.PrintStory("Well done! You've reset the controls, and the reactor is running smoothly again. That's one big step toward mastering this facility! Go to the next room.");
             Utility.PrintStory("Oh, you seem confused. I forgot to mention that this tour will be conducted in a period of 12 days ensuring you know how a state of the art reactor works! Enough of this for now."); //it shuld be configurable
 

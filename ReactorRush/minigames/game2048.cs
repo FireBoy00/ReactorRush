@@ -22,6 +22,7 @@ namespace Minigames
         }
         public void Run()
         {
+            Console.Title = "2048 Minigame";
             Console.CursorVisible = false;
             Array.Clear(board);
             rollX = dice.Next(0, SizeOfBoard);

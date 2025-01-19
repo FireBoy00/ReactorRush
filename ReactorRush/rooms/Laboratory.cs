@@ -12,6 +12,7 @@ namespace Rooms
 
         public int StartLevel(Player player)
         {
+            Console.Title = "Laboratory";
             Score = 0;
             AnsiConsole.Clear();
 
