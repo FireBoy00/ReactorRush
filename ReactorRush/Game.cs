@@ -167,7 +167,8 @@ namespace ReactorRush
         {
             try
             {
-                StreamWriter file = new StreamWriter("player1.txt");
+                Directory.CreateDirectory("saves");
+                StreamWriter file = new StreamWriter($"saves\\{player.Name}.txt");
                 file.WriteLine($"Total score: {player.Score}\n");
                 file.WriteLine("Rooms:");
                 foreach (var room in rooms)
@@ -198,7 +199,7 @@ namespace ReactorRush
         {
             try
             {
-                StreamReader file = new StreamReader("player1.txt");
+                StreamReader file = new StreamReader($"saves\\{player.Name}.txt");
                 file.ReadLine(); //Total score
                 file.ReadLine(); //empty line
                 file.ReadLine(); //Rooms:
@@ -252,6 +253,7 @@ namespace ReactorRush
                 var minigameName = minigame.GetType().Name;
                 player.UpdateMinigameStatus(minigameName, false);
             }
+            Save();
             Console.Clear();
             AnsiConsole.Write(new Padder(new FigletText("The game has been restarted!").Centered().Color(Color.Yellow)).PadTop(10));
             Thread.Sleep(1500);
