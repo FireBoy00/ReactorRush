@@ -3,6 +3,8 @@ using Spectre.Console;
 using Spectre.Console.Rendering;
 using Minigames;
 using Rooms;
+using Microsoft.VisualBasic;
+using System.Xml.Linq;
 
 namespace ReactorRush
 {
@@ -16,6 +18,7 @@ namespace ReactorRush
 
         public void Run()
         {
+            Read();
             Console.Clear();
             Console.Title = "Reactor Rush";
 
@@ -50,7 +53,7 @@ namespace ReactorRush
             menu.Border(TableBorder.None);
 
             menu.AddColumn(new TableColumn("Menu").LeftAligned());
-            string[] options = ["Start Game", "Minigames", "Statistics", "Quit"];
+            string[] options = ["Start Game", "Minigames", "Statistics", "Restar Game", "Quit"];
             for (int i = 0; i < options.Length; i++)
             {
                 if (selected == i + 1)
@@ -99,6 +102,9 @@ namespace ReactorRush
                                 Statistics();
                                 break;
                             case 4:
+                                Restar();
+                                break;
+                            case 5:
                                 Quit();
                                 break;
                             default:
@@ -189,8 +195,60 @@ namespace ReactorRush
             }
         }
 
-        private static void Quit()
+        private void Read()
         {
+            try
+            {
+                StreamReader file = new StreamReader("player1.txt");
+                file.ReadLine(); //Total score
+                file.ReadLine(); //empty line
+                file.ReadLine(); //Rooms:
+                string line;
+                bool games = false;
+                while ((line = file.ReadLine()) != null)
+                {
+                    if (!games)
+                    {
+                        if (string.IsNullOrWhiteSpace(line))
+                        {
+                            games = true;
+                            file.ReadLine();
+                        }
+                        else
+                        {
+                            string[] date = line.Split('\t');
+                            bool.TryParse(date[1], out bool result);
+                            player.UpdateRoomStatus(date[0], result);
+                        }
+                    }
+                    else
+                    {
+                        string[] date = line.Split('\t');
+                        bool.TryParse(date[1], out bool result);
+                        player.UpdateMinigameStatus(date[0], result);
+                    }
+                }
+                file.Close();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Exeption: " + e.Message);
+            }
+            finally
+            {
+                DisplayMenu();
+            }
+        }
+
+        private void Restar()
+        {
+
+            DisplayMenu();
+        }
+        private /*static*/ void Quit()
+        {
+            Save();
             Console.Clear();
             Console.Title = "Reactor Rush: Quit";
             Console.WriteLine("Thanks for playing!");
