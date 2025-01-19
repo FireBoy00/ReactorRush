@@ -6,6 +6,7 @@ namespace Minigames
     public class CableFix : IMinigame
     {
         public int Score { get; private set; }
+        public string Name { get; private set; } = string.Empty;
         private int width;
         private int height;
         private int startX;
@@ -19,7 +20,7 @@ namespace Minigames
 
         public void Run()
         {
-            Console.Title = "Cable Fix Minigame";
+            Name = "Cable Fix Minigame";
             Score = 0;
             Console.CursorVisible = false; // Hide the cursor
             width = Console.WindowWidth / 4;

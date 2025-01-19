@@ -68,6 +68,7 @@ namespace Rooms
             } while (prompt1 != "It could lead to the overheating of reactor components and increased risks of the accident.");
             
             Utility.PrintStory("Now that you understand the purpose of the Emergency Backup room, it is time to put your skills to the test. During an unexpected outage, a critical power cable has been damaged. It is your job to fix the cables and restore backup power to the system. \n\nYou need to drag and connect the left and right sides of the cable.");
+            Console.Title = $"Emergency Backup Room - {minigames[minigameIndex].Name}";
             minigames[minigameIndex].Run();
             Console.Title = "Emergency Backup Room";
             player.UpdateMinigameStatus(minigames[minigameIndex].GetType().Name, minigames[minigameIndex].Score > 0); // Update the minigame status
@@ -80,6 +81,7 @@ namespace Rooms
                 Utility.PrintStory("Close, but not quite! Focus and try again to restore power");
                 do
                 {
+                    Console.Title = $"Emergency Backup Room - {minigames[minigameIndex].Name}";
                     minigames[minigameIndex].Run();
                     Console.Title = "Emergency Backup Room";
                 } while (minigames[minigameIndex].Score == 0);

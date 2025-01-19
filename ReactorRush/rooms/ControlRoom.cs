@@ -49,6 +49,7 @@ namespace Rooms
             } while (prompt1 != "The control room team coordinates with other plant personnel to handle routine and maintenance");
             
             AnsiConsole.Clear();
+            Console.Title = $"Control Room - {minigames[minigameIndex].Name}";
             minigames[minigameIndex].Run();
             player.UpdateMinigameStatus(minigames[minigameIndex].GetType().Name, true); // Update the minigame status
             Console.Title = "Control Room";

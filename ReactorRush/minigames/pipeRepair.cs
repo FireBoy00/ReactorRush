@@ -7,6 +7,7 @@ namespace Minigames
     {
         public int SizeOfBoard { get; private set; }
         public int Score { get; private set; }
+        public string Name { get; private set; } = string.Empty;
         public bool IsWon { get; private set; }
         public int MaxEnergy { get; private set; }
         private int[,] board;
@@ -27,7 +28,7 @@ namespace Minigames
         }
         public void Run()
         {
-            Console.Title = "Pipe Repair Minigame";
+            Name = "Pipe Repair Minigame";
             Console.CursorVisible = false;
             Array.Clear(board);
             Array.Clear(isWaterGo);

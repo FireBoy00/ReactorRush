@@ -9,6 +9,7 @@ namespace Minigames
     public class Pindle : IMinigame
     {
         public int Score { get; private set; }
+        public string Name { get; private set; } = string.Empty;
         private const int NumberLength = 5;
         private const int MaxAttempts = 6;
         private readonly Random _random = new Random();
@@ -21,7 +22,7 @@ namespace Minigames
 
         public void Run()
         {
-            Console.Title = "Pindle Minigame";
+            Name = "Pindle Minigame";
             Console.CursorVisible = false;
             _targetNumber = GenerateTargetNumber();
             _attempts = 0;

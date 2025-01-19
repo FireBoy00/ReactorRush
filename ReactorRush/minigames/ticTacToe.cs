@@ -7,6 +7,7 @@ namespace Minigames
     {
         public int SizeOfBoard { get; private set; }
         public int Score { get; private set; }
+        public string Name { get; private set; } = string.Empty;
         public bool IsWon { get; private set; }
         private int[,] board;
         private int rollX;
@@ -19,6 +20,8 @@ namespace Minigames
             SizeOfBoard = sizeOfBoard;
             board = new int[SizeOfBoard, SizeOfBoard];
             ratEnergy = givenRatEnergy;
+            Score = 0;
+            Name = "Tic Tac Toe Minigame";
             //Run();
         }
         /*public GameTicTacToe(int sizeOfBoard = 10, int winningAmountgiven = 5)
@@ -30,7 +33,7 @@ namespace Minigames
         }*/
         public void Run()
         {
-            Console.Title = "Tic Tac Toe Minigame";
+            Name = "Tic Tac Toe Minigame";
             Console.CursorVisible = false;
             Array.Clear(board);
             Score = 0;

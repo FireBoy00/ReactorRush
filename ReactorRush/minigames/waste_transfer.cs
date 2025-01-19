@@ -9,10 +9,11 @@ namespace Minigames
     public class WasteDisposal : IMinigame
     {
         public int Score { get; private set; }
+        public string Name { get; private set; } = string.Empty;
 
         public void Run()
         {
-            Console.Title = "Waste Transfer Minigame";
+            Name = "Waste Transfer Minigame";
             Score = 0;
             var originalEncoding = Console.OutputEncoding;
 

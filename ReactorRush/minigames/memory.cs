@@ -10,6 +10,7 @@ namespace Minigames
         private const int Rows = 3;
         private const int Cols = 4;
         public int Score { get; private set; }
+        public string Name { get; private set; } = string.Empty;
         private const int MaxScore = Rows * Cols / 2;
         private Dictionary<int, string> cardMap = new Dictionary<int, string>();
         private List<int> flippedCards = new List<int>();
@@ -37,7 +38,7 @@ namespace Minigames
 
         public void Run()
         {
-            Console.Title = "Memory Minigame";
+            Name = "Memory Minigame";
             Score = 0;
             Countdown();
         }

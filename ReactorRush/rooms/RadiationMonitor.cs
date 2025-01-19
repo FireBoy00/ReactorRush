@@ -23,7 +23,8 @@ namespace Rooms
             Utility.PrintStory("What does this room do?");
             Utility.PrintStory("The monitoring systems in this room continuously track radiation levels using advanced detectors. These systems help ensure the safety of workers and the integrity of the plant by identifying changes in gamma radiation across different areas. From low levels that safeguard workers to high ranges that indicate breaches, the monitors are designed to act quickly and effectively.");
             Utility.PrintStory("Did You Know?\n\nRadiation is a natural part of life and exists everywhere—even in the air we breathe and the bananas we eat! However, in a nuclear plant, keeping radiation levels under control is vital to protect people and maintain smooth operations. ");
-            minigames[minigameIndex].Run(); // Run the minigame
+            Console.Title = $"Radiation Monitor - {minigames[minigameIndex].Name}";
+            minigames[minigameIndex].Run();
             Console.Title = "Radiation Monitor";
             bool minigameWon = false;
             while (!minigameWon)
@@ -33,7 +34,8 @@ namespace Rooms
                 {
                     Utility.PrintStory("You didn't succeed in the minigame. Remember, monitoring radiation levels accurately is crucial for safety. Try again!");
                     Score -= 2;
-                    minigames[minigameIndex].Run(); // Run the minigame again
+                    Console.Title = $"Radiation Monitor - {minigames[minigameIndex].Name}";
+                    minigames[minigameIndex].Run();
                     Console.Title = "Radiation Monitor";
                 }
                 else

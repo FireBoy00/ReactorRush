@@ -84,16 +84,17 @@ namespace Rooms
             Utility.PrintStory(welcomeMsg3);
 
             AnsiConsole.Clear();
+            Console.Title = $"Containment Building - {minigames[minigameIndex].Name}";
             minigames[minigameIndex].Run();
-            Console.Title = $"Containment Building";
 
             while(minigames[minigameIndex].Score == 0)
             {
                 Utility.PrintStory("Close, but not quite! Focus and give it another shot.");
                 AnsiConsole.Clear();
+                Console.Title = $"Containment Building - {minigames[minigameIndex].Name}";
                 minigames[minigameIndex].Run();
-                Console.Title = "Containment Building";
             }
+            Console.Title = "Containment Building";
             player.UpdateMinigameStatus(minigames[minigameIndex].GetType().Name, true); // Update the minigame status
             Utility.PrintStory("Wonderful job, you have successfully escaped the incident by quickly entering the pin-code. Your sharp thinking has prevented any major damage. Which correlates to the 12th SDG by having responsible production.\nTime to move to the next challenge!");
 

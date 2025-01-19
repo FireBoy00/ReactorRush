@@ -38,6 +38,7 @@ namespace Rooms
                 }
             }
             AnsiConsole.Clear();
+            Console.Title = $"Reactor Core - {minigames[minigameIndex].Name}";
             minigames[minigameIndex].Run();
             Console.Title = "Reactor Core";
             if (minigames[minigameIndex].Score == 1)
@@ -52,6 +53,7 @@ namespace Rooms
                 do
                 {
                     AnsiConsole.Clear();
+                    Console.Title = $"Reactor Core - {minigames[minigameIndex].Name}";
                     minigames[minigameIndex].Run();
                     Console.Title = "Reactor Core";
                     if (minigames[minigameIndex].Score == 1)

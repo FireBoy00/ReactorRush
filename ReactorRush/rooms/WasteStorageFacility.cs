@@ -42,6 +42,7 @@ namespace Rooms
 
             if (minigames.Count >= minigameIndex)
             {
+                Console.Title = $"Waste Storage Facility - {minigames[minigameIndex].Name}";
                 minigames[minigameIndex].Run();
                 Console.Title = "Waste Storage Facility";
                 player.UpdateMinigameStatus(minigames[minigameIndex].GetType().Name, true); // Update the minigame status

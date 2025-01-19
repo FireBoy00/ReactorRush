@@ -34,6 +34,7 @@ namespace Rooms
             Utility.PrintStory(welcomeMsg4);
 
             AnsiConsole.Clear();
+            Console.Title = $"Fuel Handling Area - {minigames[minigameIndex].Name}";
             minigames[minigameIndex].Run();
             Console.Title = "Fuel Handling Area";
 
@@ -42,6 +43,7 @@ namespace Rooms
                 Utility.PrintStory("Oops! Try again to strengthen your understanding. Pay close attention to the key roles and concepts before your next attempt!");
                 NumberOfTries++;
                 AnsiConsole.Clear();
+                Console.Title = $"Fuel Handling Area - {minigames[minigameIndex].Name}";
                 minigames[minigameIndex].Run();
                 Console.Title = "Fuel Handling Area";
                 if (minigames[minigameIndex].Score == 6) {
@@ -52,6 +54,7 @@ namespace Rooms
                     Utility.PrintStory("Try one more time");
                     NumberOfTries++;
                     AnsiConsole.Clear();
+                    Console.Title = $"Fuel Handling Area - {minigames[minigameIndex].Name}";
                     minigames[minigameIndex].Run();
                     Console.Title = "Fuel Handling Area";
                 }
