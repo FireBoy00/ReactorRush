@@ -24,6 +24,8 @@ namespace Minigames
             board = new int[SizeOfBoard + 2, SizeOfBoard];
             isWaterGo = new bool[SizeOfBoard + 2, SizeOfBoard];
             MaxEnergy = SizeOfBoard * 4;
+            Score = 0;
+            Name = "Pipe Repair Minigame";
             //Run();
         }
         public void Run()

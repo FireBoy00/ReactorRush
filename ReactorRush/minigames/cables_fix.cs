@@ -18,6 +18,12 @@ namespace Minigames
         private int playerY;
         private DateTime startTime;
 
+        public CableFix()
+        {
+            Score = 0;
+            Name = "Cable Fix Minigame";
+        }
+
         public void Run()
         {
             Name = "Cable Fix Minigame";

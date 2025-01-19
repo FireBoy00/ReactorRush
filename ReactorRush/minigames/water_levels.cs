@@ -19,6 +19,12 @@ namespace Minigames
         private readonly TimeSpan timeLimit = TimeSpan.FromSeconds(10); // 10s time limit
         private int previousCursorPos = 27;
 
+        public WaterLevels()
+        {
+            Score = 0;
+            Name = "Water Levels Minigame";
+        }
+
         public void Run()
         {
             Name = "Water Levels Minigame";

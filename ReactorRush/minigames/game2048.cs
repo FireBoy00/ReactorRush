@@ -19,6 +19,8 @@ namespace Minigames
             SizeOfBoard = sizeOfBoard;
             board = new int[SizeOfBoard, SizeOfBoard];
             //MinScore = SizeOfBoard * SizeOfBoard * 200;
+            Score = 0;
+            Name = "2048 Minigame";
             //Run();
         }
         public void Run()

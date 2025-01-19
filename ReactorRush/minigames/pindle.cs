@@ -20,6 +20,12 @@ namespace Minigames
         private string _currentGuess = string.Empty;
         private string[] _guesses = new string[MaxAttempts];
 
+        public Pindle()
+        {
+            Score = 0;
+            Name = "Pindle Minigame";
+        }
+        
         public void Run()
         {
             Name = "Pindle Minigame";

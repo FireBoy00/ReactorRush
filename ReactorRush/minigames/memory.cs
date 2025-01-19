@@ -36,6 +36,12 @@ namespace Minigames
             { "Heat", "turns the water into steam, which spins a turbine to produce carbon-free electricity" }
         };
 
+        public Memory()
+        {
+            Score = 0;
+            Name = "Memory Minigame";
+        }
+
         public void Run()
         {
             Name = "Memory Minigame";
