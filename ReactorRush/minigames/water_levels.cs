@@ -6,6 +6,7 @@ namespace Minigames
     public class WaterLevels : IMinigame
     {
         public int Score { get; private set; }
+        public string Name { get; private set; } = string.Empty;
         public int GetWaterLevel() // Or create a getter method
         {
             return WaterLevel;
@@ -18,10 +19,15 @@ namespace Minigames
         private readonly TimeSpan timeLimit = TimeSpan.FromSeconds(10); // 10s time limit
         private int previousCursorPos = 27;
 
+        public WaterLevels()
+        {
+            Score = 0;
+            Name = "Water Levels Minigame";
+        }
+
         public void Run()
         {
-            Console.Title = "Water Levels Minigame";
-
+            Name = "Water Levels Minigame";
             Score = 0;
             isGameOver = false;
             WaterLevel = 3;

@@ -6,6 +6,7 @@ namespace Minigames
     public class RadiationLevels : IMinigame
     {
         public int Score { get; private set; }
+        public string Name { get; private set; } = string.Empty;
         private int[] radiationLevels;
         private bool[] valves;
         private int timeLimit;
@@ -22,10 +23,12 @@ namespace Minigames
             valves = new bool[arraySize];
             timeLimit = limit;
             Score = 0;
+            Name = "Radiation Levels Minigame";
         }
 
         public void Run()
         {
+            Name = "Radiation Levels Minigame";
             Score = 0;
             for (int i = 0; i < radiationLevels.Length; i++)
             {

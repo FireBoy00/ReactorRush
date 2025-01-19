@@ -7,6 +7,7 @@ namespace Minigames
     {
         public int SizeOfBoard { get; private set; }
         public int Score { get; private set; }
+        public string Name { get; private set; } = string.Empty;
         private int[,] board;
         private int rollX;
         private int rollY;
@@ -16,10 +17,13 @@ namespace Minigames
         {
             SizeOfBoard = sizeOfBoard;
             board = new int[SizeOfBoard, SizeOfBoard];
+            Score = 0;
+            Name = "Slider Minigame";
             //Run();
         }
         public void Run()
         {
+            Name = "Slider Minigame";
             Console.CursorVisible = false;
             placeOfZero[0] = SizeOfBoard - 1;
             placeOfZero[1] = SizeOfBoard - 1;

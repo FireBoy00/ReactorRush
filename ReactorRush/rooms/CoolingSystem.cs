@@ -13,6 +13,7 @@ namespace Rooms
         
         public int StartLevel(Player player)
         {
+            Console.Title = "Cooling System";
             Score = 0;
             AnsiConsole.Clear();
 
@@ -21,14 +22,18 @@ namespace Rooms
             Utility.PrintStory(welcomeMsg);
 
             AnsiConsole.Clear();
+            Console.Title = $"Cooling System - {minigames[minigameIndex].Name}";
             minigames[minigameIndex].Run();
+            Console.Title = "Cooling System";
  
             int NumberOfTries = 1;
             if (minigames[minigameIndex].Score >= 40) {
                 Utility.PrintStory("Oh no! You couldn’t repair the broken pipe, and it led to a disaster.\nThis is the most likely disaster in a nuclear power plant: the cooling system failed, causing rapid overheating. Normally, reactors are designed in such a way that they cannot form a supercritical mass of fissionable material and therefore cannot create a nuclear explosion. However, failures of systems and safeguards can cause catastrophic accidents, including chemical explosions and nuclear meltdowns.\nYou can still try to repair it, so try again!");
                 NumberOfTries++;
                 AnsiConsole.Clear();
+                Console.Title = $"Cooling System - {minigames[minigameIndex].Name}";
                 minigames[minigameIndex].Run();
+                Console.Title = "Cooling System";
                 if (minigames[minigameIndex].Score < 40) {
                     player.UpdateMinigameStatus(minigames[minigameIndex].GetType().Name, true); // Update the minigame status
                     Utility.PrintStory("Success! You did it! Now the reactor is safe, and you can move to the next room.");
@@ -37,7 +42,9 @@ namespace Rooms
                     Utility.PrintStory("Try one more time");
                     NumberOfTries++;
                     AnsiConsole.Clear();
+                    Console.Title = $"Cooling System - {minigames[minigameIndex].Name}";
                     minigames[minigameIndex].Run();
+                    Console.Title = "Cooling System";
                 }
             }
             else {

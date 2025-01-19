@@ -12,6 +12,7 @@ namespace Rooms
         private readonly int minigameIndex = 9;
         public int StartLevel(Player player)
         {
+            Console.Title = "Water Reservoir";
             Score = 0;
             AnsiConsole.Clear();
 
@@ -53,14 +54,18 @@ namespace Rooms
             if (minigames.Count > minigameIndex)
             {
                 bool firstAttempt = true; // Flag to check if it's the first attempt
+                Console.Title = $"Water Reservoir - {minigames[minigameIndex].Name}";
                 waterLevelsGame.Run();
+                Console.Title = "Water Reservoir";
 
                 int waterLevel = waterLevelsGame.GetWaterLevel();
 
                 while (waterLevel == 0 || waterLevel == 1 || waterLevel == 9 || waterLevel == 10)
                 {
                     Utility.PrintStory("Water levels are still critical! Please try again to prevent a system shutdown.");
+                    Console.Title = $"Water Reservoir - {minigames[minigameIndex].Name}";
                     waterLevelsGame.Run();
+                    Console.Title = "Water Reservoir";
                     waterLevel = waterLevelsGame.GetWaterLevel();
                     firstAttempt = false;
                 }

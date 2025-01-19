@@ -17,6 +17,7 @@ namespace ReactorRush
         public void Run()
         {
             Console.Clear();
+            Console.Title = "Reactor Rush";
 
             //! [DEBUG] Set the player's progress to true for all rooms except the WasteStorageFacility [DEBUG]
             // foreach (var room in rooms)
@@ -37,6 +38,7 @@ namespace ReactorRush
 
         private void DisplayMenu(int selected = 1)
         {
+            Console.Title = "Reactor Rush: Main Menu";
             Console.CursorVisible = false; // Hide the cursor
             Console.SetCursorPosition(0, 0);
             AnsiConsole.Write(new Padder(new FigletText("Reactor Rush").Centered().Color(Color.DarkOrange3)).PadTop(7));
@@ -116,6 +118,7 @@ namespace ReactorRush
         private void Statistics()
         {
             Console.Clear();
+            Console.Title = "Reactor Rush: Statistics";
             AnsiConsole.Write(new Markup($"[bold yellow]Your score is: {player.Score}[/]\n"));
 
             var table = new Table();
@@ -153,6 +156,7 @@ namespace ReactorRush
 
         private static void Quit() {
             Console.Clear();
+            Console.Title = "Reactor Rush: Quit";
             Console.WriteLine("Thanks for playing!");
             Thread.Sleep(1000); // pause for 1 seconds before closing the console
             Environment.Exit(1); // close the game
@@ -160,6 +164,7 @@ namespace ReactorRush
 
         private void DisplayMinigameMenu(int selected = 1)
         {
+            Console.Title = "Reactor Rush: Minigame Menu";
             var passedMinigames = minigames.Where(m => player.HasPassedMinigame(m.GetType().Name)).ToList();
             if (passedMinigames.Count == 0)
             {
@@ -205,7 +210,6 @@ namespace ReactorRush
             }
 
             AnsiConsole.Write(menu);
-            Console.SetCursorPosition(Console.WindowWidth / 2, Console.GetCursorPosition().Top + 4);
 
             var menuChosen = false;
             while (!menuChosen)
@@ -235,6 +239,7 @@ namespace ReactorRush
                         }
                         else
                         {
+                            Console.Title = minigames[selected - 1].GetType().Name;
                             passedMinigames[selected - 1].Run();
                             Thread.Sleep(1000);
                             DisplayMinigameMenu(selected);
@@ -252,6 +257,7 @@ namespace ReactorRush
 
         private void DisplayLevelSelectionMenu(int selected = 1) 
         {
+            Console.Title = "Reactor Rush: Level Selection Menu";
             Console.CursorVisible = false; // Hide the cursor
             Console.SetCursorPosition(0, 0);
             AnsiConsole.Write(new Padder(new FigletText("Select Level").Centered().Color(Color.DarkOrange3)).PadTop(7));
@@ -408,7 +414,7 @@ namespace ReactorRush
 
         private void DisplayEndScreen() {
             AnsiConsole.Clear();
-            
+            Console.Title = "Reactor Rush: End Screen";
             Console.SetCursorPosition(0, 0);
             AnsiConsole.Write(new Padder(new FigletText($"{player.Score}").Centered().Color(Color.DarkOrange3)).PadTop(4));
 

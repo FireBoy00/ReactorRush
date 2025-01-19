@@ -7,6 +7,7 @@ namespace Minigames
     {
         public int SizeOfBoard { get; private set; }
         public int Score { get; private set; }
+        public string Name { get; private set; } = string.Empty;
         //public bool IsWon { get; private set; }
         //public int MinScore { get; private set; }
         private int[,] board;
@@ -18,10 +19,13 @@ namespace Minigames
             SizeOfBoard = sizeOfBoard;
             board = new int[SizeOfBoard, SizeOfBoard];
             //MinScore = SizeOfBoard * SizeOfBoard * 200;
+            Score = 0;
+            Name = "2048 Minigame";
             //Run();
         }
         public void Run()
         {
+            Name = "2048 Minigame";
             Console.CursorVisible = false;
             Array.Clear(board);
             rollX = dice.Next(0, SizeOfBoard);

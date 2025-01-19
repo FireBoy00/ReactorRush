@@ -13,6 +13,7 @@ namespace Rooms
 
         public int StartLevel(Player player)
         {
+            Console.Title = "Waste Storage Facility";
             Score = 0;
             AnsiConsole.Clear();
 
@@ -41,7 +42,9 @@ namespace Rooms
 
             if (minigames.Count >= minigameIndex)
             {
+                Console.Title = $"Waste Storage Facility - {minigames[minigameIndex].Name}";
                 minigames[minigameIndex].Run();
+                Console.Title = "Waste Storage Facility";
                 player.UpdateMinigameStatus(minigames[minigameIndex].GetType().Name, true); // Update the minigame status
 
                 Utility.PrintStory("Wonderful job! You successfully secured the radioactive waste container, preventing a potential hazard. This is exactly how responsible waste management works - protecting people, the environment, and the future of nuclear energy. Now let's move to the next challenge!");

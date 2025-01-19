@@ -13,6 +13,7 @@ namespace Rooms
 
         public int StartLevel(Player player)
         {
+            Console.Title = "Steam Turbine Room";
             Score = 0;
             AnsiConsole.Clear();
 
@@ -31,7 +32,9 @@ namespace Rooms
             do
             {
                 AnsiConsole.Clear();
+                Console.Title = $"Steam Turbine Room - {minigames[minigameIndex].Name}";
                 minigames[minigameIndex].Run();
+                Console.Title = "Steam Turbine Room";
                 player.UpdateMinigameStatus(minigames[minigameIndex].GetType().Name, minigames[minigameIndex].Score >= 1600); // Update the minigame status
                 if (minigames[minigameIndex].Score >= 3200)
                 {

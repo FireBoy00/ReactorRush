@@ -8,10 +8,10 @@ namespace Rooms
     public class Laboratory : IRooms
     {
         public int Score { get; private set; }
-        private readonly List<IMinigame> minigames = MinigameList.Minigames;
 
         public int StartLevel(Player player)
         {
+            Console.Title = "Laboratory";
             Score = 0;
             AnsiConsole.Clear();
 

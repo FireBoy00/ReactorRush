@@ -12,10 +12,12 @@ namespace Rooms
         bool isCorrect2 = false;
         string prompt2 = "";
         public int Score { get; private set; }
+        private readonly int minigameIndex = 1; // Index of the minigame in the minigames list
         private readonly List<IMinigame> minigames = MinigameList.Minigames;
 
         public int StartLevel(Player player)
         {
+            Console.Title = "Containment Building";
             Score = 0;
             AnsiConsole.Clear();
 
@@ -82,32 +84,36 @@ namespace Rooms
             Utility.PrintStory(welcomeMsg3);
 
             AnsiConsole.Clear();
-            minigames[1].Run();
+            Console.Title = $"Containment Building - {minigames[minigameIndex].Name}";
+            minigames[minigameIndex].Run();
+            Console.Title = "Containment Building";
 
-            while(minigames[1].Score == 0)
+            while(minigames[minigameIndex].Score == 0)
             {
                 Utility.PrintStory("Close, but not quite! Focus and give it another shot.");
                 AnsiConsole.Clear();
-                minigames[1].Run();
+                Console.Title = $"Containment Building - {minigames[minigameIndex].Name}";
+                minigames[minigameIndex].Run();
+                Console.Title = "Containment Building";
             }
-            player.UpdateMinigameStatus(minigames[1].GetType().Name, true); // Update the minigame status
+            player.UpdateMinigameStatus(minigames[minigameIndex].GetType().Name, true); // Update the minigame status
             Utility.PrintStory("Wonderful job, you have successfully escaped the incident by quickly entering the pin-code. Your sharp thinking has prevented any major damage. Which correlates to the 12th SDG by having responsible production.\nTime to move to the next challenge!");
 
             Utility.PrintStory("Halfway there!\n\nYou are doing great and are halfway to completing the final challenge. Let us head to the next room and see what awaits you!");
 
-            if (minigames[1].Score == 6) {
+            if (minigames[minigameIndex].Score == 6) {
                 Score += 10;
             }
-            else if (minigames[1].Score == 5) {
+            else if (minigames[minigameIndex].Score == 5) {
                 Score += 9;
             }
-            else if (minigames[1].Score == 4) {
+            else if (minigames[minigameIndex].Score == 4) {
                 Score += 8;
             }
-            else if (minigames[1].Score == 3) {
+            else if (minigames[minigameIndex].Score == 3) {
                 Score += 7;
             }
-            else if (minigames[1].Score == 2) {
+            else if (minigames[minigameIndex].Score == 2) {
                 Score += 6;
             }
             else {
