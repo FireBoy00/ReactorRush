@@ -4,7 +4,7 @@ namespace Minigames
     {
         void Run();
         int Score { get; }
-        string Name { get; } // Add a property to store the name of the minigame
+        string Name { get; }
     }
 
     public static class MinigameList
