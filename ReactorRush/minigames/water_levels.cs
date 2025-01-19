@@ -86,6 +86,7 @@ namespace Minigames
                 }
             }
             AnsiConsole.Clear();
+            Score = WaterLevel;
         }
 
         private void DisplayHeader()
