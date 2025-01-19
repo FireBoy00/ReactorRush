@@ -1,6 +1,8 @@
 using System;
+using System.Dynamic;
 using Minigames;
 using Rooms;
+using System.IO;
 
 namespace ReactorRush
 {
@@ -11,9 +13,14 @@ namespace ReactorRush
         public int Score { get { 
             return rooms.Sum(room => room.Score);
         } }
+        public string? Name { get; private set; }
         private readonly Dictionary<string, bool> roomsPassed = [];
         private readonly Dictionary<string, bool> minigamesPassed = [];
 
+        public Player(string name = "player1")
+        {
+            Name = name;
+        }
         public void UpdateRoomStatus(string roomName, bool passed)
         {
             if (rooms == null)
@@ -49,5 +56,6 @@ namespace ReactorRush
         {
             return minigamesPassed.TryGetValue(minigameName, out var passed) && passed;
         }
+
     }
 }

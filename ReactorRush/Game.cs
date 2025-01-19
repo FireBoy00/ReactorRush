@@ -66,9 +66,11 @@ namespace ReactorRush
             AnsiConsole.Write(menu);
             Console.SetCursorPosition(Console.WindowWidth / 2, Console.GetCursorPosition().Top + 4);
 
-            while (!menuChosen) {
+            while (!menuChosen)
+            {
                 var key = Console.ReadKey(true); // Read key without displaying it
-                switch (key.Key) {
+                switch (key.Key)
+                {
                     case ConsoleKey.UpArrow:
                         if (selected == 1)
                             selected = options.Length; // If it would go past 1, reset it to 3
@@ -85,7 +87,8 @@ namespace ReactorRush
                         break;
                     case ConsoleKey.Enter:
                         Console.Clear();
-                        switch (selected) {
+                        switch (selected)
+                        {
                             case 1:
                                 StartGame();
                                 break;
@@ -117,6 +120,7 @@ namespace ReactorRush
 
         private void Statistics()
         {
+            Save();
             Console.Clear();
             Console.Title = "Reactor Rush: Statistics";
             AnsiConsole.Write(new Markup($"[bold yellow]Your score is: {player.Score}[/]\n"));
@@ -154,7 +158,39 @@ namespace ReactorRush
             Run();
         }
 
-        private static void Quit() {
+        private void Save()
+        {
+            try
+            {
+                StreamWriter file = new StreamWriter("player1.txt");
+                file.WriteLine($"Total score: {player.Score}\n");
+                file.WriteLine("Rooms:");
+                foreach (var room in rooms)
+                {
+                    var roomName = room.GetType().Name;
+                    var status = player.HasPassedRoom(roomName) ? true : false;
+                    file.WriteLine($"{roomName}\t{status}\t{room.Score.ToString()}");
+                }
+                file.WriteLine();
+                file.WriteLine("Minigames:");
+
+                foreach (var minigame in minigames)
+                {
+                    var minigameName = minigame.GetType().Name;
+                    var status = player.HasPassedMinigame(minigameName) ? true : false;
+                    file.WriteLine($"{minigameName}\t{status}\t{minigame.Score.ToString()}");
+                }
+                file.Close();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Exeption: " + e.Message);
+            }
+        }
+
+        private static void Quit()
+        {
             Console.Clear();
             Console.Title = "Reactor Rush: Quit";
             Console.WriteLine("Thanks for playing!");
@@ -255,7 +291,7 @@ namespace ReactorRush
             #endregion
         }
 
-        private void DisplayLevelSelectionMenu(int selected = 1) 
+        private void DisplayLevelSelectionMenu(int selected = 1)
         {
             Console.Title = "Reactor Rush: Level Selection Menu";
             Console.CursorVisible = false; // Hide the cursor
@@ -340,9 +376,11 @@ namespace ReactorRush
             AnsiConsole.Write(paddedMenu);
             Console.SetCursorPosition(Console.WindowWidth / 2, Console.GetCursorPosition().Top + 4);
 
-            while (true) {
+            while (true)
+            {
                 var key = Console.ReadKey();
-                switch (key.Key) {
+                switch (key.Key)
+                {
                     case ConsoleKey.LeftArrow:
                         if (selected == 1)
                             selected = levels.Length + 1; // If it would go past 1, reset it to the last option
@@ -352,7 +390,7 @@ namespace ReactorRush
                         break;
                     case ConsoleKey.UpArrow:
                         if (selected > columns)
-                            selected-= columns; // If it has a row above, move up
+                            selected -= columns; // If it has a row above, move up
                         DisplayLevelSelectionMenu(selected);
                         break;
                     case ConsoleKey.RightArrow:
@@ -366,7 +404,7 @@ namespace ReactorRush
                         if (selected >= levels.Length + 1 - columns)
                             selected = levels.Length + 1; // If it would go past the last option, reset it to the "Back" button
                         else
-                            selected+= columns; // If it has a row below, move down
+                            selected += columns; // If it has a row below, move down
                         DisplayLevelSelectionMenu(selected);
                         break;
                     case ConsoleKey.Enter:
@@ -391,7 +429,7 @@ namespace ReactorRush
                             }
                         }
                         return;
-                    case ConsoleKey.Escape: 
+                    case ConsoleKey.Escape:
                     case ConsoleKey.Backspace:
                         Run(); // Go back to the main menu
                         return;
@@ -400,7 +438,8 @@ namespace ReactorRush
             #endregion
         }
 
-        private void StartLevel(int level) {
+        private void StartLevel(int level)
+        {
             int score = rooms[level - 1].StartLevel(player);
             Console.SetCursorPosition(0, Console.WindowHeight * 1 / 3);
             AnsiConsole.Write(new FigletText($"SCORE: {score}").Centered().Color(Color.Yellow));
@@ -412,20 +451,24 @@ namespace ReactorRush
             DisplayLevelSelectionMenu();
         }
 
-        private void DisplayEndScreen() {
+        private void DisplayEndScreen()
+        {
             AnsiConsole.Clear();
             Console.Title = "Reactor Rush: End Screen";
             Console.SetCursorPosition(0, 0);
             AnsiConsole.Write(new Padder(new FigletText($"{player.Score}").Centered().Color(Color.DarkOrange3)).PadTop(4));
 
             Panel messagePanel;
-            if (player.Score > 185) {
+            if (player.Score > 185)
+            {
                 messagePanel = new Panel(new Markup("[bold]What an outstanding score! You are clearly well-educated on the topic of nuclear energy.[/]").Centered()).Expand().Border(BoxBorder.None);
             }
-            else if (player.Score <= 185 && player.Score > 102) {
+            else if (player.Score <= 185 && player.Score > 102)
+            {
                 messagePanel = new Panel(new Markup("[bold]A respectable score. We hope we were able to add to your existing knowledge through our game.[/]").Centered()).Expand().Border(BoxBorder.None);
             }
-            else {
+            else
+            {
                 messagePanel = new Panel(new Markup("[bold]We hope you found our game fun and insightful! However, you might want to take a look back at some of the rooms.[/]").Centered()).Expand().Border(BoxBorder.None);
             }
 
@@ -465,11 +508,15 @@ namespace ReactorRush
             string[] options = ["Continue Playing", "Quit Game"];
             PrintButtons(options);
         }
-    
-        private void PrintButtons(string[] options, int selected = 1, (int, int)? cursorPosition = null, bool clear = false) {
-            if (!clear) {
+
+        private void PrintButtons(string[] options, int selected = 1, (int, int)? cursorPosition = null, bool clear = false)
+        {
+            if (!clear)
+            {
                 cursorPosition = (Console.CursorLeft, Console.CursorTop);
-            }else {
+            }
+            else
+            {
                 if (cursorPosition.HasValue)
                 {
                     Console.SetCursorPosition(cursorPosition.Value.Item1, cursorPosition.Value.Item2);
