@@ -140,7 +140,7 @@ namespace Minigames
                 AnsiConsole.Markup($"[white on black]      [/]");
             }
             Console.WriteLine();
-            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ResetColor();
         }
         #endregion
         #region Control

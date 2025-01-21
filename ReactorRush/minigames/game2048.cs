@@ -111,7 +111,7 @@ namespace Minigames
                 }
                 Console.WriteLine();
             }
-            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ResetColor();
         }
         private void PrintPlotline()
         {

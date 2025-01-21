@@ -216,7 +216,7 @@ namespace Minigames
                 AnsiConsole.Markup($"[maroon on grey78] [/]");
                 Console.WriteLine("");
             }
-            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ResetColor();
         }
         #endregion
         #region Control
