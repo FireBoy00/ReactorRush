@@ -168,7 +168,7 @@ namespace ReactorRush
             try
             {
                 Directory.CreateDirectory("saves");
-                StreamWriter file = new StreamWriter($"saves\\{player.Name}.txt");
+                StreamWriter file = new StreamWriter(Path.Combine("saves",$"{player.Name}.txt"));
                 file.WriteLine($"Total score: {player.Score}\n");
                 file.WriteLine("Rooms:");
                 foreach (var room in rooms)
@@ -199,7 +199,7 @@ namespace ReactorRush
         {
             try
             {
-                StreamReader file = new StreamReader($"saves\\{player.Name}.txt");
+                StreamReader file = new StreamReader(Path.Combine("saves",$"{player.Name}.txt"));
                 file.ReadLine(); //Total score
                 file.ReadLine(); //empty line
                 file.ReadLine(); //Rooms:
