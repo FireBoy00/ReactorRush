@@ -57,6 +57,9 @@ namespace Rooms
                     Console.Title = $"Fuel Handling Area - {minigames[minigameIndex].Name}";
                     minigames[minigameIndex].Run();
                     Console.Title = "Fuel Handling Area";
+                    if (minigames[minigameIndex].Score == 6) {
+                    player.UpdateMinigameStatus(minigames[minigameIndex].GetType().Name, true); // Update the minigame status
+                    }
                 }
             }
             else {
