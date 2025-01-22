@@ -26,10 +26,10 @@ namespace Rooms
             minigames[minigameIndex].Run();
             Console.Title = "Cooling System";
  
-            int NumberOfTries = 1;
+            // int NumberOfTries = 1;
             if (minigames[minigameIndex].Score >= 40) {
                 Utility.PrintStory("Oh no! You couldn’t repair the broken pipe, and it led to a disaster.\nThis is the most likely disaster in a nuclear power plant: the cooling system failed, causing rapid overheating. Normally, reactors are designed in such a way that they cannot form a supercritical mass of fissionable material and therefore cannot create a nuclear explosion. However, failures of systems and safeguards can cause catastrophic accidents, including chemical explosions and nuclear meltdowns.\nYou can still try to repair it, so try again!");
-                NumberOfTries++;
+                // NumberOfTries++;
                 AnsiConsole.Clear();
                 Console.Title = $"Cooling System - {minigames[minigameIndex].Name}";
                 minigames[minigameIndex].Run();
@@ -40,11 +40,14 @@ namespace Rooms
                 }
                 else {
                     Utility.PrintStory("Try one more time");
-                    NumberOfTries++;
+                    // NumberOfTries++;
                     AnsiConsole.Clear();
                     Console.Title = $"Cooling System - {minigames[minigameIndex].Name}";
                     minigames[minigameIndex].Run();
                     Console.Title = "Cooling System";
+                    if (minigames[minigameIndex].Score < 40) {
+                    player.UpdateMinigameStatus(minigames[minigameIndex].GetType().Name, true); // Update the minigame status
+                    }
                 }
             }
             else {
