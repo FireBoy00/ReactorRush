@@ -167,7 +167,7 @@ namespace Minigames
         {
             if (WaterLevel >= maxLevel)
             {
-                DisplayMessage("Overflow! Water level is too high! Stabilize it quickly!\nRecommendation from the colleague: it's most efficient when it is in the middle.\nYou lost 5 points by the way.", ConsoleColor.Red);
+                DisplayMessage("Overflow! Water level is too high! Stabilize it quickly!\nRecommendation from the colleague: it's most efficient when it is in the middle.\nYou lost 10 points by the way.", ConsoleColor.Red);
                 Score -= 10;
                 if (Score < 0) Score = 0;
             }
