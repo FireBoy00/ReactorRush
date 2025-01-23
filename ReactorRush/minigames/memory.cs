@@ -17,7 +17,7 @@ namespace Minigames
         private int mistakes = 0; // increase every time the user flips two non-pair cards
         public int MaxMistakes { get; private set; } = 8;
         public int MemoriseSec { get; private set; } = 45;
-        List<string> items = new List<string>
+        private List<string> items = new List<string>
                 {
                     "Nuclear reactors", "contain and control nuclear chain reactions that produce heat",
                     "Nuclear fission", "a process where atoms split and release energy",
@@ -97,7 +97,7 @@ namespace Minigames
             DisplayTable(items, Rows, Cols);
         }
 
-        static void DisplayTable(List<string> items, int Rows, int Cols)
+        private static void DisplayTable(List<string> items, int Rows, int Cols)
         {
             var table = new Table();
 
@@ -129,7 +129,7 @@ namespace Minigames
         }
 
         // show the cards with the texts for x seconds in the beginning, while counting down
-        public void Countdown()
+        private void Countdown()
         {
             System.Timers.Timer timer = new(1000); // 1000 milliseconds = 1 second
             int remainingTime = MemoriseSec;
@@ -213,7 +213,7 @@ namespace Minigames
             Console.CursorVisible = false; // hide the cursor
         }
 
-        static void ClearLastLine()
+        private static void ClearLastLine()
         {
             // Move the cursor to the beginning of the last line
             Console.SetCursorPosition(0, Console.CursorTop);
@@ -223,7 +223,7 @@ namespace Minigames
             Console.SetCursorPosition(0, Console.CursorTop - 1);
         }
 
-        public void FlipCard(int cardNumber)
+        private void FlipCard(int cardNumber)
         {
             if (cardMap.ContainsKey(cardNumber))
             {
