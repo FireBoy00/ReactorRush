@@ -10,12 +10,12 @@ namespace ReactorRush
     {
         private readonly List<IRooms> rooms = RoomsList.Rooms;
         private readonly List<IMinigame> minigames = MinigameList.Minigames;
-        /*public int Score { get { 
-            return rooms.Sum(room => room.Score);
-        } }*/
         public int Score { get { 
-            return roomsResults.Values.Sum();
+            return rooms.Sum(room => room.Score);
         } }
+        /*public int Score { get { 
+            return roomsResults.Values.Sum();
+        } }*/
         public string? Name { get; private set; }
         private readonly Dictionary<string, bool> roomsPassed = [];
         private readonly Dictionary<string, bool> minigamesPassed = [];
