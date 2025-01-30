@@ -64,7 +64,6 @@ namespace ReactorRush
             }
 
             AnsiConsole.Write(menu);
-            Console.SetCursorPosition(Console.WindowWidth / 2, Console.GetCursorPosition().Top + 4);
 
             while (!menuChosen) {
                 var key = Console.ReadKey(true); // Read key without displaying it
