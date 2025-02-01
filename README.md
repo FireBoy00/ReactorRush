@@ -5,13 +5,17 @@
 
 ## Contributors
 
-
+- Adrian Cristian Stancu
+- Agata Weronika Majewska
+- Emma Júlia Sólyom
+- Gabija Staskeviciute
+- Morten Ren Lins
+- Paul Donici
 
 
 ## Acknowledgements
 
  - Spectre.console
- - 
 
 
 ## Deployment
